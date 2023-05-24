@@ -8,6 +8,7 @@ const Dashboard = () => {
       <Center>
         <Heading as="h1" size="xl">
           Dashboard
+          Teste de commit na branch main
         </Heading>
       </Center>
     </Flex>
