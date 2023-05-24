@@ -6,7 +6,7 @@ const Pedidos = () => {
         <>
           <Flex minHeight="100vh" alignItems="center" justifyContent="center">
             <Center>
-                <Heading as="h1" size="xl">Pedidos</Heading>
+                <Heading as="h1" size="xl">Pedidoss</Heading>
             </Center>
           </Flex>
         </>
