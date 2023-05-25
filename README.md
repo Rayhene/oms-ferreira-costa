@@ -43,9 +43,9 @@ Antes de enviar o Pull Request, é recomendado obter as últimas atualizações 
 5. Publique sua Branch
 Publique sua branch no repositório remoto para que outros possam acessá-la e revisar suas alterações. Utilize o comando a seguir para publicar sua branch: `git push origin nome_da_branch`
 
-6. Envie seu Pull Request
+6. Envie seu Pull Request<br>
 Agora é hora de enviar um Pull Request (PR) para que suas alterações sejam revisadas e incorporadas ao projeto principal. Acesse a página do repositório no GitHub e clique no botão "New Pull Request" ou "Criar novo pull request". Selecione sua branch como "compare" e a branch principal do projeto como "base".
 Forneça uma descrição clara e concisa do seu Pull Request, explicando o que foi alterado e por quê. Quando estiver satisfeito com a descrição, clique em "Create Pull Request" ou "Criar Pull Request" para enviá-lo. 
 
-7. Revisão e Incorporação
+7. Revisão e Incorporação<br>
 Os colaboradores do projeto revisarão suas alterações, fornecendo comentários e sugestões, se necessário. Esteja preparado para iterar e fazer ajustes com base no feedback recebido. Assim que suas alterações forem aprovadas, um colaborador do projeto irá incorporá-las à branch principal. Agradecemos sua contribuição para o projeto!
