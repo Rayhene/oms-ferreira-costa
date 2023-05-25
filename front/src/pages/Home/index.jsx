@@ -7,7 +7,7 @@ const Home = () => {
           <Flex minHeight="100vh" alignItems="center" justifyContent="center">
             <Center>
                 <Heading as="h1" size="xl">
-                  Home Testee!!!
+                  Home Testee!!!adasdsad
                 </Heading>
             </Center>
           </Flex>
