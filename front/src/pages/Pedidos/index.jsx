@@ -1,14 +1,14 @@
-import { Flex, Center, Heading } from '@chakra-ui/react';
+import Navbar from '../../components/Navbar';
+import Cards from '../../components/Cards';
+import PedidosTable from '../../components/PedidosTable';
 
 const Pedidos = () => {
   
     return (
         <>
-          <Flex minHeight="100vh" alignItems="center" justifyContent="center">
-            <Center>
-                <Heading as="h1" size="xl">Pedidos</Heading>
-            </Center>
-          </Flex>
+         <Navbar />
+         <Cards /> 
+         <PedidosTable />   
         </>
     );
   };
