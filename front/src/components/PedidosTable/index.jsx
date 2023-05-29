@@ -140,7 +140,7 @@ const PedidosTable = () => {
           </Flex>
         </Tabs>
         <Box py="23px">
-          <InputGroup width="50%" alignItems="center">
+          <InputGroup width="60%" alignItems="center">
             <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.300" />} />
             <Input
               placeholder="Insira o número do pedido ou CPF"
@@ -149,7 +149,7 @@ const PedidosTable = () => {
             />
             <Stack ml={2} align='center' direction='row' display='flex' alignItems='center'>
               <Switch isChecked={exibirApenasComErro} onChange={handleSwitchChange} colorScheme="red" />
-              <Tag size="md" bg='none' textAlign="center">
+              <Tag size="md" bg='none' textAlign="center" style={{ whiteSpace: 'nowrap' }}>
                 Mostrar apenas pedidos com erro
               </Tag>
             </Stack>
