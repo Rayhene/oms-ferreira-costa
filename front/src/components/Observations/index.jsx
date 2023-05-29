@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
 
 const Observations = () => {
-  const [comentarios, setComentarios] = useState([]);
+  const [comentarios, setComentarios] = useState(() => {
+    const comentariosArmazenados = localStorage.getItem('comentarios');
+    return comentariosArmazenados ? JSON.parse(comentariosArmazenados) : [];
+  });
   const [novoComentario, setNovoComentario] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('comentarios', JSON.stringify(comentarios));
+  }, [comentarios]);
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -18,9 +25,17 @@ const Observations = () => {
         texto: novoComentario,
       };
 
-      setComentarios([...comentarios, novoComentarioObj]);
-      setNovoComentario(''); // Limpa o input após adicionar o comentário
+      setComentarios((prevComentarios) => [...prevComentarios, novoComentarioObj]);
+      setNovoComentario('');
     }
+  };
+
+  const handleExcluirComentario = (index) => {
+    setComentarios((prevComentarios) => {
+      const novosComentarios = [...prevComentarios];
+      novosComentarios.splice(index, 1);
+      return novosComentarios;
+    });
   };
 
   return (
@@ -55,14 +70,15 @@ const Observations = () => {
           <React.Fragment key={index}>
             <Flex align="center" wrap="wrap">
               <Avatar size="sm" src={comentario.avatar} mr={4} />
-              <Box>Ana Paula Firmo</Box>
+              <Box><b>Ana Paula Firmo</b></Box>
               <Box color="#c3c3c3" ml={1}>
                 | Financeiro
               </Box>
             </Flex>
 
-            <Stack direction="column" mt={3} ml={4} mt={2}>
+            <Stack direction="column" ml={4}>
               <Box
+                mt={1}
                 border="1px"
                 boxShadow="base"
                 p="6"
@@ -71,11 +87,31 @@ const Observations = () => {
                 borderColor="gray.200"
                 borderRadius="10"
                 padding={2}
-                width="93%"
-                ml="7%"
+                width="94%"
+                ml="6%"
               >
                 {comentario.texto}
               </Box>
+
+              <Stack direction="row" color="#BABBBB" mt={4} mb={7} alignItems="center">
+                <Box width="94%" ml="6%" mb={7} display="flex" alignItems="center">
+                  <img src="../../asset/addEmoji.png" alt="" />
+                  <span ml={2}>●</span>
+                  <Box direction="row" textDecoration="underline" ml={2} mr={2}>
+                    Responder
+                  </Box>
+                  <span ml={2}>●</span>
+                  <Box
+                    direction="row"
+                    textDecoration="underline"
+                    ml={2}
+                    onClick={() => handleExcluirComentario(index)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Excluir
+                  </Box>
+                </Box>
+              </Stack>
             </Stack>
           </React.Fragment>
         ))}
