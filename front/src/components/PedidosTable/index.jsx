@@ -12,6 +12,7 @@ const PedidosTable = () => {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [quantidadePedidos, setQuantidadePedidos] = useState(10);
   const [pedidosPorPagina] = useState(quantidadePedidos);
+  const [indexDaPagina, setIndexDaPagina] = useState();
 
 
   useEffect(() => {
@@ -101,10 +102,24 @@ const PedidosTable = () => {
   const pedidosDaPagina = filtrarPedidosPorStatus(tabSelecionada).slice(indicePrimeiroPedido, indiceUltimoPedido);
 
   const proximaPagina = () => {
-    if (paginaAtual < Math.ceil(filtrarPedidosPorStatus(tabSelecionada).length / pedidosPorPagina)) {
-      setPaginaAtual(paginaAtual + 1);
-    }
+    setPaginaAtual(paginaAtual + 1);
   };
+
+  const atualizarPedidosDaTabela = (event) => {
+    setQuantidadePedidos(Number(event));
+    setPaginaAtual(1)
+  }
+
+  useEffect(() => {
+    const novoIndexDaPagina = paginaAtual * quantidadePedidos;
+    if (novoIndexDaPagina >= pedidos.length) {
+      setIndexDaPagina(pedidos.length);
+    } else {
+      setIndexDaPagina(novoIndexDaPagina);
+    }
+  }, [paginaAtual, quantidadePedidos, pedidos.length]);
+  
+
 
   const paginaAnterior = () => {
     if (paginaAtual > 1) {
@@ -214,16 +229,16 @@ const PedidosTable = () => {
             <Tag bg="none" color="#B4B4B4">Resultados por página:</Tag>
             <Select
               value={quantidadePedidos}
-              onChange={(event) => setQuantidadePedidos(Number(event.target.value))}
+              onChange={(event) => atualizarPedidosDaTabela(event.target.value)}
               width=" 7%">
               <option value={2}>2</option>
               <option value={5}>5</option>
               <option value={10}>10</option>
             </Select>
-            <Tag ml={5} mr={1} color="black" bg="none" >{quantidadePedidos} de {pedidos.length}</Tag>
+            <Tag ml={5} mr={1} color="black" bg="none" >{indexDaPagina} de {pedidos.length}</Tag>
             <Button
               mx="-1" onClick={paginaAnterior}
-              disabled={paginaAtual === 1}
+              isDisabled={paginaAtual === 1 }
               color="gray.400" bg="none"
               _hover={{ color: 'black' }}
               _focus={{ boxShadow: 'none' }}
@@ -232,7 +247,9 @@ const PedidosTable = () => {
               {"<"}
             </Button>
             <Button mx="-1" onClick={proximaPagina}
-              disabled={paginaAtual === Math.ceil(filtrarPedidosPorStatus(tabSelecionada).length / pedidosPorPagina)}
+              isDisabled={
+                indexDaPagina >= pedidos.length
+              }
               color="gray.400" bg="none"
               _hover={{ color: 'black' }}
               _focus={{ boxShadow: 'none' }}
