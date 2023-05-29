@@ -173,7 +173,7 @@ const PedidosTable = () => {
                   <Td py="10px">{pedido.cpf}</Td>
                   <Td py="10px">{pedido.nome}</Td>
                   <Td py="10px">{pedido.numeroDoPedido}</Td>
-                  <Td py="10px">{pedido.valorTotal}</Td>
+                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
                   <Td py="10px">{pedido.dataDaCompra}</Td>
                   <Td py="10px">
                     {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
