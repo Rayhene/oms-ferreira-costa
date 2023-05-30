@@ -3,6 +3,7 @@ import Cards from "../../components/Cards";
 import PedidosTable from "../../components/PedidosTable";
 import { useParams } from "react-router-dom";
 import { Flex, Center, Heading } from "@chakra-ui/react";
+import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
 
 const Pedido = () => {
@@ -16,6 +17,7 @@ const Pedido = () => {
           Pedido {params.pedidoId}
         </Heading>
       </Flex>
+      <Example />
 
       <Observations />
     </>
