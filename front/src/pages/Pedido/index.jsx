@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Flex, Center, Heading } from "@chakra-ui/react";
 import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
+import BoughtProducts from "../../components/BoughtProducts";
 
 const Pedido = () => {
   const params = useParams();
@@ -18,7 +19,7 @@ const Pedido = () => {
         </Heading>
       </Flex>
       <Example />
-
+      <BoughtProducts />
       <Observations />
     </>
   );
