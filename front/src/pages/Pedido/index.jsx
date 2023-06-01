@@ -4,6 +4,7 @@ import PedidosTable from "../../components/PedidosTable";
 import { useParams } from "react-router-dom";
 import { Flex, Center, Heading } from "@chakra-ui/react";
 import Observations from "../../components/Observations/index";
+import Pricing from "../../components/metodo_de_pagamento/index";
 
 const Pedido = () => {
   const params = useParams();
@@ -16,8 +17,9 @@ const Pedido = () => {
           Pedido {params.pedidoId}
         </Heading>
       </Flex>
-
+      <Pricing />
       <Observations />
+      
     </>
   );
 };
