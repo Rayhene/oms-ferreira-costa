@@ -3,6 +3,7 @@ import { Select, Stack, Switch, Badge, Table, Thead, Tbody, Tr, Th, Td, TableCon
 import { useState, useEffect } from "react";
 import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
+import cpfMask from "../Masks/cpfMask";
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -11,7 +12,7 @@ const PedidosTable = () => {
   const [exibirApenasComErro, setExibirApenasComErro] = useState(false);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [quantidadePedidos, setQuantidadePedidos] = useState(10);
-  const [pedidosPorPagina] = useState(quantidadePedidos);
+  const [indexDaPagina, setIndexDaPagina] = useState();
 
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const PedidosTable = () => {
   }, []);
 
   const filtrarPedidosPorStatus = (status) => {
+
     let pedidosFiltrados = pedidos;
 
     if (exibirApenasComErro) {
@@ -71,8 +73,11 @@ const PedidosTable = () => {
         (pedido) => pedido.status_pedido === "ENTREGUE"
       );
     }
+
     return []
   };
+
+  const totalPedidosNaTab = filtrarPedidosPorStatus(tabSelecionada).length;
 
   const handleTabChange = (index) => {
     const tabs = [
@@ -101,10 +106,28 @@ const PedidosTable = () => {
   const pedidosDaPagina = filtrarPedidosPorStatus(tabSelecionada).slice(indicePrimeiroPedido, indiceUltimoPedido);
 
   const proximaPagina = () => {
-    if (paginaAtual < Math.ceil(filtrarPedidosPorStatus(tabSelecionada).length / pedidosPorPagina)) {
-      setPaginaAtual(paginaAtual + 1);
-    }
+    setPaginaAtual(paginaAtual + 1);
   };
+
+
+  const atualizarPedidosDaTab = (event) => {
+    setQuantidadePedidos(Number(event));
+    setPaginaAtual(1)
+  }
+
+  useEffect(() => {
+    setPaginaAtual(1)
+  }, [numeroPedido, exibirApenasComErro, tabSelecionada])
+
+
+  useEffect(() => {
+    const novoIndexDaPagina = paginaAtual * quantidadePedidos;
+    if (novoIndexDaPagina >= totalPedidosNaTab) {
+      setIndexDaPagina(totalPedidosNaTab);
+    } else {
+      setIndexDaPagina(novoIndexDaPagina);
+    }
+  }, [paginaAtual, quantidadePedidos, pedidos.length, tabSelecionada, totalPedidosNaTab]);
 
   const paginaAnterior = () => {
     if (paginaAtual > 1) {
@@ -159,23 +182,24 @@ const PedidosTable = () => {
           <Table size="sm" textAlign="center">
             <Thead>
               <Tr>
-                <Th py="10px">CPF</Th>
-                <Th py="10px">Nome</Th>
                 <Th py="10px">N° do pedido</Th>
-                <Th py="10px">Valor Total</Th>
                 <Th py="10px">Data de compra</Th>
+                <Th py="10px">Nome</Th>
+                <Th py="10px">CPF</Th>
+                <Th py="10px">Valor Total</Th>
                 <Th py="10px">Status do Pedido</Th>
               </Tr>
             </Thead>
             <Tbody>
               {pedidosDaPagina.map((pedido) => (
                 <Tr key={pedido.id}>
-                  <Td py="10px">{pedido.cpf}</Td>
-                  <Td py="10px">{pedido.nome}</Td>
                   <Td py="10px">{pedido.numeroDoPedido}</Td>
-                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
                   <Td py="10px">{pedido.dataDaCompra}</Td>
-                  <Td py="10px">
+                  <Td py="10px">{pedido.nome}</Td>
+                  <Td py="10px">{cpfMask(pedido.cpf)}</Td>
+                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
+
+                  <Td py="10px" px='0'>
                     {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
                       <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
                     ) : pedido.status_pedido === "NAOENTREGUE" ? (
@@ -214,16 +238,16 @@ const PedidosTable = () => {
             <Tag bg="none" color="#B4B4B4">Resultados por página:</Tag>
             <Select
               value={quantidadePedidos}
-              onChange={(event) => setQuantidadePedidos(Number(event.target.value))}
+              onChange={(event) => atualizarPedidosDaTab(event.target.value)}
               width=" 7%">
               <option value={2}>2</option>
               <option value={5}>5</option>
               <option value={10}>10</option>
             </Select>
-            <Tag ml={5} mr={1} color="black" bg="none" >{quantidadePedidos} de {pedidos.length}</Tag>
+            <Tag ml={5} mr={1} color="black" bg="none" >{indexDaPagina} de {totalPedidosNaTab}</Tag>
             <Button
               mx="-1" onClick={paginaAnterior}
-              disabled={paginaAtual === 1}
+              isDisabled={paginaAtual === 1}
               color="gray.400" bg="none"
               _hover={{ color: 'black' }}
               _focus={{ boxShadow: 'none' }}
@@ -232,7 +256,9 @@ const PedidosTable = () => {
               {"<"}
             </Button>
             <Button mx="-1" onClick={proximaPagina}
-              disabled={paginaAtual === Math.ceil(filtrarPedidosPorStatus(tabSelecionada).length / pedidosPorPagina)}
+              isDisabled={
+                indexDaPagina >= totalPedidosNaTab
+              }
               color="gray.400" bg="none"
               _hover={{ color: 'black' }}
               _focus={{ boxShadow: 'none' }}

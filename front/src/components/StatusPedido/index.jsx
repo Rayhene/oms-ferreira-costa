@@ -7,6 +7,7 @@ import { WarningIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
 import { buscarPedidoPorNumero } from '../../services/api'
 
+
 const steps = [
   { title: 'Pedido Realizado', description: 'Date & Time' },
   { title: 'Captura', description: 'Date & Time' },
@@ -114,7 +115,6 @@ function Example() {
 
         ))}
       </Stepper>
-
     </Box>
   )
 }
