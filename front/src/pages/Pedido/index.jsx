@@ -6,6 +6,7 @@ import { Flex, Center, Heading, Button, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
+import Pricing from "../../components/metodo_de_pagamento/index";
 import ClientInfos from "../../components/ClientInfos";
 import BoughtProducts from "../../components/BoughtProducts";
 
@@ -27,7 +28,8 @@ const Pedido = () => {
           
         </Heading>
       </Flex>
-
+      <Pricing />
+      <Observations />
       <Flex w="100vw">
         <Box h="100vh" pr="3px">
           <ClientInfos></ClientInfos>
@@ -41,7 +43,6 @@ const Pedido = () => {
           { /* metodo de pagamento vem aqui */ }
         </Box>
       </Flex>
-
     </>
   );
 };
