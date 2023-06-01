@@ -51,28 +51,15 @@ function Pricing() {
         border="1px"
         borderColor="gray.300"
         borderRadius="10"
-        maxW={'364px'}
-        height={'227px'}
-        w={'full'}
-        position={'relative'}
-        top={'350px'} // ajuste a posição verticalmente conforme necessário
-        left={'500px'}  // ajuste a posição horizontalmente conforme necessário
         bg={useColorModeValue('white', 'gray.800')}
         rounded={'md'}
-        overflow={'hidden'}
+        p='20px'
+        w='100%'
       >
-
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          height="100%"
-          gap="10px"
-          pl="25px"
-        >
           <Text fontSize={'20px'} fontWeight={600}>
             Método de Pagamento
           </Text>
+
           <List spacing={5}>
             <Box>
               <ListItem>
@@ -92,7 +79,6 @@ function Pricing() {
               </ListItem>
             </Box>
           </List>
-        </Box>
       </Box>
     </Center>
   );

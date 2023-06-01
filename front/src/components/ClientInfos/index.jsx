@@ -25,7 +25,18 @@ const ClientInfos = () => {
     }
 
     return (
-        <Flex direction="row" ml="12" mr="6" py="5" px="7" w="62vw" h="28vh" border='1px solid gray' borderRadius="8">
+        <Flex 
+        direction="row" 
+        ml="12" 
+        mr="6" 
+        py="5" 
+        px="7" 
+        w="62vw" 
+        h="28vh"
+        boxShadow="base"
+        border="1px"
+        borderColor="gray.300" 
+        borderRadius="8">
             <Box w="50%">
                 <Box h="55%">
                     <Heading as="h2" fontSize="lg" h="30%">Cliente</Heading>
