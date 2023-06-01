@@ -3,6 +3,7 @@ import { Select, Stack, Switch, Badge, Table, Thead, Tbody, Tr, Th, Td, TableCon
 import { useState, useEffect } from "react";
 import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
+import cpfMask from "../Masks/cpfMask";
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -128,8 +129,6 @@ const PedidosTable = () => {
     }
   }, [paginaAtual, quantidadePedidos, pedidos.length, tabSelecionada, totalPedidosNaTab]);
 
-
-
   const paginaAnterior = () => {
     if (paginaAtual > 1) {
       setPaginaAtual(paginaAtual - 1);
@@ -197,7 +196,7 @@ const PedidosTable = () => {
                   <Td py="10px">{pedido.numeroDoPedido}</Td>
                   <Td py="10px">{pedido.dataDaCompra}</Td>
                   <Td py="10px">{pedido.nome}</Td>
-                  <Td py="10px">{pedido.cpf}</Td>
+                  <Td py="10px">{cpfMask(pedido.cpf)}</Td>
                   <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
 
                   <Td py="10px" px='0'>
