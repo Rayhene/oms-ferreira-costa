@@ -84,16 +84,13 @@ function Example() {
       justifyContent='center'
       alignItems='center'
       padding="15px"
-      //height="85vh"
-      //width="96%"
-      //ml="75%"
-      border='1px solid gray'
-      marginRight="9px"
-      marginLeft="9px"
+      boxShadow="base"
+      border="1px"
+      borderColor="gray.300"
       borderRadius="8px"
-      //boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+      gap={'2vh'}
       >
-      <Heading as="h1" size="md" marginBottom="20px">Histórico do Status do Pedido</Heading>
+      <Heading as="h1" size="md" fontWeight={'500'}>Histórico do Status do Pedido</Heading>
       <Stepper index={activeStep} colorScheme='green' orientation='vertical' height='460px' gap='0' size='sm'>
         {steps.map((step, index) => (
           <Step key={index}>

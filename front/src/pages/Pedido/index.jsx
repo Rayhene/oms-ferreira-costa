@@ -4,7 +4,7 @@ import { Flex, Heading, Button, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
-//import Pricing from "../../components/metodo_de_pagamento/index";
+import Pricing from "../../components/metodo_de_pagamento/index";
 import ClientInfos from "../../components/ClientInfos";
 import BoughtProducts from "../../components/BoughtProducts";
 
@@ -19,28 +19,25 @@ const Pedido = () => {
   return (
     <>
       <Navbar />
-      <Flex p={10} align="center">
+      <Flex p={10} align="center" w={'100%'}>
         <Button onClick={handleBackButton} bg="transparent" px="2" mr="5"><ArrowBackIcon boxSize={6} /></Button>
         <Heading as="h1" size="lg">
           Pedido n°{params.pedidoId}
 
         </Heading>
       </Flex>
-      <Flex w="100vw">
-        <Box h="100vh" pr="3px">
+      <Flex w={"100%"}>
+        <Box>
           <ClientInfos></ClientInfos>
-
           <BoughtProducts />
-
           <Observations />
         </Box>
-        <Box pl="3px">
+
+        <Box>
           <Example />
-          { /* metodo de pagamento vem aqui */}
-        </Box>
-        {/* <Box>
           <Pricing />
-        </Box> */}
+        </Box>
+          
       </Flex>
     </>
   );
