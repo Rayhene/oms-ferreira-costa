@@ -72,7 +72,7 @@ const PedidosTable = () => {
         (pedido) => pedido.status_pedido === "ENTREGUE"
       );
     }
-    
+
     return []
   };
 
@@ -127,7 +127,7 @@ const PedidosTable = () => {
       setIndexDaPagina(novoIndexDaPagina);
     }
   }, [paginaAtual, quantidadePedidos, pedidos.length, tabSelecionada, totalPedidosNaTab]);
-  
+
 
 
   const paginaAnterior = () => {
@@ -183,22 +183,23 @@ const PedidosTable = () => {
           <Table size="sm" textAlign="center">
             <Thead>
               <Tr>
-                <Th py="10px">CPF</Th>
-                <Th py="10px">Nome</Th>
                 <Th py="10px">N° do pedido</Th>
-                <Th py="10px">Valor Total</Th>
                 <Th py="10px">Data de compra</Th>
+                <Th py="10px">Nome</Th>
+                <Th py="10px">CPF</Th>
+                <Th py="10px">Valor Total</Th>
                 <Th py="10px">Status do Pedido</Th>
               </Tr>
             </Thead>
             <Tbody>
               {pedidosDaPagina.map((pedido) => (
                 <Tr key={pedido.id}>
-                  <Td py="10px">{pedido.cpf}</Td>
-                  <Td py="10px">{pedido.nome}</Td>
                   <Td py="10px">{pedido.numeroDoPedido}</Td>
-                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
                   <Td py="10px">{pedido.dataDaCompra}</Td>
+                  <Td py="10px">{pedido.nome}</Td>
+                  <Td py="10px">{pedido.cpf}</Td>
+                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
+
                   <Td py="10px" px='0'>
                     {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
                       <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
@@ -247,7 +248,7 @@ const PedidosTable = () => {
             <Tag ml={5} mr={1} color="black" bg="none" >{indexDaPagina} de {totalPedidosNaTab}</Tag>
             <Button
               mx="-1" onClick={paginaAnterior}
-              isDisabled={paginaAtual === 1 }
+              isDisabled={paginaAtual === 1}
               color="gray.400" bg="none"
               _hover={{ color: 'black' }}
               _focus={{ boxShadow: 'none' }}
