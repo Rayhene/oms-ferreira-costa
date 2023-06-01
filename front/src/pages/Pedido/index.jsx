@@ -7,6 +7,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
 import ClientInfos from "../../components/ClientInfos";
+import BoughtProducts from "../../components/BoughtProducts";
 
 const Pedido = () => {
   const params = useParams();
@@ -31,7 +32,7 @@ const Pedido = () => {
         <Box h="100vh" pr="3px">
           <ClientInfos></ClientInfos>
           
-          { /* descrição produtos vem aqui */ }
+          <BoughtProducts />
 
           <Observations />
         </Box>
