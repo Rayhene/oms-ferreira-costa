@@ -45,7 +45,7 @@ const BoughtProducts = () => {
   const Package = () => produtos.map((item, pos) => {
     return (
       <Box key={pos}>
-        <Box w='90%'ml='10'pl='6'pr='6'pt='3'pb='3'mb='24px'border='1px solid rgba(158, 158, 158, 0.7)'borderRadius='8'>
+        <Box w='91%'ml='10'pl='6'pr='6'pt='3'pb='3'mb='24px'border='1px solid rgba(158, 158, 158, 0.7)'borderRadius='8'>
          {/* Pacote 1 */}
          {/* parte colorida */}
          <Box bg='#F2F9FE'ml='-6' mr='-6'mt='-3'mb='-3'pl='6'pr='6'pt='3'pb='6' borderTopRadius='8'>
@@ -88,12 +88,12 @@ const BoughtProducts = () => {
                </Text>
              </StackItem>
              <StackItem >
-               <Text fontSize='18px' fontWeight='semibold' ml='28px'>
+               <Text fontSize='18px' fontWeight='semibold' ml='40px'>
                  Quantidade
                </Text>
              </StackItem>
              <StackItem >
-               <Text fontSize='18px' fontWeight='semibold' ml='-16px'>
+               <Text fontSize='18px' fontWeight='semibold' ml='28px'>
                  Total
                </Text>
              </StackItem>
@@ -135,12 +135,12 @@ const BoughtProducts = () => {
              </Text>
            </StackItem>
            <StackItem>
-             <Text ml='-48px' >
+             <Text ml='-9' >
                {produtos[ pos ]?.quantidade}
              </Text>
            </StackItem>
            <StackItem>
-             <Text ml='32px'>
+             <Text ml='89px'>
                {produtos[ pos ]?.valor_total_produto?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
              </Text>
            </StackItem>
@@ -152,15 +152,7 @@ const BoughtProducts = () => {
   });
 
     return (
-        <Box 
-            maxW='60%'
-            bg='FDFFFE'
-            border='1px solid rgba(158, 158, 158, 0.7)'
-            borderRadius='8'
-            ml='70'
-            mb='20'
-            overflow='hidden'
-            >
+        <Box w="62vw" bg='FDFFFE'border='1px solid gray'borderRadius='8'ml='12'my='8' overflow='hidden'>
                 {/* Produtos */}
                 <Box pl='25' pt='13' pb='6'>
                     <Heading fontSize='20px'>
