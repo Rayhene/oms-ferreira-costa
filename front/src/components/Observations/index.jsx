@@ -9,20 +9,22 @@ const Observations = () => {
   const [novoComentario, setNovoComentario] = useState('');
   const [respostaAberta, setRespostaAberta] = useState([]);
   const [isReplyClicked, setIsReplyClicked] = useState(false);
+  const [replyIndex, setReplyIndex] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('comentarios', JSON.stringify(comentarios));
     scrollToBottom();
   }, [comentarios]);
 
-  const handleModify = () => {
+  const handleModify = (index) => {
     setIsReplyClicked(!isReplyClicked);
+    setReplyIndex(index);
   };
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event, index) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      handleComentar();
+      handleResponderComentario(index, event.target.value);
     }
   };
 
@@ -53,7 +55,6 @@ const Observations = () => {
       setRespostaAberta((prevRespostaAberta) => prevRespostaAberta.filter((i) => i !== index));
     } else {
       setRespostaAberta((prevRespostaAberta) => [...prevRespostaAberta, index]);
-      focusInputComent.current.focus();
     }
   };
 
@@ -67,6 +68,8 @@ const Observations = () => {
       return novosComentarios;
     });
     toggleResposta(index);
+    setIsReplyClicked(false);
+    setReplyIndex(null);
   };
 
   const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
@@ -83,17 +86,14 @@ const Observations = () => {
   };
 
   return (
-    <Box maxWidth="60vw" ml="12" mt="3vh" pb="10vh" >
+    <Box maxWidth="60vw" ml="12" mt="3vh" pb="10vh">
       <Heading size="xl" fontSize="32px" mb="1vw">
         Observações
       </Heading>
 
-      {/* OUTPUT DOS COMENTÁRIOS */}
-
       <Stack direction="column">
         {comentarios.map((comentario, index) => (
           <React.Fragment key={index}>
-
             <Flex align="center" mt="2vh">
               <Avatar size="sm" src={comentario.avatar} mr={4} />
               <Box>
@@ -120,17 +120,14 @@ const Observations = () => {
                 {comentario.texto}
               </Box>
 
-              <Stack direction="row" color="#BABBBB" mt='0.5vh' mb='2vh' alignItems="center">
+              <Stack direction="row" color="#BABBBB" mt="0.5vh" mb="2vh" alignItems="center">
                 <Box width="94%" ml="48px" display="flex" alignItems="center" fontSize={16}>
                   <Box
                     ml="15px"
                     direction="row"
                     textDecoration="underline"
                     mr={2}
-                    onClick={() => {
-                      toggleResposta(index);
-                      handleModify();
-                    }}
+                    onClick={() => handleModify(index)}
                     style={{ cursor: 'pointer' }}
                   >
                     Responder
@@ -151,13 +148,48 @@ const Observations = () => {
               </Stack>
 
               {/* INPUT DA RESPOSTA */}
+              {isReplyClicked && replyIndex === index && (
+                <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
+                  <Flex justifyContent={'space-between'} width="100%" gap="1vw">
+                    <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
 
+                    <Input
+                      placeholder="Escreva uma resposta..."
+                      focusBorderColor="black"
+                      colorScheme="black"
+                      ref={focusInputComent}
+                      id={`resposta-${index}`}
+                      onKeyDown={(event) => handleKeyDown(event, index)}
+                    />
 
+                    <Button
+                      colorScheme="red"
+                      variant="outline"
+                      size="md"
+                      onClick={() =>
+                        handleResponderComentario(index, document.getElementById(`resposta-${index}`).value)
+                      }
+                      ml={2}
+                    >
+                      Enviar
+                    </Button>
+
+                    <Button
+                      colorScheme="gray"
+                      variant="outline"
+                      size="md"
+                      onClick={() => handleModify(index)}
+                      ml={2}
+                    >
+                      Cancelar
+                    </Button>
+                  </Flex>
+                </Stack>
+              )}
 
               {/* OUTPUT DA RESPOSTA */}
-
               {comentario.respostas.map((resposta, respostaIndex) => (
-                <Box key={respostaIndex} ml='150px' pl={10} >
+                <Box key={respostaIndex} ml="150px" pl={10}>
                   <Flex align="center">
                     <Avatar size="sm" src={comentario.avatar} mr={2} />
                     <Box>
@@ -167,7 +199,8 @@ const Observations = () => {
                       | Financeiro
                     </Box>
                   </Flex>
-                  <Box mt="0.5vh"
+                  <Box
+                    mt="0.5vh"
                     border="1px"
                     boxShadow="base"
                     p="6"
@@ -200,50 +233,8 @@ const Observations = () => {
       </Stack>
 
       {/* INPUT DE COMENTÁRIO e RESPOSTA */}
-
-      {isReplyClicked ? respostaAberta.includes(index) && (
-        <Box>
-          <Flex align="center" ml="3vw">
-            <Avatar size="sm" src={'https://avatars.dicebear.com/api/male/username.svg'} mr={2} />
-
-            <Input
-              placeholder="Escreva uma resposta..."
-              focusBorderColor="black"
-              colorScheme="black"
-              id={`resposta-${index}`}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  event.preventDefault();
-                  handleResponderComentario(index, document.getElementById(`resposta-${index}`).value);
-                }
-              }}
-            />
-
-            <Button
-              colorScheme="red"
-              variant="outline"
-              size="md"
-              onClick={() =>
-                handleResponderComentario(index, document.getElementById(`resposta-${index}`).value)
-              }
-              ml={2}
-            >
-              Enviar
-            </Button>
-
-            <Button
-              colorScheme="gray"
-              variant="outline"
-              size="md"
-              onClick={() => toggleResposta(index)}
-              ml={2}
-            >
-              Cancelar
-            </Button>
-          </Flex>
-        </Box>
-      ) : (
-        <Stack direction="row" spacing={4} mt={4}>
+      {!isReplyClicked && (
+        <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
           <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
 
           <Flex justifyContent={'space-between'} width="100%" gap="1vw">
@@ -267,9 +258,7 @@ const Observations = () => {
           </Flex>
         </Stack>
       )}
-
-
-    </Box >
+    </Box>
   );
 };
 
