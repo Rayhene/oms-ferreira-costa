@@ -20,22 +20,31 @@ const steps = [
   { title: 'Produto Entregue', description: 'Date & Time' }
 ]
 
-const numero = 83352426;
 let indexStatus = 0;
 
 function Example() {
 
   const [pedido, setPedido] = useState("");
+  const [statusErro, setStatusErro] = useState(false);
+  const [dataDaCompra, setDataDaCompra] = useState("");
 
   useEffect(() => {
-    buscarPedidoPorNumero(numero)
+    buscarPedidoPorNumero(buscarNumeroPedido())
       .then((data) => {
         setPedido(data);
+        setStatusErro(data?.status_erro || false);
+        setDataDaCompra(data?.dataDaCompra || "");
+        
       })
       .catch((error) => {
         console.error("Erro ao buscar todos os pedidos:", error);
       });
   }, []);
+
+  const buscarNumeroPedido = () => {
+    let numeroPedido = window.location.pathname.split('/');
+    return numeroPedido[2];
+  };
 
   if (pedido?.status_pedido === "PEDIDO REALIZADO") {
     indexStatus = Number(0);
@@ -58,7 +67,7 @@ function Example() {
   else if (pedido?.status_pedido === "EMPACOTAMENTO E DESIGNAÇÃO") {
     indexStatus = Number(6);
   }
-  else if (pedido?.status_pedido === "ENTREGUE PARA TRANSPORTADORA") {
+  else if (pedido?.status_pedido === "TRANSPORTE") {
     indexStatus = Number(7);
   }
   else if (pedido?.status_pedido === "NAOENTREGUE") {
@@ -83,27 +92,31 @@ function Example() {
       flexDirection="column"
       justifyContent='center'
       alignItems='center'
-      padding="15px"
-      boxShadow="base"
-      border="1px"
-      borderColor="gray.300"
+      padding="20px"
+      //height="85vh"
+      //width="96%"
+      //ml="75%"
+      border='1px solid gray'
+      marginRight="9px"
+      marginLeft="9px"
       borderRadius="8px"
       gap={'2vh'}
       >
-      <Heading as="h1" size="md" fontWeight={'500'}>Histórico do Status do Pedido</Heading>
+      <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">Histórico do Status do Pedido</Heading>
       <Stepper index={activeStep} colorScheme='green' orientation='vertical' height='460px' gap='0' size='sm'>
         {steps.map((step, index) => (
           <Step key={index}>
             <StepIndicator>
               <StepStatus
                 complete={<StepIcon />}
-                active={indexStatus === 8 ? (<WarningIcon color="red.500" />) : (<StepNumber />)}
+                active={statusErro || indexStatus === 8 ? <WarningIcon color="red.500" /> : <StepNumber />}
                 incomplete={<StepNumber />}
+                //active={StatusErro === "true" ? (<WarningIcon color="red.500" />) : (<StepNumber />)}
               />
             </StepIndicator>
 
             <Box flexShrink='0'>
-              <StepTitle style={indexStatus === 8 ? { color: 'red' } : null} >{step.title}</StepTitle>
+              <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null} >{step.title}</StepTitle>
               <StepDescription >{step.description}</StepDescription>
             </Box>
 
