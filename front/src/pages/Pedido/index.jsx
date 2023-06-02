@@ -1,11 +1,10 @@
 import Navbar from "../../components/Navbar";
-import Cards from "../../components/Cards";
-import PedidosTable from "../../components/PedidosTable";
 import { useParams, useNavigate } from "react-router-dom";
-import { Flex, Center, Heading, Button, Box } from "@chakra-ui/react";
+import { Flex, Heading, Button, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import Example from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
+import Pricing from "../../components/metodo_de_pagamento/index";
 import ClientInfos from "../../components/ClientInfos";
 import BoughtProducts from "../../components/BoughtProducts";
 
@@ -27,21 +26,25 @@ const Pedido = () => {
           
         </Heading>
       </Flex>
+          </Heading>
+        </Flex>
 
-      <Flex w="100vw">
-        <Box h="100vh" pr="3px">
-          <ClientInfos></ClientInfos>
+        <Flex w={"100%"} justify={'center'} gap={'2%'}>
           
-          <BoughtProducts />
+          <Box>
+            <ClientInfos></ClientInfos>
+            <BoughtProducts />
+            <Observations />
+          </Box>
 
-          <Observations />
-        </Box>
-        <Box pl="3px">
-          <Example />
-          { /* metodo de pagamento vem aqui */ }
-        </Box>
+          <Box>
+            <Example />
+            <Pricing />
+          </Box>
+            
+        </Flex>
       </Flex>
-
+      
     </>
   );
 };
