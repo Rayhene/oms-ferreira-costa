@@ -189,7 +189,7 @@ const Observations = () => {
 
               {/* OUTPUT DA RESPOSTA */}
               {comentario.respostas.map((resposta, respostaIndex) => (
-                <Box key={respostaIndex} ml="150px" pl={10}>
+                <Box key={respostaIndex} ml="120px" pl={10}>
                   <Flex align="center">
                     <Avatar size="sm" src={comentario.avatar} mr={2} />
                     <Box>
@@ -216,7 +216,7 @@ const Observations = () => {
                   <Stack direction="row" color="#BABBBB" mt={2}>
                     <Box
                       fontSize={16}
-                      ml="52px"
+                      ml="55px"
                       direction="row"
                       textDecoration="underline"
                       onClick={() => handleExcluirResposta(index, respostaIndex)}
