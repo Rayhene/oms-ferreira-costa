@@ -15,6 +15,10 @@ const Observations = () => {
     scrollToBottom();
   }, [comentarios]);
 
+  const handleModify = () => {
+    setIsReplyClicked(!isReplyClicked);
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -26,7 +30,7 @@ const Observations = () => {
     if (novoComentario.trim() !== '') {
       const novoComentarioObj = {
         avatar: 'https://avatars.dicebear.com/api/male/username.svg',
-        nome: 'Hamilton Gomes da Silva Filho',
+        nome: 'Hamilton Gomes',
         texto: novoComentario,
         respostas: [],
       };
@@ -123,7 +127,10 @@ const Observations = () => {
                     direction="row"
                     textDecoration="underline"
                     mr={2}
-                    onClick={() => toggleResposta(index)}
+                    onClick={() => {
+                      toggleResposta(index);
+                      handleModify();
+                    }}
                     style={{ cursor: 'pointer' }}
                   >
                     Responder
@@ -145,48 +152,7 @@ const Observations = () => {
 
               {/* INPUT DA RESPOSTA */}
 
-              {respostaAberta.includes(index) && (
-                <Box>
-                  <Flex align="center" ml="3vw">
-                    <Avatar size="sm" src={'https://avatars.dicebear.com/api/male/username.svg'} mr={2} />
 
-                    <Input
-                      placeholder="Escreva uma resposta..."
-                      focusBorderColor="black"
-                      colorScheme="black"
-                      id={`resposta-${index}`}
-                      onKeyDown={(event) => {
-                        if (event.key === 'Enter') {
-                          event.preventDefault();
-                          handleResponderComentario(index, document.getElementById(`resposta-${index}`).value);
-                        }
-                      }}
-                    />
-
-                    <Button
-                      colorScheme="red"
-                      variant="outline"
-                      size="md"
-                      onClick={() =>
-                        handleResponderComentario(index, document.getElementById(`resposta-${index}`).value)
-                      }
-                      ml={2}
-                    >
-                      Enviar
-                    </Button>
-
-                    <Button
-                      colorScheme="gray"
-                      variant="outline"
-                      size="md"
-                      onClick={() => toggleResposta(index)}
-                      ml={2}
-                    >
-                      Cancelar
-                    </Button>
-                  </Flex>
-                </Box>
-              )}
 
               {/* OUTPUT DA RESPOSTA */}
 
@@ -235,29 +201,73 @@ const Observations = () => {
 
       {/* INPUT DE COMENTÁRIO e RESPOSTA */}
 
-      <Stack direction="row" spacing={4} mt={4}>
-        <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+      {isReplyClicked ? respostaAberta.includes(index) && (
+        <Box>
+          <Flex align="center" ml="3vw">
+            <Avatar size="sm" src={'https://avatars.dicebear.com/api/male/username.svg'} mr={2} />
 
-        <Flex justifyContent={'space-between'} width="100%" gap="1vw">
-          <Input
-            ref={focusInputComent}
-            placeholder="Escreva um comentário..."
-            focusBorderColor="black"
-            colorScheme="black"
-            value={novoComentario}
-            onKeyDown={handleKeyDown}
-            onChange={(event) => setNovoComentario(event.target.value)}
-          />
-          <Button
-            colorScheme="red"
-            variant="outline"
-            onClick={handleComentar}
-            isDisabled={novoComentario.trim() === ''}
-          >
-            Comente
-          </Button>
-        </Flex>
-      </Stack>
+            <Input
+              placeholder="Escreva uma resposta..."
+              focusBorderColor="black"
+              colorScheme="black"
+              id={`resposta-${index}`}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  event.preventDefault();
+                  handleResponderComentario(index, document.getElementById(`resposta-${index}`).value);
+                }
+              }}
+            />
+
+            <Button
+              colorScheme="red"
+              variant="outline"
+              size="md"
+              onClick={() =>
+                handleResponderComentario(index, document.getElementById(`resposta-${index}`).value)
+              }
+              ml={2}
+            >
+              Enviar
+            </Button>
+
+            <Button
+              colorScheme="gray"
+              variant="outline"
+              size="md"
+              onClick={() => toggleResposta(index)}
+              ml={2}
+            >
+              Cancelar
+            </Button>
+          </Flex>
+        </Box>
+      ) : (
+        <Stack direction="row" spacing={4} mt={4}>
+          <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+
+          <Flex justifyContent={'space-between'} width="100%" gap="1vw">
+            <Input
+              ref={focusInputComent}
+              placeholder="Escreva um comentário..."
+              focusBorderColor="black"
+              colorScheme="black"
+              value={novoComentario}
+              onKeyDown={handleKeyDown}
+              onChange={(event) => setNovoComentario(event.target.value)}
+            />
+            <Button
+              colorScheme="red"
+              variant="outline"
+              onClick={handleComentar}
+              isDisabled={novoComentario.trim() === ''}
+            >
+              Comente
+            </Button>
+          </Flex>
+        </Stack>
+      )}
+
 
     </Box >
   );
