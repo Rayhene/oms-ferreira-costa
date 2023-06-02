@@ -23,7 +23,7 @@ const Pedido = () => {
       <Flex p={10} align="center">
         <Button onClick={handleBackButton} bg="transparent" px="2" mr="5"><ArrowBackIcon boxSize={6}/></Button>
         <Heading as="h1" size="lg">
-          Pedido n°{params.pedidoId}
+          Pedido n° {params.pedidoId}
           
         </Heading>
       </Flex>
