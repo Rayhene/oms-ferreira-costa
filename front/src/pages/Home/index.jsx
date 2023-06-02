@@ -1,6 +1,6 @@
 import { Flex, Center, Heading } from '@chakra-ui/react';
-import Pie from '../../components/GraphPie/GraphPie';
-import Bar from '../../components/GraphBar/GraphBar';
+import Pie from '../../components/ChartPie/GraphPie';
+import App from '../../components/ChartSelling/GraphSelling';
 
 const Home = () => {
   
@@ -9,8 +9,8 @@ const Home = () => {
           <Flex minHeight="100vh" alignItems="center" justifyContent="center">
             <Center>
                 <Heading as="h1" size="xl">Home</Heading>
+                <App/>
                 <div style={{height: 200}}><Pie/></div>
-                <div style={{height: 200}}><Bar/></div>
             </Center>
           </Flex>
         </>
