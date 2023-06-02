@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
 import cpfMask from "../Masks/cpfMask";
+import Loading from "../Loading";
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [tabSelecionada, setTabSelecionada] = useState("todos");
   const [numeroPedido, setNumeroPedido] = useState("");
   const [exibirApenasComErro, setExibirApenasComErro] = useState(false);
@@ -19,6 +21,7 @@ const PedidosTable = () => {
     buscarTodosPedidos()
       .then((data) => {
         setPedidos(data);
+        setIsLoading(false);
         console.log("data", data);
       })
       .catch((error) => {
@@ -191,47 +194,58 @@ const PedidosTable = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {pedidosDaPagina.map((pedido) => (
-                <Tr key={pedido.id}>
-                  <Td py="10px">{pedido.numeroDoPedido}</Td>
-                  <Td py="10px">{pedido.dataDaCompra}</Td>
-                  <Td py="10px">{pedido.nome}</Td>
-                  <Td py="10px">{cpfMask(pedido.cpf)}</Td>
-                  <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
-
-                  <Td py="10px" px='0'>
-                    {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
-                    ) : pedido.status_pedido === "NAOENTREGUE" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Não entregue</Tag>
-                    ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Picking</Tag></>
-                    ) : pedido.status_pedido === "PICKING" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Picking</Tag>
-                    ) : pedido.status_pedido === "FATURADO" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Faturado</Tag></>
-                    ) : pedido.status_pedido === "FATURADO" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Faturado</Tag>
-                    ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Transporte</Tag></>
-                    ) : pedido.status_pedido === "TRANSPORTE" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white">Transporte</Tag>
-                    ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag></>
-                    ) : pedido.status_pedido === "ANTIFRAUDE" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag>
-                    ) : pedido.status_pedido === "CAPTURA" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Captura</Tag></>
-                    ) : pedido.status_pedido === "CAPTURA" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Captura</Tag>
-                    ) : pedido.status_pedido === "ENTREGUE" && pedido.status_erro === true ? (
-                      <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Entregue</Tag></>
-                    ) : pedido.status_pedido === "ENTREGUE" ? (
-                      <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Entregue</Tag>
-                    ) : null}
+              {isLoading ? (
+                <Tr>
+                  <Td colSpan={6} py="10px">
+                    <Loading mb={3} mt={3} />
                   </Td>
                 </Tr>
-              ))}
+              ) : (
+                <>
+                  {
+                    pedidosDaPagina.map((pedido) => (
+                      <Tr key={pedido.id}>
+                        <Td py="10px">{pedido.numeroDoPedido}</Td>
+                        <Td py="10px">{pedido.dataDaCompra}</Td>
+                        <Td py="10px">{pedido.nome}</Td>
+                        <Td py="10px">{cpfMask(pedido.cpf)}</Td>
+                        <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
+
+                        <Td py="10px" px='0'>
+                          {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
+                          ) : pedido.status_pedido === "NAOENTREGUE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Não entregue</Tag>
+                          ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Picking</Tag></>
+                          ) : pedido.status_pedido === "PICKING" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Picking</Tag>
+                          ) : pedido.status_pedido === "FATURADO" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Faturado</Tag></>
+                          ) : pedido.status_pedido === "FATURADO" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Faturado</Tag>
+                          ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Transporte</Tag></>
+                          ) : pedido.status_pedido === "TRANSPORTE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white">Transporte</Tag>
+                          ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag></>
+                          ) : pedido.status_pedido === "ANTIFRAUDE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag>
+                          ) : pedido.status_pedido === "CAPTURA" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Captura</Tag></>
+                          ) : pedido.status_pedido === "CAPTURA" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Captura</Tag>
+                          ) : pedido.status_pedido === "ENTREGUE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Entregue</Tag></>
+                          ) : pedido.status_pedido === "ENTREGUE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Entregue</Tag>
+                          ) : null}
+                        </Td>
+                      </Tr>
+                    ))
+                  }
+                </>)}
             </Tbody>
           </Table>
           <Flex justify="right" py="5px" marginRight={5}>

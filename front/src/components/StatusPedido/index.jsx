@@ -100,7 +100,7 @@ function Example() {
       marginRight="9px"
       marginLeft="9px"
       borderRadius="8px"
-      //boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
+      gap={'2vh'}
       >
       <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">Histórico do Status do Pedido</Heading>
       <Stepper index={activeStep} colorScheme='green' orientation='vertical' height='460px' gap='0' size='sm'>

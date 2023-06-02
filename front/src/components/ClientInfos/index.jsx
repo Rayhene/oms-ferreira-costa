@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { buscarPedidoPorNumero } from "../../services/api";
 import { Box, Text, Heading, Flex } from "@chakra-ui/react";
+import cpfMask from "../Masks/cpfMask";
+import phoneMask from "../Masks/phoneMask";
 
 const ClientInfos = () => {
     const [clientData, setClientData] = useState(null);
@@ -9,13 +11,13 @@ const ClientInfos = () => {
 
     useEffect(() => {
         buscarPedidoPorNumero(params.pedidoId)
-          .then((data) => {
-            console.log('data', data);
-            getClientData(data);
-          })
-          .catch((error) => {
-            console.error('Erro ao buscar todos os pedidos:', error);
-          });
+            .then((data) => {
+                console.log('data', data);
+                getClientData(data);
+            })
+            .catch((error) => {
+                console.error('Erro ao buscar todos os pedidos:', error);
+            });
     }, []);
 
     const getClientData = (data) => {
@@ -23,14 +25,25 @@ const ClientInfos = () => {
     }
 
     return (
-        <Flex direction="row" ml="12" mr="6" py="5" px="7" w="62vw" h="28vh" border='1px solid gray' borderRadius="8">
+        <Flex 
+        direction="row" 
+        ml="12" 
+        mr="6" 
+        py="5" 
+        px="7" 
+        w="62vw" 
+        h="28vh"
+        boxShadow="base"
+        border="1px"
+        borderColor="gray.300" 
+        borderRadius="8">
             <Box w="50%">
                 <Box h="55%">
                     <Heading as="h2" fontSize="lg" h="30%">Cliente</Heading>
                     {clientData && (
                         <>
                             <Text h="30%">Nome: {clientData.nome}</Text>
-                            <Text>CPF: {clientData.cpf}</Text>
+                            <Text>CPF: {cpfMask(clientData.cpf)}</Text>
                         </>
                     )}
                 </Box>
@@ -39,9 +52,9 @@ const ClientInfos = () => {
                     <Heading as="h2" fontSize="lg" h="30%">Contato</Heading>
                     {clientData && (
                         <>
-                        <Text h="30%">Telefone: {clientData.contato}</Text>
-                        <Text >Email: {clientData.email}</Text>
-                    </>
+                            <Text h="30%">Telefone: {phoneMask(clientData.contato)}</Text>
+                            <Text >Email: {clientData.email}</Text>
+                        </>
                     )}
                 </Box>
             </Box>
