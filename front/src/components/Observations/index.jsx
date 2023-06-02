@@ -13,7 +13,6 @@ const Observations = () => {
 
   useEffect(() => {
     localStorage.setItem('comentarios', JSON.stringify(comentarios));
-    scrollToBottom();
   }, [comentarios]);
 
   const handleModify = (index) => {
@@ -21,9 +20,14 @@ const Observations = () => {
     setReplyIndex(index);
   };
 
-  const handleKeyDown = (event, index) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
+  const handleKeyDownComentario = (event) => {
+    if (event.key === 'Enter' && novoComentario.trim() !== '') {
+      handleComentar();
+    }
+  };
+
+  const handleKeyDownResposta = (event, index) => {
+    if (event.key === 'Enter' && event.target.value.trim() !== '') {
       handleResponderComentario(index, event.target.value);
     }
   };
@@ -39,7 +43,14 @@ const Observations = () => {
 
       setComentarios((prevComentarios) => [...prevComentarios, novoComentarioObj]);
       setNovoComentario('');
+
+      const novoComentarioElement = document.getElementById(`comentario-${comentarios.length}`);
+      if (novoComentarioElement) {
+        novoComentarioElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
     }
+    scrollToBottom();
   };
 
   const handleExcluirComentario = (index) => {
@@ -70,6 +81,7 @@ const Observations = () => {
     toggleResposta(index);
     setIsReplyClicked(false);
     setReplyIndex(null);
+    scrollToBottom();
   };
 
   const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
@@ -159,7 +171,7 @@ const Observations = () => {
                       colorScheme="black"
                       ref={focusInputComent}
                       id={`resposta-${index}`}
-                      onKeyDown={(event) => handleKeyDown(event, index)}
+                      onKeyDown={(event) => handleKeyDownResposta(event, index)} // Alteração aqui
                     />
 
                     <Button
@@ -244,8 +256,8 @@ const Observations = () => {
               focusBorderColor="black"
               colorScheme="black"
               value={novoComentario}
-              onKeyDown={handleKeyDown}
               onChange={(event) => setNovoComentario(event.target.value)}
+              onKeyDown={handleKeyDownComentario} // Alteração aqui
             />
             <Button
               colorScheme="red"
