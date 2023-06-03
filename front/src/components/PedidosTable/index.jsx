@@ -5,6 +5,8 @@ import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
 import cpfMask from "../Masks/cpfMask";
 import Loading from "../Loading";
+import { Link }  from 'react-router-dom';
+import { Link as LinkChakra} from '@chakra-ui/react'
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -138,6 +140,11 @@ const PedidosTable = () => {
     }
   };
 
+  const estiloDoLink = {
+    textDecoration: 'underline',
+    cursor: 'pointer',
+  };
+
   return (
     <>
       <Box maxW="7xl" mx="auto" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
@@ -205,7 +212,11 @@ const PedidosTable = () => {
                   {
                     pedidosDaPagina.map((pedido) => (
                       <Tr key={pedido.id}>
-                        <Td py="10px">{pedido.numeroDoPedido}</Td>
+                        <Td py="10px">
+                          <LinkChakra as={Link} to={`/pedido/${pedido.numeroDoPedido}`}>
+                            {pedido.numeroDoPedido}
+                          </LinkChakra>
+                          </Td>
                         <Td py="10px">{pedido.dataDaCompra}</Td>
                         <Td py="10px">{pedido.nome}</Td>
                         <Td py="10px">{cpfMask(pedido.cpf)}</Td>
