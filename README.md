@@ -8,7 +8,7 @@ Para rodar o projeto é necessário ter instalado o Node.js e o npm.
 
 - Para instalar o Node.js, acesse o [site oficial](https://nodejs.org/) e faça o download da versão correspondente ao seu sistema operacional. 
 - O npm já vem instalado com o Node.js.
-
+- Instale o Yarn com o comando `npm install --global yarn`
 ## Como rodar
 
 ### Front
@@ -16,6 +16,8 @@ Para rodar o projeto é necessário ter instalado o Node.js e o npm.
 1. Entre na pasta /front.
 2. Execute o comando `npm install` para instalar as dependências.
 3. Execute o comando `npm run dev` para iniciar o cliente.
+4. Executo o comando `yarn` recomendo sempre usar o Prompt de comandos (CMD)
+
 
 ## Como Contribuir
 Descreveremos abaixo o processo passo a passo para você contribuir com o projeto no GitHub.
