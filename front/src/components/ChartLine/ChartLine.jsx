@@ -4,7 +4,7 @@ import { data } from "./data";
 
 const ChartlineModel = () => (
     <Line
-    
+
         data={data}
         height={400} 
         width={800}
@@ -40,6 +40,9 @@ const ChartlineModel = () => (
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
+        colors={['#EC5466', '#00C49F', '#FFBB28', '#FF8042']}
+        enableSlices="x"
+
         useMesh={true}
         legends={[
             {

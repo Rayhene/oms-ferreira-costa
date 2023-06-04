@@ -1,20 +1,26 @@
 import { Bar } from "@nivo/bar";
 import { data } from "./data";
 
-   const ResponsiveBar = () => (
+const horizonBar = () => (
     <Bar
         data={data}
         height={400} 
         width={800}
         keys={[
-            'Pedidos',
+            'Finalizados',
+            'Com erro',
+            'sandwich',
+            'kebab',
+            'fries',
+            'donut'
         ]}
-        indexBy="mes"
+        indexBy="country"
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
+        layout="horizontal"
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'set1' }}
+        colors={{ scheme: 'nivo' }}
         defs={[
             {
                 id: 'dots',
@@ -35,7 +41,20 @@ import { data } from "./data";
                 spacing: 10
             }
         ]}
-    
+        fill={[
+            {
+                match: {
+                    id: 'fries'
+                },
+                id: 'dots'
+            },
+            {
+                match: {
+                    id: 'sandwich'
+                },
+                id: 'lines'
+            }
+        ]}
         borderColor={{
             from: 'color',
             modifiers: [
@@ -51,6 +70,7 @@ import { data } from "./data";
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
+            legend: 'country',
             legendPosition: 'middle',
             legendOffset: 32
         }}
@@ -58,6 +78,7 @@ import { data } from "./data";
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
+            legend: 'food',
             legendPosition: 'middle',
             legendOffset: -40
         }}
@@ -72,7 +93,7 @@ import { data } from "./data";
                 ]
             ]
         }}
-/*         legends={[
+        legends={[
             {
                 dataFrom: 'keys',
                 anchor: 'bottom-right',
@@ -95,11 +116,11 @@ import { data } from "./data";
                     }
                 ]
             }
-        ]} */
+        ]}
         role="application"
         ariaLabel="Nivo bar chart demo"
-        barAriaLabel={e=>e.id+": "+e.formattedValue+" in mes: "+e.indexValue}
+        barAriaLabel={e=>e.id+": "+e.formattedValue+" in country: "+e.indexValue}
     />
 )
 
-export default ResponsiveBar;
+export default horizonBar;

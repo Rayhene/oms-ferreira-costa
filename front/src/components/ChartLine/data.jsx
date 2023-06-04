@@ -1,7 +1,7 @@
 
 
 export const data = [
-  {
+/*   {
     "id": "Entregue",
     "color": "hsl(103, 70%, 50%)",
     "data": [
@@ -136,38 +136,45 @@ export const data = [
         "y": 5
       }
     ]
-  },
+  }, */
   {
     "id": "Finalizados",
     "color": "hsl(227, 70%, 50%)",
     "data": [
       {
         "x": "Seg",
-        "y": 150
+        "y": 150,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Ter",
-        "y": 250
+        "y": 250,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Qua",
-        "y": 180
+        "y": 200,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Qui",
-        "y": 100
+        "y": 175,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Sex",
-        "y": 180
+        "y": 240,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Sab",
-        "y": 295
+        "y": 270,
+        color: "hsl(190, 70%, 50%)"
       },
       {
         "x": "Dom",
-        "y": 286
+        "y": 286,
+        color: "hsl(190, 70%, 50%)"
       }
     ]
   }
