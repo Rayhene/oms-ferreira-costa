@@ -5,8 +5,8 @@ import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
 import cpfMask from "../Masks/cpfMask";
 import Loading from "../Loading";
-import { Link }  from 'react-router-dom';
-import { Link as LinkChakra} from '@chakra-ui/react'
+import { Link } from 'react-router-dom';
+import { Link as LinkChakra } from '@chakra-ui/react'
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -140,10 +140,6 @@ const PedidosTable = () => {
     }
   };
 
-  const estiloDoLink = {
-    textDecoration: 'underline',
-    cursor: 'pointer',
-  };
 
   return (
     <>
@@ -216,7 +212,7 @@ const PedidosTable = () => {
                           <LinkChakra as={Link} to={`/pedido/${pedido.numeroDoPedido}`}>
                             {pedido.numeroDoPedido}
                           </LinkChakra>
-                          </Td>
+                        </Td>
                         <Td py="10px">{pedido.dataDaCompra}</Td>
                         <Td py="10px">{pedido.nome}</Td>
                         <Td py="10px">{cpfMask(pedido.cpf)}</Td>
@@ -224,33 +220,33 @@ const PedidosTable = () => {
 
                         <Td py="10px" px='0'>
                           {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#AED8F9" color="000000" rounded="full">Não entregue</Tag></>
                           ) : pedido.status_pedido === "NAOENTREGUE" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Não entregue</Tag>
+                            <Tag ml={4} bg="#AED8F9" color="000000" rounded="full">Não entregue</Tag>
                           ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Picking</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADE6" color="000000" rounded="full">Picking</Tag></>
                           ) : pedido.status_pedido === "PICKING" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Picking</Tag>
+                            <Tag ml={4} bg="#F8ADE6" color="000000" rounded="full">Picking</Tag>
                           ) : pedido.status_pedido === "FATURADO" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Faturado</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag></>
                           ) : pedido.status_pedido === "FATURADO" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Faturado</Tag>
+                            <Tag ml={4} bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag>
                           ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Transporte</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#D9D9D9" color="000000" rounded="full">Transporte</Tag></>
                           ) : pedido.status_pedido === "TRANSPORTE" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white">Transporte</Tag>
+                            <Tag ml={4} bg="#D9D9D9" color="000000">Transporte</Tag>
                           ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag></>
                           ) : pedido.status_pedido === "ANTIFRAUDE" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag>
+                            <Tag ml={4} bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag>
                           ) : pedido.status_pedido === "CAPTURA" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Captura</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8EDAD" color="000000" rounded="full">Captura</Tag></>
                           ) : pedido.status_pedido === "CAPTURA" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Captura</Tag>
+                            <Tag ml={4} bg="#52B7FF" color="000000" rounded="full">Captura</Tag>
                           ) : pedido.status_pedido === "ENTREGUE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Entregue</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag></>
                           ) : pedido.status_pedido === "ENTREGUE" ? (
-                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Entregue</Tag>
+                            <Tag ml={4} bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag>
                           ) : null}
                         </Td>
                       </Tr>
@@ -299,3 +295,4 @@ const PedidosTable = () => {
 };
 
 export default PedidosTable;
+
