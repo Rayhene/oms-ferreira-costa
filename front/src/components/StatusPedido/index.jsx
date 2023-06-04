@@ -1,4 +1,7 @@
-import { Table, Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, Td, Tr, useSteps } from '@chakra-ui/react'
+import {
+  Step, StepDescription, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle,
+  Stepper, Table, Td, Tr, useSteps
+} from '@chakra-ui/react'
 import { Box, Heading } from '@chakra-ui/react'
 import { WarningIcon } from '@chakra-ui/icons'
 import { useState, useEffect } from 'react'
@@ -7,15 +10,15 @@ import Loading from '../Loading'
 
 
 const steps = [
-  { title: 'Pedido Realizado', description: '' },
-  { title: 'Captura', description: '' },
-  { title: 'Anti-Fraude', description: '' },
-  { title: 'Faturado', description: '' },
-  { title: 'E-mail Enviado ao Cliente', description: '' },
-  { title: 'Picking', description: '' },
-  { title: 'Empacotamento e Designição', description: '' },
-  { title: 'Entregue para Transportadora', description: '' },
-  { title: 'Produto Entregue', description: '' }
+  { title: 'Pedido Realizado', description: 'Date & Time' },
+  { title: 'Captura', description: 'Date & Time' },
+  { title: 'Anti-Fraude', description: 'Date & Time' },
+  { title: 'Faturado', description: 'Date & Time' },
+  { title: 'E-mail Enviado ao Cliente', description: 'Date & Time' },
+  { title: 'Picking', description: 'Date & Time' },
+  { title: 'Empacotamento e Designição', description: 'Date & Time' },
+  { title: 'Entregue para Transportadora', description: 'Date & Time' },
+  { title: 'Produto Entregue', description: 'Date & Time' }
 ]
 
 let indexStatus = 0;
@@ -26,23 +29,14 @@ function Example() {
   const [isLoading, setIsLoading] = useState(true);
   const [statusErro, setStatusErro] = useState(false);
   const [dataDaCompra, setDataDaCompra] = useState("");
-  const [datas, setDatas] = useState([]);
 
   useEffect(() => {
     buscarPedidoPorNumero(buscarNumeroPedido())
       .then((data) => {
         setPedido(data);
+        setIsLoading(false);
         setStatusErro(data?.status_erro || false);
         setDataDaCompra(data?.dataDaCompra || "");
-        const datasAtualizadas = steps.map((step, index) => {
-          if (index <= indexStatus) {
-            return data?.dataDaCompra;
-          }
-          return null;
-        });
-
-        setDatas(datasAtualizadas);
-        setIsLoading(false);
 
       })
       .catch((error) => {
@@ -99,54 +93,54 @@ function Example() {
     <Box
       display="flex"
       flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
+      justifyContent='center'
+      alignItems='center'
       padding="20px"
-      border="1px solid gray"
+      //height="85vh"
+      //width="96%"
+      //ml="75%"
+      border='1px solid gray'
       marginRight="9px"
       marginLeft="9px"
       borderRadius="8px"
       gap={'2vh'}
     >
-      <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">
-        Histórico do Status do Pedido
-      </Heading>
+      <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">Histórico do Status do Pedido</Heading>
       {isLoading ? (
         <Table>
           <Tr>
             <Td colSpan={6} py="10px">
-              <Loading />
+              <Loading mb={3} mt={3} />
             </Td>
           </Tr>
         </Table>
       ) : (
         <>
-          <Stepper index={activeStep} colorScheme="green" orientation="vertical" height="460px" gap="0" size="sm">
+          <Stepper index={activeStep} colorScheme='green' orientation='vertical' height='460px' gap='0' size='sm'>
             {steps.map((step, index) => (
               <Step key={index}>
                 <StepIndicator>
                   <StepStatus
                     complete={<StepIcon />}
-                    active={(statusErro || indexStatus === 8) && activeStep === index ? <WarningIcon color="red.500" /> : <StepNumber />}
+                    active={statusErro || indexStatus === 8 ? <WarningIcon color="red.500" /> : <StepNumber />}
                     incomplete={<StepNumber />}
+                  //active={StatusErro === "true" ? (<WarningIcon color="red.500" />) : (<StepNumber />)}
                   />
                 </StepIndicator>
 
-                <Box flexShrink="0">
-                  <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null}>
-                    {step.title}
-                  </StepTitle>
-                  <StepDescription>{step.description}</StepDescription>
-                  {index <= activeStep && datas[index] && <StepDescription>{datas[index]}</StepDescription>}
+                <Box flexShrink='0'>
+                  <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null} >{step.title}</StepTitle>
+                  <StepDescription >{step.description}</StepDescription>
                 </Box>
 
                 <StepSeparator />
               </Step>
+
             ))}
           </Stepper>
         </>)}
-    </Box >
-  );
+    </Box>
+  )
 }
 
 export default Example;
