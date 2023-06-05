@@ -220,9 +220,9 @@ const PedidosTable = () => {
 
                         <Td py="10px" px='0'>
                           {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#AED8F9" color="000000" rounded="full">Não entregue</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag></>
                           ) : pedido.status_pedido === "NAOENTREGUE" ? (
-                            <Tag ml={4} bg="#AED8F9" color="000000" rounded="full">Não entregue</Tag>
+                            <Tag ml={4} bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag>
                           ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADE6" color="000000" rounded="full">Picking</Tag></>
                           ) : pedido.status_pedido === "PICKING" ? (
@@ -232,9 +232,9 @@ const PedidosTable = () => {
                           ) : pedido.status_pedido === "FATURADO" ? (
                             <Tag ml={4} bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag>
                           ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#D9D9D9" color="000000" rounded="full">Transporte</Tag></>
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B1ADF9" color="000000" rounded="full">Transporte</Tag></>
                           ) : pedido.status_pedido === "TRANSPORTE" ? (
-                            <Tag ml={4} bg="#D9D9D9" color="000000">Transporte</Tag>
+                            <Tag ml={4} bg="#B1ADF9" color="000000">Transporte</Tag>
                           ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag></>
                           ) : pedido.status_pedido === "ANTIFRAUDE" ? (
@@ -295,4 +295,5 @@ const PedidosTable = () => {
 };
 
 export default PedidosTable;
+
 
