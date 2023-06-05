@@ -3,9 +3,11 @@ import { Select } from '@chakra-ui/react'
 import ReactDOM from 'react-dom';
 import Bar from '../ChartBar/GraphBar';
 import Line from '../ChartLine/ChartLine';
+import LineMonthly from '../ChartLineMonthly/ChartLine';
+
 
 const ChartDaily = () => (<Line/>);
-const ChartWeekly = () => (<Bar/>);
+const ChartMonthly = () => (<LineMonthly/>)
 const ChartYearly = () => (<Bar/>);
 
 const App = () => {
@@ -19,10 +21,10 @@ const App = () => {
         switch (componentSelected) {
             case 'Daily':
                 return <ChartDaily/>;
-            case 'Weekly':
-                return <ChartWeekly/>;
             case 'Yearly':
                 return <ChartYearly/>;
+            case 'Monthly':
+                return <ChartMonthly/>;
             default:
                 return <ChartDaily/>;
         }
@@ -31,9 +33,9 @@ const App = () => {
     return (
         <div>
             <Select value={componentSelected} onChange={handleChange}>
-                <option value="Daily">Diario</option>
-                <option value="Weekly">Semanal</option>
+                <option value="Daily">Semanal</option>
                 <option value="Yearly">Anual</option>
+                <option value="Monthly">Mensal</option>
             </Select>
             <div>{renderSelectedChart()}</div>
         </div>
