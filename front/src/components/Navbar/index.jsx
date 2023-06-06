@@ -3,7 +3,9 @@ import {
   Box,
   Flex,
   Avatar,
+  HStack,
   Link,
+  IconButton,
   Button,
   Menu,
   MenuButton,
@@ -13,78 +15,108 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  useColorMode,
-  Center,
+  MenuProvider,
+  MenuCommand,
 } from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import img from '../../assets/img.png';
+import { Link as LinkDom } from 'react-router-dom';
 
-const NavLink = () => (
+const Links = ['Dashboard', 'Pedidos', 'Estatísticas'];
+
+const colorNavLink = ({ children }) => {
+  const [activeLink, setActiveLink] = useState('');
+
+  const handleClick = () => {
+    setActiveLink(children);
+  };
+
+}
+
+const NavLink = ({ children }) => (
   <Link
     px={2}
     py={1}
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      bg: useColorModeValue('red.200', 'red.700'),
     }}
-    href={'#'}>
+    as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatistica")}
+    color={(children === 'Pedidos') ? 'red' : 'black'}>
     {children}
+
   </Link>
 );
 
-const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
-      <Box  boxShadow='md' bg={useColorModeValue('#FDFFFE')} px={4}>
+      <Box bg={useColorModeValue('white.100', 'white.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box><img src={img} alt="logo" width="72" height="72" /></Box>
-
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+          <HStack spacing={8} alignItems={'center'}>
+            <Box><img src={img} alt="logo da Ferreira Costa" width={75} height={75} /></Box>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', md: 'flex' }}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </HStack>
+          </HStack>
           <Flex alignItems={'center'}>
-            <Stack direction={'row'} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button>
-
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    size={'sm'}
-                    src={'https://avatars.dicebear.com/api/male/username.svg'}
-                  />
-                </MenuButton>
-                <MenuList alignItems={'center'}>
-                  <br />
-                  <Center>
-                    <Avatar
-                      size={'2xl'}
-                      src={'https://avatars.dicebear.com/api/male/username.svg'}
-                    />
-                  </Center>
-                  <br />
-                  <Center>
-                    <p>Username</p>
-                  </Center>
-                  <br />
-                  <MenuDivider />
-                  <MenuItem>Your Servers</MenuItem>
-                  <MenuItem>Account Settings</MenuItem>
-                  <MenuItem>Logout</MenuItem>
-                </MenuList>
-              </Menu>
-            </Stack>
+            <Box mr={5} display="flex">
+              Olá, <Box style={{ fontWeight: 'bold' }} ml={2}>Igor Santos!</Box>
+            </Box>
+            <Menu>
+              <MenuButton
+                as={Button}
+                rounded={'full'}
+                variant={'link'}
+                cursor={'pointer'}
+                minW={0}>
+                <Avatar
+                  size={'sm'}
+                  src={
+                    'https://avatars.githubusercontent.com/u/103756299?v=4'
+                  }
+                />
+              </MenuButton>
+              <MenuList>
+                <Stack align={'center'} direction={'column'}>
+                  <MenuProvider>Igor Santos</MenuProvider>
+                  <MenuCommand fontSize={14}>Financeiro</MenuCommand>
+                </Stack>
+                
+                <MenuDivider />
+                <MenuItem>Gerenciar Perfil</MenuItem>
+                <MenuItem>Sair</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </Flex>
+
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
+      <hr></hr>
     </>
   );
 }
-
-export default Navbar;

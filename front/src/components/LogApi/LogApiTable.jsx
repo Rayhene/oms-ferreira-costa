@@ -7,7 +7,7 @@ import {
     Td,
     Box,
     ChakraProvider,
-    Flex
+    Heading,
 } from "@chakra-ui/react";
 import { buscarTodosPedidos } from "../../services/api";
 import { useState, useEffect } from "react";
@@ -31,17 +31,14 @@ const LogApiTable = () => {
 
 
     return (
-        <Flex direction="row"
-            ml="12"
-            mr="6"
-            py="5"
-            px="7"
-            w="62vw"
-            h="28vh">
-            <Table boxShadow="base" border="1px" borderColor="gray.300" borderRadius="8">
+        <Box>
+            <Heading as="h2" size="md" mb={5}>
+                Log da API
+            </Heading>
+            <Table boxShadow="base" borderRadius="8px" width='100%'>
                 <ChakraProvider>
                     <Box padding={4}>
-                        <Box overflowY="auto" maxHeight="200px">
+                        <Box maxHeight="300px" overflowY='auto' overflowX='auto'>
                             {isLoading ? (
                                 <Tr>
                                     <Td colSpan={6} py="10px">
@@ -50,21 +47,21 @@ const LogApiTable = () => {
                                 </Tr>
                             ) : (
                                 <>
-                                    <Thead position="sticky" top={0} bg="white">
-                                        <Tr fontSize="12">
-                                            <Th>N° Pedido</Th>
-                                            <Th>Timestamp</Th>
-                                            <Th>Status</Th>
-                                            <Th>Message</Th>
+                                    <Thead position="sticky" bg="white">
+                                        <Tr fontSize="12" >
+                                            <Th p={3} pl={5}>N° Pedido</Th>
+                                            <Th p={3} pl={5}>Timestamp</Th>
+                                            <Th p={3} pl={5}>Status</Th>
+                                            <Th p={3} pl={5}>Message</Th>
                                         </Tr>
                                     </Thead>
                                     <Tbody>
                                         {pedidos.map((item) => (
-                                            <Tr key={item.id} fontSize="10px">
-                                                <Td>{item.numeroDoPedido}</Td>
-                                                <Td>{item.timestempDataDaCompra}</Td>
-                                                <Td>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 404 : 201}</Td>
-                                                <Td>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Not Found" : "Order created success"}</Td>
+                                            <Tr key={item.id} fontSize="12px">
+                                                <Td  p={3} pl={5}>{item.numeroDoPedido}</Td>
+                                                <Td  p={3} pl={5} wordBreak={"keep-all"}>{item.timestempDataDaCompra}</Td>
+                                                <Td  p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 404 : 201}</Td>
+                                                <Td  p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Not Found" : "Order created success"}</Td>
                                             </Tr>
                                         ))}
                                     </Tbody>
@@ -73,7 +70,9 @@ const LogApiTable = () => {
                     </Box>
                 </ChakraProvider>
             </Table>
-        </Flex>
+        </Box>
+            
+
     );
 };
 export default LogApiTable;
