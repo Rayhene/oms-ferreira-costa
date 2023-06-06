@@ -49,7 +49,6 @@ function Example() {
     return numeroPedido[2];
   };
 
-
   if (pedido?.status_pedido === "PEDIDO REALIZADO") {
     indexStatus = Number(0);
   }
