@@ -3,12 +3,14 @@ import Pie from '../../components/ChartPie/GraphPie';
 import App from '../../components/ChartSelling/GraphSelling';
 import LogApiTable from '../../components/LogApi/LogApiTable';
 import CardsErro from '../../components/CardsErro';
+import { ChartProgressError } from '../../components/ChartProgressError/ChartProgressError';
 
 const Home = () => {
 
   return (
     <>
    <CardsErro />
+   <ChartProgressError/>
       <Flex direction='column' alignItems={'center'} width='100%'>
         <Flex alignItems="center" justifyContent="center">
           <Center>
