@@ -2,11 +2,13 @@ import { Flex, Center, Heading } from '@chakra-ui/react';
 import Pie from '../../components/ChartPie/GraphPie';
 import App from '../../components/ChartSelling/GraphSelling';
 import LogApiTable from '../../components/LogApi/LogApiTable';
+import CardsErro from '../../components/CardsErro';
 
 const Home = () => {
 
   return (
     <>
+   <CardsErro />
       <Flex direction='column' alignItems={'center'} width='100%'>
         <Flex alignItems="center" justifyContent="center">
           <Center>
