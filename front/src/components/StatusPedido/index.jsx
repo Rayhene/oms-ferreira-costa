@@ -103,10 +103,12 @@ function Example() {
     <Box
       display="flex"
       flexDirection="column"
-      justifyContent='center'
-      alignItems='center'
+      justifyContent="center"
+      alignItems="center"
       padding="20px"
-      border='1px solid gray'
+      border="1px"
+      borderColor="gray.300"
+      boxShadow="base"
       marginRight="9px"
       marginLeft="9px"
       borderRadius="8px"
