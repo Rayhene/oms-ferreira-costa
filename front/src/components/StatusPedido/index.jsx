@@ -10,15 +10,15 @@ import Loading from '../Loading'
 
 
 const steps = [
-  { title: 'Pedido Realizado', description: 'Date & Time' },
-  { title: 'Captura', description: 'Date & Time' },
-  { title: 'Anti-Fraude', description: 'Date & Time' },
-  { title: 'Faturado', description: 'Date & Time' },
-  { title: 'E-mail Enviado ao Cliente', description: 'Date & Time' },
-  { title: 'Picking', description: 'Date & Time' },
-  { title: 'Empacotamento e Designição', description: 'Date & Time' },
-  { title: 'Entregue para Transportadora', description: 'Date & Time' },
-  { title: 'Produto Entregue', description: 'Date & Time' }
+  { title: 'Pedido Realizado', description: '' },
+  { title: 'Captura', description: '' },
+  { title: 'Anti-Fraude', description: '' },
+  { title: 'Faturado', description: '' },
+  { title: 'E-mail Enviado ao Cliente', description: '' },
+  { title: 'Picking', description: '' },
+  { title: 'Empacotamento e Designição', description: '' },
+  { title: 'Entregue para Transportadora', description: '' },
+  { title: 'Produto Entregue', description: '' }
 ]
 
 let indexStatus = 0;
@@ -28,7 +28,7 @@ function Example() {
   const [pedido, setPedido] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [statusErro, setStatusErro] = useState(false);
-  const [dataDaCompra, setDataDaCompra] = useState("");
+  const [datasDescricao, setdatasDescricao] = useState([]);
 
   useEffect(() => {
     buscarPedidoPorNumero(buscarNumeroPedido())
@@ -36,7 +36,7 @@ function Example() {
         setPedido(data);
         setIsLoading(false);
         setStatusErro(data?.status_erro || false);
-        setDataDaCompra(data?.dataDaCompra || "");
+        setdatasDescricao(datas);
 
       })
       .catch((error) => {
@@ -89,6 +89,16 @@ function Example() {
     setActiveStep(indexStatus);
   }, [indexStatus]);
 
+  useEffect(() => {
+  const datas = steps.map((step, index) => {
+    if (index <= indexStatus) {
+      return pedido?.dataDaCompra;
+    }
+    return null;
+  });
+  setdatasDescricao(datas);
+},[pedido, indexStatus]);
+
   return (
     <Box
       display="flex"
@@ -96,9 +106,6 @@ function Example() {
       justifyContent='center'
       alignItems='center'
       padding="20px"
-      //height="85vh"
-      //width="96%"
-      //ml="75%"
       border='1px solid gray'
       marginRight="9px"
       marginLeft="9px"
@@ -124,13 +131,12 @@ function Example() {
                     complete={<StepIcon />}
                     active={statusErro || indexStatus === 8 ? <WarningIcon color="red.500" /> : <StepNumber />}
                     incomplete={<StepNumber />}
-                  //active={StatusErro === "true" ? (<WarningIcon color="red.500" />) : (<StepNumber />)}
                   />
                 </StepIndicator>
 
                 <Box flexShrink='0'>
                   <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null} >{step.title}</StepTitle>
-                  <StepDescription >{step.description}</StepDescription>
+                  <StepDescription >{datasDescricao[index]}</StepDescription>
                 </Box>
 
                 <StepSeparator />
