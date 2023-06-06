@@ -85,7 +85,7 @@ const ClientInfos = () => {
                     )}
                 </Box>
             </Box>
-            </>)};
+            </>)}
         </Flex>
     );
 }
