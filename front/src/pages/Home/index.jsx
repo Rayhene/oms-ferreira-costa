@@ -22,9 +22,16 @@ const Home = () => {
           </Center>
         </Flex>
 
-        <Flex align={'center'} justify={'center'} gap='10%' width='80%' border={'1px solid'} borderColor={'gray.300'} rounded={'md'}>
-          <Pie />
-          <LogApiTable />
+        <Flex align={'center'} justify={'center'}  width='80%' border={'1px solid'} borderColor={'gray.300'} rounded={'md'}>
+          <Flex direction='column' alignItems={'left'} width='40%' p={5} >
+            <Heading as='h3' size='lg'>API do Anti-Fraude</Heading>
+            <Pie />
+          </Flex>
+          
+          <Flex alignItems={'center'} width='100%' p={10}>
+            <LogApiTable />
+          </Flex>
+
         </Flex>
       </Flex>
     </>
