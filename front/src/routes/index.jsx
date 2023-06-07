@@ -2,7 +2,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import Pedidos from "../pages/Pedidos";
 import Home from "../pages/Home";
 import Pedido from "../pages/Pedido";
-import Estatisticas from "../pages/Estatísticas";
+import Estatisticas from "../pages/Estatisticas";
 
 const AppRoutes = () => {
   return (
