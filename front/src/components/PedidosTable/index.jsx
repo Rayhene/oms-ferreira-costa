@@ -143,7 +143,7 @@ const PedidosTable = () => {
 
   return (
     <>
-      <Box maxW="7xl" mx="auto" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+      <Box maxW="7xl" mx="auto" pt={1} px={{ base: 2, sm: 12, md: 17 }}>
         <Box textAlign="left" fontSize="4xl" py={10} fontWeight="bold">
           Pedidos
         </Box>
