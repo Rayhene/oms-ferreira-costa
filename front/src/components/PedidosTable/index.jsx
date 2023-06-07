@@ -67,7 +67,7 @@ const PedidosTable = () => {
       );
     } else if (status === "transporte") {
       return pedidosFiltrados.filter(
-        (pedido) => pedido.status_pedido === "TRANSPORTE"
+        (pedido) => pedido.status_pedido === "SINCRONIZACAO"
       );
     } else if (status === "naoEntregue") {
       return pedidosFiltrados.filter(
