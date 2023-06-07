@@ -25,15 +25,15 @@ function CardsErro() {
 
 
   return (
-    <Box marginTop='4rem'>
-      <Flex justifyContent='center' padding='1rem' color="#1D252F">
-        <Box maxWidth={['100%', '80%', '100%']} margin='auto'>
+    <Flex justifyContent="center" marginTop='4rem'>
+      <Flex w='1280px' justifyContent='space-arround' padding='1rem' color="#1D252F">
+        <Box width='100%' margin='auto'>
           <Heading fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} color='#303030' size="lg" marginBottom='1rem'>
             Erros no Sistema
           </Heading>
 
-          <Flex justifyContent={['center', 'flex-start']} gap='1rem' flexWrap='wrap'>
-            <Box minHeight="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+          <Flex justifyContent={['space-between']} gap='1rem' flexWrap='wrap'>
+            <Box minHeight="10vh" width={['100%', '32vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Anti-Fraude</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("ANTIFRAUDE")}</Heading>
@@ -41,7 +41,7 @@ function CardsErro() {
               </Flex>
             </Box>
 
-            <Box minHeight="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" width={['100%', '32vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Captura</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("CAPTURA")}</Heading>
@@ -50,7 +50,7 @@ function CardsErro() {
             </Box>
 
 
-            <Box minHeight="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" width={['100%', '32vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Carrinho</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("FATURADO")}</Heading>
@@ -59,7 +59,7 @@ function CardsErro() {
             </Box>
 
 
-            <Box minHeight="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" width={['100%', '32vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Picking</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("PICKING")}</Heading>
@@ -70,7 +70,7 @@ function CardsErro() {
           </Flex>
         </Box>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
 

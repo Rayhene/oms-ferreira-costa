@@ -1,11 +1,11 @@
-import { Bar } from "@nivo/bar";
+import { ResponsiveBar } from "@nivo/bar";
 import { data } from "./data";
 
-   const ResponsiveBar = () => (
-    <Bar
+
+   const ChartSalesMounthly = () => {
+    return (
+    <ResponsiveBar
         data={data}
-        height={400} 
-        width={800}
         keys={[
             'Pedidos',
         ]}
@@ -14,7 +14,7 @@ import { data } from "./data";
         padding={0.3}
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'set1' }}
+        colors={['#EC5466']}
         defs={[
             {
                 id: 'dots',
@@ -100,6 +100,7 @@ import { data } from "./data";
         ariaLabel="Nivo bar chart demo"
         barAriaLabel={e=>e.id+": "+e.formattedValue+" in mes: "+e.indexValue}
     />
-)
+    )
+}
 
-export default ResponsiveBar;
+export default ChartSalesMounthly;
