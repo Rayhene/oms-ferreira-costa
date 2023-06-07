@@ -32,7 +32,7 @@ const LogApiTable = () => {
     return (
         <Box>
             <Heading as="h2" size="md" mb={5}>
-                Log da API
+                Historico de Erro
             </Heading>
             <Table boxShadow="base" borderRadius="8px" width='100%'>
                 <ChakraProvider>

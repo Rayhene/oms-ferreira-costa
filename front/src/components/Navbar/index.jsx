@@ -57,8 +57,8 @@ export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
-      <Box bg={useColorModeValue('white.100', 'white.900')} px={4}>
+    <Flex justifyContent="center">
+      <Box w='1280px' bg={useColorModeValue('white.100', 'white.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -121,6 +121,6 @@ export default function withAction() {
         ) : null}
       </Box>
       <hr></hr>
-    </>
+    </Flex>
   );
 }
