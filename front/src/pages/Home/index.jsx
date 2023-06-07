@@ -4,6 +4,7 @@ import App from '../../components/ChartSelling/GraphSelling';
 import LogApiTable from '../../components/LogApi/LogApiTable';
 import Navbar from '../../components/Navbar';
 import CardsErro from '../../components/CardsErro';
+import { ChartProgressError } from '../../components/ChartProgressError/ChartProgressError';
 
 const Home = () => {
 
@@ -11,6 +12,7 @@ const Home = () => {
     <>
    <Navbar />
    <CardsErro />
+   <ChartProgressError/>
       <Flex direction='column' alignItems={'center'} width='100%'>
         <Flex alignItems="center" justifyContent="center">
           <Center>
