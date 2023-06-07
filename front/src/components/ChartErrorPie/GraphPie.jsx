@@ -69,6 +69,7 @@ const ResponsivePie = () => {
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
+      enableArcLabels={false}
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{

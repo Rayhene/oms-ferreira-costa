@@ -1,13 +1,13 @@
-import { Line } from "@nivo/line";
+import { ResponsiveLine } from "@nivo/line";
 import { data } from "./data";
 
 
-const ChartlineModel = () => (
-    <Line
+const ChartSalesDaily = () => {
+    return (
+    <ResponsiveLine
     
         data={data}
-        height={400} 
-        width={800}
+        colors={['#EC5466']}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{
@@ -68,6 +68,7 @@ const ChartlineModel = () => (
             }
         ]}
     />
-)
+    )
+}
 
-export default ChartlineModel;
+export default ChartSalesDaily;
