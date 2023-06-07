@@ -42,7 +42,7 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('red.200', 'red.700'),
     }}
-    as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatistica")}
+    as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
     color={(children === 'Pedidos') ? 'red' : 'black'}>
     {children}
 
