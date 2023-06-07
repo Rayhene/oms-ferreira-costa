@@ -2,16 +2,10 @@ import { ResponsiveLine } from "@nivo/line";
 import { data } from "./data";
 
 
-<<<<<<< HEAD:front/src/components/ChartSalesDaily/ChartSalesDaily.jsx
 const ChartSalesDaily = () => {
     return (
     <ResponsiveLine
     
-=======
-const ChartlineModel = () => (
-    <Line
-
->>>>>>> 312ff31bc19eeada164928ac460692964757fb3e:front/src/components/ChartLine/ChartLine.jsx
         data={data}
         colors={['#EC5466']}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -46,9 +40,6 @@ const ChartlineModel = () => (
         pointBorderWidth={2}
         pointBorderColor={{ from: 'serieColor' }}
         pointLabelYOffset={-12}
-        colors={['#EC5466', '#00C49F', '#FFBB28', '#FF8042']}
-        enableSlices="x"
-
         useMesh={true}
         legends={[
             {
