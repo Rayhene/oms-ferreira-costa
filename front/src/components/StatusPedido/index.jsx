@@ -70,7 +70,7 @@ function Example() {
   else if (pedido?.status_pedido === "EMPACOTAMENTO E DESIGNAÇÃO") {
     indexStatus = Number(6);
   }
-  else if (pedido?.status_pedido === "TRANSPORTE") {
+  else if (pedido?.status_pedido === "SINCRONIZACAO") {
     indexStatus = Number(7);
   }
   else if (pedido?.status_pedido === "NAOENTREGUE") {
