@@ -231,9 +231,9 @@ const PedidosTable = () => {
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag></>
                           ) : pedido.status_pedido === "FATURADO" ? (
                             <Tag ml={4} bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag>
-                          ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
+                          ) : pedido.status_pedido === "SINCRONIZACAO" && pedido.status_erro === true ? (
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B1ADF9" color="000000" rounded="full">Transporte</Tag></>
-                          ) : pedido.status_pedido === "TRANSPORTE" ? (
+                          ) : pedido.status_pedido === "SINCRONIZACAO" ? (
                             <Tag ml={4} bg="#B1ADF9" color="000000">Transporte</Tag>
                           ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag></>
