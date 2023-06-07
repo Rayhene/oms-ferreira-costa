@@ -85,7 +85,11 @@ const ClientInfos = () => {
                     )}
                 </Box>
             </Box>
+<<<<<<< HEAD
             </>)}
+=======
+            </>)};
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
         </Flex>
     );
 }

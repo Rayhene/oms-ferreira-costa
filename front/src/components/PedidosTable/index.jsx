@@ -5,8 +5,11 @@ import { buscarTodosPedidos } from "../../services/api";
 import { SearchIcon } from "@chakra-ui/icons";
 import cpfMask from "../Masks/cpfMask";
 import Loading from "../Loading";
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
 import { Link as LinkChakra } from '@chakra-ui/react'
+=======
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -208,11 +211,15 @@ const PedidosTable = () => {
                   {
                     pedidosDaPagina.map((pedido) => (
                       <Tr key={pedido.id}>
+<<<<<<< HEAD
                         <Td py="10px">
                           <LinkChakra as={Link} to={`/pedido/${pedido.numeroDoPedido}`}>
                             {pedido.numeroDoPedido}
                           </LinkChakra>
                         </Td>
+=======
+                        <Td py="10px">{pedido.numeroDoPedido}</Td>
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
                         <Td py="10px">{pedido.dataDaCompra}</Td>
                         <Td py="10px">{pedido.nome}</Td>
                         <Td py="10px">{cpfMask(pedido.cpf)}</Td>
@@ -220,6 +227,7 @@ const PedidosTable = () => {
 
                         <Td py="10px" px='0'>
                           {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
+<<<<<<< HEAD
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag></>
                           ) : pedido.status_pedido === "NAOENTREGUE" ? (
                             <Tag ml={4} bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag>
@@ -247,6 +255,35 @@ const PedidosTable = () => {
                             <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag></>
                           ) : pedido.status_pedido === "ENTREGUE" ? (
                             <Tag ml={4} bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag>
+=======
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Não entregue</Tag></>
+                          ) : pedido.status_pedido === "NAOENTREGUE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Não entregue</Tag>
+                          ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Picking</Tag></>
+                          ) : pedido.status_pedido === "PICKING" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Picking</Tag>
+                          ) : pedido.status_pedido === "FATURADO" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Faturado</Tag></>
+                          ) : pedido.status_pedido === "FATURADO" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Faturado</Tag>
+                          ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Transporte</Tag></>
+                          ) : pedido.status_pedido === "TRANSPORTE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white">Transporte</Tag>
+                          ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag></>
+                          ) : pedido.status_pedido === "ANTIFRAUDE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Anti-fraude</Tag>
+                          ) : pedido.status_pedido === "CAPTURA" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Captura</Tag></>
+                          ) : pedido.status_pedido === "CAPTURA" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Captura</Tag>
+                          ) : pedido.status_pedido === "ENTREGUE" && pedido.status_erro === true ? (
+                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#52B7FF" color="white" rounded="full">Entregue</Tag></>
+                          ) : pedido.status_pedido === "ENTREGUE" ? (
+                            <Tag ml={4} bg="#52B7FF" color="white" rounded="full">Entregue</Tag>
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
                           ) : null}
                         </Td>
                       </Tr>
@@ -295,5 +332,8 @@ const PedidosTable = () => {
 };
 
 export default PedidosTable;
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e

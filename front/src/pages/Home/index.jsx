@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Flex, Box, Heading } from '@chakra-ui/react';
 import Pie from '../../components/ChartErrorPie/GraphPie';
 import ChartSalesGroup from '../../components/ChartSalesGroup/ChartSalesGroup';
@@ -22,6 +23,19 @@ const Home = () => {
             <Box w='29%' >
               <ChartProgressError />
             </Box>
+=======
+import { Flex, Center } from '@chakra-ui/react';
+import ChartOrdersModel from '../../components/ChartSelling/GraphSelling';
+
+const Home = () => {
+  
+    return (
+        <>
+          <Flex minHeight="100vh" justify="center" flexDir="reverseRow">
+            <Center>
+                <ChartOrdersModel/>
+            </Center>
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
           </Flex>
         </Flex>
         <Box width='1280px' p='1em' >

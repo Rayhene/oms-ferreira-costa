@@ -26,18 +26,29 @@ let indexStatus = 0;
 function Example() {
 
   const [pedido, setPedido] = useState("");
+<<<<<<< HEAD
   const [isLoading, setIsLoading] = useState(true);
   const [statusErro, setStatusErro] = useState(false);
   const [datasDescricao, setdatasDescricao] = useState([]);
+=======
+  const [statusErro, setStatusErro] = useState(false);
+  const [dataDaCompra, setDataDaCompra] = useState("");
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
 
   useEffect(() => {
     buscarPedidoPorNumero(buscarNumeroPedido())
       .then((data) => {
         setPedido(data);
+<<<<<<< HEAD
         setIsLoading(false);
         setStatusErro(data?.status_erro || false);
         setdatasDescricao(datas);
 
+=======
+        setStatusErro(data?.status_erro || false);
+        setDataDaCompra(data?.dataDaCompra || "");
+        
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
       })
       .catch((error) => {
         console.error("Erro ao buscar todos os pedidos:", error);
@@ -103,16 +114,27 @@ function Example() {
     <Box
       display="flex"
       flexDirection="column"
+<<<<<<< HEAD
       justifyContent="center"
       alignItems="center"
       padding="20px"
       border="1px"
       borderColor="gray.300"
       boxShadow="base"
+=======
+      justifyContent='center'
+      alignItems='center'
+      padding="20px"
+      //height="85vh"
+      //width="96%"
+      //ml="75%"
+      border='1px solid gray'
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
       marginRight="9px"
       marginLeft="9px"
       borderRadius="8px"
       gap={'2vh'}
+<<<<<<< HEAD
     >
       <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">Histórico do Status do Pedido</Heading>
       {isLoading ? (
@@ -140,6 +162,26 @@ function Example() {
                   <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null} >{step.title}</StepTitle>
                   <StepDescription >{datasDescricao[index]}</StepDescription>
                 </Box>
+=======
+      >
+      <Heading as="h1" size="md" marginBottom="20px" fontSize="18px">Histórico do Status do Pedido</Heading>
+      <Stepper index={activeStep} colorScheme='green' orientation='vertical' height='460px' gap='0' size='sm'>
+        {steps.map((step, index) => (
+          <Step key={index}>
+            <StepIndicator>
+              <StepStatus
+                complete={<StepIcon />}
+                active={statusErro || indexStatus === 8 ? <WarningIcon color="red.500" /> : <StepNumber />}
+                incomplete={<StepNumber />}
+                //active={StatusErro === "true" ? (<WarningIcon color="red.500" />) : (<StepNumber />)}
+              />
+            </StepIndicator>
+
+            <Box flexShrink='0'>
+              <StepTitle style={((statusErro && activeStep === index) || (indexStatus === 8 && activeStep === index)) ? { color: 'red' } : null} >{step.title}</StepTitle>
+              <StepDescription >{step.description}</StepDescription>
+            </Box>
+>>>>>>> 312ff31bc19eeada164928ac460692964757fb3e
 
                 <StepSeparator />
               </Step>
