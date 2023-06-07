@@ -22,7 +22,6 @@ const LogApiTable = () => {
             .then((data) => {
                 setPedidos(data);
                 setIsLoading(false);
-                console.log("data", data);
             })
             .catch((error) => {
                 console.error("Erro ao buscar todos os pedidos:", error);

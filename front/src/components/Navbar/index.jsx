@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   Box,
   Flex,
@@ -24,30 +23,35 @@ import { Link as LinkDom } from 'react-router-dom';
 
 const Links = ['Dashboard', 'Pedidos', 'Estatísticas'];
 
-const colorNavLink = ({ children }) => {
-  const [activeLink, setActiveLink] = useState('');
+const rotaAtual = () => {
+  let numeroPedido = window.location.pathname.split('/');
+  console.log(numeroPedido[1]);
+  return numeroPedido[1];
+};
 
-  const handleClick = () => {
-    setActiveLink(children);
-  };
+const NavLink = ({ children}) => {
+
+  let router = rotaAtual();
+  let  mapRouter = router === 'pedidos' ? 'Pedidos' : router === '' ? 'Dashboard' : 'Estatísticas';
+
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: useColorModeValue('red.200', 'red.700'),
+      }}
+      as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
+      style={{ color: mapRouter === children ? 'red' : 'black' }}
+      >
+      {children}
+  
+    </Link>
+  );
 
 }
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('red.200', 'red.700'),
-    }}
-    as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatistica")}
-    color={(children === 'Pedidos') ? 'red' : 'black'}>
-    {children}
-
-  </Link>
-);
 
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
