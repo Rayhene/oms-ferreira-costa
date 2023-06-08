@@ -2,15 +2,14 @@ import {
   Box,
   Center,
   Text,
-  Stack,
   List,
   ListItem,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { CheckIcon } from '@chakra-ui/icons'
 import { buscarPedidoPorNumero } from "../../services/api";
 import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
+import realMask from '../Masks/realMask';
 
 function Pricing() {
   const [clientData, setClientData] = useState(null);
@@ -37,9 +36,12 @@ function Pricing() {
 
     const somaValores = clientData.produtos.reduce((sum, produto) => {
       return sum + produto.valor_total_produto;
+
     }, 0);
 
-    return somaValores / clientData.parcelas;
+    const result = (somaValores / clientData.parcelas)
+    return realMask(result);
+
   }
 
   const valorParcelas = calculateValorParcelas();
@@ -56,29 +58,29 @@ function Pricing() {
         p='20px'
         w='100%'
       >
-          <Text fontSize={'20px'} fontWeight={600}>
-            Método de Pagamento
-          </Text>
+        <Text fontSize={'20px'} fontWeight={600}>
+          Método de Pagamento
+        </Text>
 
-          <List spacing={5}>
-            <Box>
-              <ListItem>
-                {clientData?.tipo_pagamento}
-              </ListItem>
-              <ListItem>
-                {clientData?.parcelas}x R${valorParcelas}
-              </ListItem>
-            </Box>
+        <List spacing={5}>
+          <Box>
+            <ListItem>
+              {clientData?.tipo_pagamento}
+            </ListItem>
+            <ListItem>
+              {clientData?.parcelas}x {valorParcelas}
+            </ListItem>
+          </Box>
 
-            <Box>
-              <ListItem style={{ fontWeight: 700 }}>
-                Id de Transação
-              </ListItem>
-              <ListItem>
+          <Box>
+            <ListItem style={{ fontWeight: 700 }}>
+              Id de Transação
+            </ListItem>
+            <ListItem>
               {clientData?.id_transacao}
-              </ListItem>
-            </Box>
-          </List>
+            </ListItem>
+          </Box>
+        </List>
       </Box>
     </Center>
   );

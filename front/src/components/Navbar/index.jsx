@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import {
   Box,
   Flex,
@@ -18,43 +17,48 @@ import {
   MenuProvider,
   MenuCommand,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import img from '../../assets/img.png';
 import { Link as LinkDom } from 'react-router-dom';
 
 const Links = ['Dashboard', 'Pedidos', 'Estatísticas'];
 
-const colorNavLink = ({ children }) => {
-  const [activeLink, setActiveLink] = useState('');
+const rotaAtual = () => {
+  let numeroPedido = window.location.pathname.split('/');
+  console.log(numeroPedido[1]);
+  return numeroPedido[1];
+};
 
-  const handleClick = () => {
-    setActiveLink(children);
-  };
+const NavLink = ({ children }) => {
+
+  let router = rotaAtual();
+  let mapRouter = router === 'pedidos' ? 'Pedidos' : router === '' ? 'Dashboard' : 'Estatísticas';
+
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'underline',
+
+      }}
+      as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
+      style={{ color: mapRouter === children ? 'red' : 'black' }}
+    >
+      {children}
+
+    </Link>
+  );
 
 }
-
-const NavLink = ({ children }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('red.200', 'red.700'),
-    }}
-    as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatistica")}
-    color={(children === 'Pedidos') ? 'red' : 'black'}>
-    {children}
-
-  </Link>
-);
 
 export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <>
-      <Box bg={useColorModeValue('white.100', 'white.900')} px={4}>
+    <Flex justifyContent="center">
+      <Box w='1280px' bg={useColorModeValue('white.100', 'white.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -97,7 +101,7 @@ export default function withAction() {
                   <MenuProvider>Igor Santos</MenuProvider>
                   <MenuCommand fontSize={14}>Financeiro</MenuCommand>
                 </Stack>
-                
+
                 <MenuDivider />
                 <MenuItem>Gerenciar Perfil</MenuItem>
                 <MenuItem>Sair</MenuItem>
@@ -117,6 +121,6 @@ export default function withAction() {
         ) : null}
       </Box>
       <hr></hr>
-    </>
+    </Flex>
   );
 }

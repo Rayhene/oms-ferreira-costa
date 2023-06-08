@@ -22,7 +22,6 @@ const LogApiTable = () => {
             .then((data) => {
                 setPedidos(data);
                 setIsLoading(false);
-                console.log("data", data);
             })
             .catch((error) => {
                 console.error("Erro ao buscar todos os pedidos:", error);
@@ -33,7 +32,7 @@ const LogApiTable = () => {
     return (
         <Box>
             <Heading as="h2" size="md" mb={5}>
-                Log da API
+                Historico de Erro
             </Heading>
             <Table boxShadow="base" borderRadius="8px" width='100%'>
                 <ChakraProvider>

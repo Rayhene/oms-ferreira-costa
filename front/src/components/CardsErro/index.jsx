@@ -1,60 +1,76 @@
-import { Box, Flex, Heading, Image } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import img from '../../assets/Vector.png';
 import { buscarTodosPedidos } from "../../services/api";
 import { useState, useEffect } from "react";
 
 function CardsErro() {
 
-    const [pedidos, setPedidos] = useState([]);
+  const [pedidos, setPedidos] = useState([]);
 
-    useEffect(() => {
-        buscarTodosPedidos()
-          .then((data) => {
-            setPedidos(data);
-            console.log("data", data)
-            console.log(pedidos);
-          })
-          .catch((error) => {
-            console.error("Erro ao buscar todos os pedidos:", error);
-          });
-      }, []);
+  useEffect(() => {
+    buscarTodosPedidos()
+      .then((data) => {
+        setPedidos(data);
+        console.log("data", data)
+        console.log(pedidos);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar todos os pedidos:", error);
+      });
+  }, []); 0
+
+  const getQuantidadePedidosErro = (status) => {
+    return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
+  };
+
 
   return (
-    <Box marginTop='4rem'>
-      <Flex justifyContent='center' padding='1rem' color="#1D252F">
-        <Box maxWidth={['100%', '80%', '100%']} margin='auto'>
+    <Flex justifyContent="center" marginTop='4rem' >
+      <Flex w='1280px' justifyContent='space-arround' color="#1D252F" padding={'16px'}>
+        <Box width='100%' margin='auto'>
           <Heading fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} color='#303030' size="lg" marginBottom='1rem'>
             Erros no Sistema
           </Heading>
 
-          <Flex justifyContent={['center', 'flex-start']} gap='1rem' flexWrap='wrap'>
-            <Box height="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
+            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Anti-Fraude</Heading>
-              <Heading as="h1" fontSize="2xl" margin="16px 18px">48</Heading>
-              <Image src={img} marginLeft="85%" marginTop="-16%" width="5" />
+              <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
+                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("ANTIFRAUDE")}</Heading>
+                <Image src={img} width="20px" height="20px" />
+              </Flex>
             </Box>
 
-            <Box height="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Captura</Heading>
-              <Heading as="h1" fontSize="2xl" margin="16px 18px">354</Heading>
-              <Image src={img} marginLeft="85%" marginTop="-16%" width="5" />
+              <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
+                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("CAPTURA")}</Heading>
+                <Image src={img} width="20px" height="20px" />
+              </Flex>
             </Box>
 
-            <Box height="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+
+            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Carrinho</Heading>
-              <Heading as="h1" fontSize="2xl" margin="16px 18px">77</Heading>
-              <Image src={img} marginLeft="85%" marginTop="-16%" width="5"/>
+              <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
+                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("FATURADO")}</Heading>
+                <Image src={img} width="20px" height="20px" />
+              </Flex>
             </Box>
 
-            <Box height="10vh" width={['100%', '26vh']} border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+
+            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Picking</Heading>
-              <Heading as="h1" fontSize="2xl" margin="16px 18px">364</Heading>
-              <Image src={img} marginLeft="85%" marginTop="-16%" width="5" />
+              <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
+                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("PICKING")}</Heading>
+                <Image src={img} width="20px" height="20px" />
+              </Flex>
             </Box>
-          </Flex>
+          </SimpleGrid>
+          
         </Box>
       </Flex>
-    </Box>
+    </Flex>
   );
 }
 

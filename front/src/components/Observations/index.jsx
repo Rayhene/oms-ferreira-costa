@@ -29,6 +29,7 @@ const Observations = () => {
   const handleKeyDownResposta = (event, index) => {
     if (event.key === 'Enter' && event.target.value.trim() !== '') {
       handleResponderComentario(index, event.target.value);
+      focusInput.current.focus();
     }
   };
 
@@ -40,23 +41,39 @@ const Observations = () => {
         texto: novoComentario,
         respostas: [],
       };
-
       setComentarios((prevComentarios) => [...prevComentarios, novoComentarioObj]);
       setNovoComentario('');
-
-      const novoComentarioElement = document.getElementById(`comentario-${comentarios.length}`);
-      if (novoComentarioElement) {
-        novoComentarioElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-
+      focusInput.current.focus();
     }
-    scrollToBottom();
+  };
+
+  const handleResponderComentario = (index, resposta) => {
+    setComentarios((prevComentarios) => {
+      const novosComentarios = [...prevComentarios];
+      const comentario = novosComentarios[index];
+      comentario.respostas.push(resposta);
+      return novosComentarios;
+    });
+
+    toggleResposta(index);
+    setIsReplyClicked(false);
+    setReplyIndex(null);
+    focusInput.current.focus();
   };
 
   const handleExcluirComentario = (index) => {
     setComentarios((prevComentarios) => {
       const novosComentarios = [...prevComentarios];
       novosComentarios.splice(index, 1);
+      return novosComentarios;
+    });
+  };
+
+  const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
+    setComentarios((prevComentarios) => {
+      const novosComentarios = [...prevComentarios];
+      const comentario = novosComentarios[comentarioIndex];
+      comentario.respostas.splice(respostaIndex, 1);
       return novosComentarios;
     });
   };
@@ -69,32 +86,14 @@ const Observations = () => {
     }
   };
 
-  const focusInputComent = useRef(null);
+  const focusInput = useRef(null);
 
-  const handleResponderComentario = (index, resposta) => {
-    setComentarios((prevComentarios) => {
-      const novosComentarios = [...prevComentarios];
-      const comentario = novosComentarios[index];
-      comentario.respostas.push(resposta);
-      return novosComentarios;
-    });
-    toggleResposta(index);
-    setIsReplyClicked(false);
-    setReplyIndex(null);
-    scrollToBottom();
-  };
+  useEffect(() => {
+    focusInput.current.focus();
+  }, []);
 
-  const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
-    setComentarios((prevComentarios) => {
-      const novosComentarios = [...prevComentarios];
-      const comentario = novosComentarios[comentarioIndex];
-      comentario.respostas.splice(respostaIndex, 1);
-      return novosComentarios;
-    });
-  };
-
-  const scrollToBottom = () => {
-    window.scrollTo(0, document.body.scrollHeight);
+  const handleFocus = () => {
+    focusInput.current.focus();
   };
 
   return (
@@ -169,9 +168,9 @@ const Observations = () => {
                       placeholder="Escreva uma resposta..."
                       focusBorderColor="black"
                       colorScheme="black"
-                      ref={focusInputComent}
+                      ref={focusInput}
                       id={`resposta-${index}`}
-                      onKeyDown={(event) => handleKeyDownResposta(event, index)} // Alteração aqui
+                      onKeyDown={(event) => handleKeyDownResposta(event, index)}
                     />
 
                     <Button
@@ -251,19 +250,20 @@ const Observations = () => {
 
           <Flex justifyContent={'space-between'} width="100%" gap="1vw">
             <Input
-              ref={focusInputComent}
+              ref={focusInput}
               placeholder="Escreva um comentário..."
               focusBorderColor="black"
               colorScheme="black"
               value={novoComentario}
               onChange={(event) => setNovoComentario(event.target.value)}
-              onKeyDown={handleKeyDownComentario} // Alteração aqui
+              onKeyDown={handleKeyDownComentario}
             />
             <Button
               colorScheme="red"
               variant="outline"
               onClick={handleComentar}
               isDisabled={novoComentario.trim() === ''}
+              ml={2}
             >
               Comente
             </Button>
