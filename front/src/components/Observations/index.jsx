@@ -1,103 +1,60 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
 
 const Observations = () => {
-  const [comentarios, setComentarios] = useState(() => {
-    const comentariosArmazenados = localStorage.getItem('comentarios');
-    return comentariosArmazenados ? JSON.parse(comentariosArmazenados) : [];
-  });
+  const [comentarios, setComentarios] = useState([]);
   const [novoComentario, setNovoComentario] = useState('');
-  const [respostaAberta, setRespostaAberta] = useState([]);
   const [isReplyClicked, setIsReplyClicked] = useState(false);
   const [replyIndex, setReplyIndex] = useState(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem('comentarios', JSON.stringify(comentarios));
-  }, [comentarios]);
-
-  const handleModify = (index) => {
-    setIsReplyClicked(!isReplyClicked);
-    setReplyIndex(index);
-  };
-
-  const handleKeyDownComentario = (event) => {
-    if (event.key === 'Enter' && novoComentario.trim() !== '') {
-      handleComentar();
+    if (isReplyClicked && replyIndex !== null && inputRef.current) {
+      inputRef.current.focus();
     }
-  };
-
-  const handleKeyDownResposta = (event, index) => {
-    if (event.key === 'Enter' && event.target.value.trim() !== '') {
-      handleResponderComentario(index, event.target.value);
-      focusInput.current.focus();
-    }
-  };
+  }, [isReplyClicked, replyIndex]);
 
   const handleComentar = () => {
     if (novoComentario.trim() !== '') {
-      const novoComentarioObj = {
-        avatar: 'https://avatars.dicebear.com/api/male/username.svg',
+      const newComment = {
         nome: 'Hamilton Gomes',
+        avatar: 'https://avatars.dicebear.com/api/male/username.svg',
         texto: novoComentario,
         respostas: [],
       };
-      setComentarios((prevComentarios) => [...prevComentarios, novoComentarioObj]);
+      setComentarios([...comentarios, newComment]);
       setNovoComentario('');
-      focusInput.current.focus();
     }
   };
 
   const handleResponderComentario = (index, resposta) => {
-    setComentarios((prevComentarios) => {
-      const novosComentarios = [...prevComentarios];
-      const comentario = novosComentarios[index];
-      comentario.respostas.push(resposta);
-      return novosComentarios;
-    });
-
-    toggleResposta(index);
-    setIsReplyClicked(false);
-    setReplyIndex(null);
-    focusInput.current.focus();
-  };
-
-  const handleExcluirComentario = (index) => {
-    setComentarios((prevComentarios) => {
-      const novosComentarios = [...prevComentarios];
-      novosComentarios.splice(index, 1);
-      return novosComentarios;
-    });
-  };
-
-  const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
-    setComentarios((prevComentarios) => {
-      const novosComentarios = [...prevComentarios];
-      const comentario = novosComentarios[comentarioIndex];
-      comentario.respostas.splice(respostaIndex, 1);
-      return novosComentarios;
-    });
-  };
-
-  const toggleResposta = (index) => {
-    if (respostaAberta.includes(index)) {
-      setRespostaAberta((prevRespostaAberta) => prevRespostaAberta.filter((i) => i !== index));
-    } else {
-      setRespostaAberta((prevRespostaAberta) => [...prevRespostaAberta, index]);
+    if (resposta.trim() !== '') {
+      const updatedComentarios = [...comentarios];
+      updatedComentarios[index].respostas.push(resposta);
+      setComentarios(updatedComentarios);
+      setIsReplyClicked(false);
+      setReplyIndex(null);
     }
   };
 
-  const focusInput = useRef(null);
+  const handleExcluirComentario = (index) => {
+    const updatedComentarios = [...comentarios];
+    updatedComentarios.splice(index, 1);
+    setComentarios(updatedComentarios);
 
-  useEffect(() => {
-    focusInput.current.focus();
-  }, []);
+    if (comentarios.length === 1 && index === 0) {
+      setIsReplyClicked(false);
+    }
+  };
 
-  const handleFocus = () => {
-    focusInput.current.focus();
+  const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
+    const updatedComentarios = [...comentarios];
+    updatedComentarios[comentarioIndex].respostas.splice(respostaIndex, 1);
+    setComentarios(updatedComentarios);
   };
 
   return (
-    <Box maxWidth="60vw" mt="3vh" pb="10vh">
+    <Box maxWidth="62vw" ml="12" mt="3vh" pb="10vh">
       <Heading size="xl" fontSize="32px" mb="1vw">
         Observações
       </Heading>
@@ -138,7 +95,10 @@ const Observations = () => {
                     direction="row"
                     textDecoration="underline"
                     mr={2}
-                    onClick={() => handleModify(index)}
+                    onClick={() => {
+                      setIsReplyClicked(true);
+                      setReplyIndex(index);
+                    }}
                     style={{ cursor: 'pointer' }}
                   >
                     Responder
@@ -160,17 +120,22 @@ const Observations = () => {
 
               {/* INPUT DA RESPOSTA */}
               {isReplyClicked && replyIndex === index && (
-                <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
-                  <Flex justifyContent={'space-between'} width="100%" gap="1vw">
-                    <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+                <Stack direction="row" spacing={4} mb="1vh">
+
+                  <Flex justifyContent="space-between" width="100%">
+                    <Avatar size="sm" src="https://avatars.dicebear.com/api/male/username.svg" mr={4} />
 
                     <Input
                       placeholder="Escreva uma resposta..."
                       focusBorderColor="black"
                       colorScheme="black"
-                      ref={focusInput}
                       id={`resposta-${index}`}
-                      onKeyDown={(event) => handleKeyDownResposta(event, index)}
+                      ref={inputRef}
+                      onKeyDown={(event) => {
+                        if (event.key === 'Enter') {
+                          handleResponderComentario(index, event.target.value);
+                        }
+                      }}
                     />
 
                     <Button
@@ -189,7 +154,10 @@ const Observations = () => {
                       colorScheme="gray"
                       variant="outline"
                       size="md"
-                      onClick={() => handleModify(index)}
+                      onClick={() => {
+                        setIsReplyClicked(false);
+                        setReplyIndex(null);
+                      }}
                       ml={2}
                     >
                       Cancelar
@@ -245,18 +213,21 @@ const Observations = () => {
 
       {/* INPUT DE COMENTÁRIO e RESPOSTA */}
       {!isReplyClicked && (
-        <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
-          <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+        <Stack direction="row" mb="1vh">
 
-          <Flex justifyContent={'space-between'} width="100%" gap="1vw">
+          <Flex justifyContent="space-between" width="100%" mt="1vh">
+            <Avatar size="sm" src="https://avatars.dicebear.com/api/male/username.svg" mr={4} />
             <Input
-              ref={focusInput}
               placeholder="Escreva um comentário..."
               focusBorderColor="black"
               colorScheme="black"
               value={novoComentario}
               onChange={(event) => setNovoComentario(event.target.value)}
-              onKeyDown={handleKeyDownComentario}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  handleComentar();
+                }
+              }}
             />
             <Button
               colorScheme="red"
