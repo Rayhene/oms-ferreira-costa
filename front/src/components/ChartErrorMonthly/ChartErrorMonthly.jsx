@@ -2,20 +2,19 @@ import { ResponsiveLine } from "@nivo/line";
 import { data } from "./data";
 
 
-const ChartSalesDaily = () => {
+const ChartErrorMonthly = () => {
     return (
     <ResponsiveLine
     
         data={data}
-        colors={['#EC5466']}
+        colors={['#E3A400','#00B2FF','#7003C6','#EC5466']}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         enableSlices="x"
         xScale={{ type: 'point' }}
         yScale={{
             type: 'linear',
             min: 'auto',
-            max: 'auto',
-            
+            max: 'auto',            
         }}
         yFormat=" >-.2f"
         axisTop={null}
@@ -70,4 +69,4 @@ const ChartSalesDaily = () => {
     )
 }
 
-export default ChartSalesDaily;
+export default ChartErrorMonthly;

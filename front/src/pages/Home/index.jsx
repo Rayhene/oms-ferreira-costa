@@ -1,6 +1,6 @@
 import { Flex, Box, Heading } from '@chakra-ui/react';
 import Pie from '../../components/ChartErrorPie/GraphPie';
-import ChartSalesGroup from '../../components/ChartSalesGroup/ChartSalesGroup';
+import ChartErrorGroup from '../../components/ChartErrorGroup/ChartErrorGroup';
 import LogApiTable from '../../components/LogApi/LogApiTable';
 import Navbar from '../../components/Navbar';
 import CardsErro from '../../components/CardsErro';
@@ -17,7 +17,7 @@ const Home = () => {
         <Flex w='1280px'>
           <Flex w='100%' justifyContent="space-between" p='1rem'>
             <Box w='70%'>
-              <ChartSalesGroup />
+              <ChartErrorGroup />
             </Box>
             <Box w='29%' >
               <ChartProgressError />

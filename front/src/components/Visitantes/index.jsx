@@ -22,7 +22,7 @@ import { ArrowUpIcon, ArrowDownIcon } from '@chakra-ui/icons'
 function Visitantes() {
   return (
     <>
-      <Card maxW="sm" height={"sm"}>
+      <Card maxW="sm" height={"sm"} border='1px' borderColor='#9E9E9E' minH='458px'>
         <CardBody>
           <Stack mt="5" spacing="3">
             <Heading size="md">Visitantes</Heading>

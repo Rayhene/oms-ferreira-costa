@@ -29,25 +29,25 @@ const ChartSalesGroup = () => {
         switch (componentSelected) {
             case 'Daily':
                 return (
-                <Box style={{ height: 500 }} >
+                <Box style={{ height: 350 }} >
                 <ChartDaily/>
                 </Box>
                 )
             case 'Monthly':
                 return (
-                    <Box style={{ height: 500 }} >
+                    <Box style={{ height: 350 }} >
                     <ChartMonthly/>
                     </Box>
                     )
             case 'Yearly':
                 return (
-                    <Box style={{ height: 500 }} >
+                    <Box style={{ height: 350 }} >
                     <ChartYearly/>
                     </Box>
                     )
             default:
                 return (
-                    <Box style={{ height: 500 }} >
+                    <Box style={{ height: 350 }} >
                     <ChartDaily/>
                     </Box>
                     )
@@ -56,7 +56,7 @@ const ChartSalesGroup = () => {
 
     return (
 
-        <Flex w='100%' border='1px' borderColor='#9E9E9E' borderRadius='6px' padding='15px' minH='610px' direction={{ base: 'column', xl: 'column' }}>
+        <Flex w='100%' border='1px' borderColor='#9E9E9E' borderRadius='6px' padding='15px' minH='300px' direction={{ base: 'column', xl: 'column' }}>
             <StatGroup paddingLeft='50px' marginBottom='-50px'>
                 <Stat>
                     <StatLabel>Vendas</StatLabel>
