@@ -23,7 +23,7 @@ const steps = [
 
 let indexStatus = 0;
 
-function Example() {
+function OrderStatus() {
 
   const [pedido, setPedido] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -149,4 +149,4 @@ function Example() {
   )
 }
 
-export default Example;
+export default OrderStatus;
