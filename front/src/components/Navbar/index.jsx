@@ -17,7 +17,7 @@ import {
   MenuProvider,
   MenuCommand,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import img from '../../assets/img.png';
 import { Link as LinkDom } from 'react-router-dom';
 
@@ -29,10 +29,10 @@ const rotaAtual = () => {
   return numeroPedido[1];
 };
 
-const NavLink = ({ children}) => {
+const NavLink = ({ children }) => {
 
   let router = rotaAtual();
-  let  mapRouter = router === 'pedidos' ? 'Pedidos' : router === '' ? 'Dashboard' : 'Estatísticas';
+  let mapRouter = router === 'pedidos' ? 'Pedidos' : router === '' ? 'Dashboard' : 'Estatísticas';
 
   return (
     <Link
@@ -40,14 +40,14 @@ const NavLink = ({ children}) => {
       py={1}
       rounded={'md'}
       _hover={{
-        textDecoration: 'none',
-        bg: useColorModeValue('red.200', 'red.700'),
+        textDecoration: 'underline',
+
       }}
       as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
       style={{ color: mapRouter === children ? 'red' : 'black' }}
-      >
+    >
       {children}
-  
+
     </Link>
   );
 
@@ -101,7 +101,7 @@ export default function withAction() {
                   <MenuProvider>Igor Santos</MenuProvider>
                   <MenuCommand fontSize={14}>Financeiro</MenuCommand>
                 </Stack>
-                
+
                 <MenuDivider />
                 <MenuItem>Gerenciar Perfil</MenuItem>
                 <MenuItem>Sair</MenuItem>
