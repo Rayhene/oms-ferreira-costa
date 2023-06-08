@@ -27,8 +27,8 @@ const ResponsivePie = () => {
       const successCount = pedidos.length - erroAntifraudeCount;
       const totalCount = pedidos.length;
 
-      const successPercentage = (successCount / totalCount) * 100;
-      const errorPercentage = (erroAntifraudeCount / totalCount) * 100;
+      const successPercentage = ((successCount / totalCount) * 100).toFixed(0);
+      const errorPercentage = ((erroAntifraudeCount / totalCount) * 100).toFixed(0);
 
       const updatedData = [
         {
