@@ -1,12 +1,23 @@
 import { Box, Flex, Heading, Image } from '@chakra-ui/react';
 import img from '../../assets/Vector.png';
 import { buscarTodosPedidos } from "../../services/api";
-import useSWR from "swr";
+import { useState, useEffect } from "react";
 
 function CardsErro() {
 
+  const [pedidos, setPedidos] = useState([]);
 
-  const { data: pedidos, isLoading } = useSWR('/api/pedidos', buscarTodosPedidos);
+  useEffect(() => {
+    buscarTodosPedidos()
+      .then((data) => {
+        setPedidos(data);
+        console.log("data", data)
+        console.log(pedidos);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar todos os pedidos:", error);
+      });
+  }, []); 0
 
   const getQuantidadePedidosErro = (status) => {
     return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
