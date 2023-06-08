@@ -1,6 +1,38 @@
 import { Box, Flex, Stack, Progress, Text } from '@chakra-ui/react';
+import { buscarTodosPedidos } from '../../services/api';
+import { useEffect, useState } from 'react';
 
 export const ChartProgressError = () => {
+  const [pedidos, setPedidos] = useState([]);
+  useEffect(() => {
+    buscarTodosPedidos()
+      .then((data) => {
+        setPedidos(data);
+        console.log("data", data)
+        console.log(pedidos);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar todos os pedidos:", error);
+      });
+  }, []);
+
+  const calcularPorcentagem = (status) => {
+    const totalPedidos = pedidos.filter(pedido => pedido.problemaResolvido === true && pedido.status_pedido === status
+      || pedido.status_erro === true && pedido.status_pedido === status).length;
+    const problemasResolvidos = pedidos.filter(pedido => pedido.problemaResolvido && pedido.status_pedido === status).length;
+    const statusErro = pedidos.filter(pedido => pedido.status_erro && pedido.status_pedido === status).length;
+
+    const porcentagemProblemasResolvidos = ((problemasResolvidos / totalPedidos) * 100).toFixed(0);
+    const porcentagemStatusErro = ((statusErro / totalPedidos) * 100).toFixed(0);
+
+    return {
+      porcentagemProblemasResolvidos,
+      porcentagemStatusErro
+    };
+  }
+
+
+
   return (
     <Flex justifyContent="flex-end">
       <Box border="1px solid #9E9E9E" w='100%' height={546} marginLeft="auto" borderRadius='6px' minH='610px'>
@@ -8,7 +40,6 @@ export const ChartProgressError = () => {
           <Text as="h1" fontWeight="bold" fontSize={30} textAlign="left" marginBottom={2}>
             Problemas resolvidos
           </Text>
-
           <Flex justifyContent="center" alignItems="center" height="100%">
             <Stack w='100%' spacing={15} marginRight={3}>
 
@@ -16,15 +47,15 @@ export const ChartProgressError = () => {
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
                   Anti-Fraude
                 </Text>
-                <Progress colorScheme="yellow" w='100%' height="20px" borderRadius={20} value={67}>
+                <Progress colorScheme="yellow" w='100%' height="20px" borderRadius={20} value={calcularPorcentagem("ANTIFRAUDE").porcentagemProblemasResolvidos}>
                   <Box width={`${20}%`} bg="#E3A400" height="100%" />
                 </Progress>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
-                    67%
+                    {calcularPorcentagem("ANTIFRAUDE").porcentagemProblemasResolvidos}%
                   </Text>
                   <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4} >
-                    33%
+                    {calcularPorcentagem("ANTIFRAUDE").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
@@ -32,15 +63,15 @@ export const ChartProgressError = () => {
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
                   Carrinho
                 </Text>
-                <Progress colorScheme="blue" w='100%' height="20px" borderRadius={20} value={76}>
+                <Progress colorScheme="blue" w='100%' height="20px" borderRadius={20} value={calcularPorcentagem("SINCRONIZACAO").porcentagemProblemasResolvidos}>
                   <Box width={`${20}%`} bg="#00B2FF" height="100%" />
                 </Progress>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
-                    76%
+                    {calcularPorcentagem("SINCRONIZACAO").porcentagemProblemasResolvidos}%
                   </Text>
                   <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    24%
+                    {calcularPorcentagem("SINCRONIZACAO").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
@@ -48,15 +79,15 @@ export const ChartProgressError = () => {
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
                   Captura
                 </Text>
-                <Progress colorScheme="purple" w='100%' height="20px" borderRadius={20} value={64}>
+                <Progress colorScheme="purple" w='100%' height="20px" borderRadius={20} value={calcularPorcentagem("CAPTURA").porcentagemProblemasResolvidos}>
                   <Box width={`${20}%`} bg="#7003C6" height="100%" />
                 </Progress>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
-                    64%
+                    {calcularPorcentagem("CAPTURA").porcentagemProblemasResolvidos}%
                   </Text>
                   <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    36%
+                    {calcularPorcentagem("CAPTURA").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
@@ -64,15 +95,15 @@ export const ChartProgressError = () => {
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
                   Picking
                 </Text>
-                <Progress colorScheme="red" w='100%' height="20px" borderRadius={20} value={57}>
+                <Progress colorScheme="red" w='100%' height="20px" borderRadius={20} value={calcularPorcentagem("PICKING").porcentagemProblemasResolvidos}>
                   <Box width={`${20}%`} bg="#EC5466" height="100%" />
                 </Progress>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
-                    57%
+                    {calcularPorcentagem("PICKING").porcentagemProblemasResolvidos}%
                   </Text>
                   <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    43%
+                    {calcularPorcentagem("PICKING").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
