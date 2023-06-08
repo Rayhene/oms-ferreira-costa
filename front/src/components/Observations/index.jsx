@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
 
 const Observations = () => {
@@ -6,6 +6,13 @@ const Observations = () => {
   const [novoComentario, setNovoComentario] = useState('');
   const [isReplyClicked, setIsReplyClicked] = useState(false);
   const [replyIndex, setReplyIndex] = useState(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isReplyClicked && replyIndex !== null && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isReplyClicked, replyIndex]);
 
   const handleComentar = () => {
     if (novoComentario.trim() !== '') {
@@ -47,7 +54,7 @@ const Observations = () => {
   };
 
   return (
-    <Box maxWidth="62vw" ml="12" mt="3vh" pb="10vh">
+    <Box maxWidth="62vw" ml="12" mt="2vh" pb="10vh">
       <Heading size="xl" fontSize="32px" mb="1vw">
         Observações
       </Heading>
@@ -113,15 +120,17 @@ const Observations = () => {
 
               {/* INPUT DA RESPOSTA */}
               {isReplyClicked && replyIndex === index && (
-                <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
-                  <Flex justifyContent={'space-between'} width="100%" gap="1vw">
-                    <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+                <Stack direction="row" spacing={4} mb="1vh">
+
+                  <Flex justifyContent="space-between" width="100%">
+                    <Avatar size="sm" src="https://avatars.dicebear.com/api/male/username.svg" mr={4} />
 
                     <Input
                       placeholder="Escreva uma resposta..."
                       focusBorderColor="black"
                       colorScheme="black"
                       id={`resposta-${index}`}
+                      ref={inputRef}
                       onKeyDown={(event) => {
                         if (event.key === 'Enter') {
                           handleResponderComentario(index, event.target.value);
@@ -204,10 +213,10 @@ const Observations = () => {
 
       {/* INPUT DE COMENTÁRIO e RESPOSTA */}
       {!isReplyClicked && (
-        <Stack direction="row" spacing={4} mt='1vh' mb='1vh'>
-          <Avatar size={'sm'} src={'https://avatars.dicebear.com/api/male/username.svg'} />
+        <Stack direction="row" mb="1vh">
 
-          <Flex justifyContent={'space-between'} width="100%" gap="1vw">
+          <Flex justifyContent="space-between" width="100%" mt="1vh">
+            <Avatar size="sm" src="https://avatars.dicebear.com/api/male/username.svg" mr={4} />
             <Input
               placeholder="Escreva um comentário..."
               focusBorderColor="black"
