@@ -7,6 +7,7 @@ import cpfMask from "../Masks/cpfMask";
 import Loading from "../Loading";
 import { Link } from 'react-router-dom';
 import { Link as LinkChakra } from '@chakra-ui/react'
+import realMask from "../Masks/realMask";
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -216,7 +217,7 @@ const PedidosTable = () => {
                         <Td py="10px">{pedido.dataDaCompra}</Td>
                         <Td py="10px">{pedido.nome}</Td>
                         <Td py="10px">{cpfMask(pedido.cpf)}</Td>
-                        <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
+                        <Td py="10px">{realMask(pedido.valorTotal)}</Td>
 
                         <Td py="10px" px='0'>
                           {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
