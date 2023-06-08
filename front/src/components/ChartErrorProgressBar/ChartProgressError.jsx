@@ -1,22 +1,21 @@
 import { Box, Flex, Stack, Progress, Text } from '@chakra-ui/react';
+import useSWR from 'swr';
 import { buscarTodosPedidos } from '../../services/api';
-import { useEffect, useState } from 'react';
 
 export const ChartProgressError = () => {
-  const [pedidos, setPedidos] = useState([]);
-  useEffect(() => {
-    buscarTodosPedidos()
-      .then((data) => {
-        setPedidos(data);
-        console.log("data", data)
-        console.log(pedidos);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar todos os pedidos:", error);
-      });
-  }, []);
+  const { data: pedidos, error } = useSWR("/api/pedidos", buscarTodosPedidos);
+
+  if (error) {
+    console.error("Erro ao buscar todos os pedidos:", error);
+  }
 
   const calcularPorcentagem = (status) => {
+    if (!pedidos) {
+      return {
+        porcentagemProblemasResolvidos: 0,
+        porcentagemStatusErro: 0
+      }
+    }
     const totalPedidos = pedidos.filter(pedido => pedido.problemaResolvido === true && pedido.status_pedido === status
       || pedido.status_erro === true && pedido.status_pedido === status).length;
     const problemasResolvidos = pedidos.filter(pedido => pedido.problemaResolvido && pedido.status_pedido === status).length;
@@ -31,9 +30,8 @@ export const ChartProgressError = () => {
     };
   }
 
-
-
   return (
+
     <Flex justifyContent="flex-end">
       <Box border="1px solid #9E9E9E" w='100%' height={546} marginLeft="auto" borderRadius='6px' minH='610px'>
         <Flex direction="column" height="100%" paddingLeft={4} paddingTop={6} paddingBottom={2}>
@@ -42,7 +40,6 @@ export const ChartProgressError = () => {
           </Text>
           <Flex justifyContent="center" alignItems="center" height="100%">
             <Stack w='100%' spacing={15} marginRight={3}>
-
               <Box >
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
                   Anti-Fraude
@@ -111,6 +108,7 @@ export const ChartProgressError = () => {
           </Flex>
         </Flex>
       </Box>
-    </Flex>
+    </Flex >
+
   );
 };
