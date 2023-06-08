@@ -20,7 +20,7 @@ const LogApiTable = () => {
     return (
         <Box>
             <Heading as="h2" size="md" mb={5}>
-                Historico de Erro
+                Historico de requisições
             </Heading>
             <Table boxShadow="base" borderRadius="8px" width='100%'>
                 <ChakraProvider>
@@ -47,8 +47,8 @@ const LogApiTable = () => {
                                             <Tr key={item.id} fontSize="12px">
                                                 <Td p={3} pl={5}>{item.numeroDoPedido}</Td>
                                                 <Td p={3} pl={5} wordBreak={"keep-all"}>{item.timestempDataDaCompra}</Td>
-                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 404 : 201}</Td>
-                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Not Found" : "Order created success"}</Td>
+                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 503 : 201}</Td>
+                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Service Unavailable" : "Order created success"}</Td>
                                             </Tr>
                                         ))}
                                     </Tbody>
