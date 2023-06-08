@@ -1,28 +1,17 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import img from '../../assets/Vector.png';
+import useSWR from 'swr';
 import { buscarTodosPedidos } from "../../services/api";
-import { useState, useEffect } from "react";
 
 function CardsErro() {
-
-  const [pedidos, setPedidos] = useState([]);
-
-  useEffect(() => {
-    buscarTodosPedidos()
-      .then((data) => {
-        setPedidos(data);
-        console.log("data", data)
-        console.log(pedidos);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar todos os pedidos:", error);
-      });
-  }, []); 0
+  const { data: pedidos, error } = useSWR("/api/pedidos", buscarTodosPedidos);
 
   const getQuantidadePedidosErro = (status) => {
-    return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
+    if (pedidos && pedidos.length > 0) {
+      return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
+    }
+    return 0;
   };
-
 
   return (
     <Flex justifyContent="center" marginTop='4rem' >
