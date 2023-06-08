@@ -19,6 +19,8 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
 import img from '../../assets/img.png';
+import img1 from '../../assets/config.svg';
+import img2 from '../../assets/sair-vetor.svg';
 import { Link as LinkDom } from 'react-router-dom';
 
 const Links = ['Dashboard', 'Pedidos', 'Estatísticas'];
@@ -97,14 +99,18 @@ export default function withAction() {
                 />
               </MenuButton>
               <MenuList>
-                <Stack align={'center'} direction={'column'}>
+                
+                <Stack sx={{ paddingLeft: 5, paddingTop: 4, PaddingBotton: 4}} align={'start'} direction={'column'}>
                   <MenuProvider>Igor Santos</MenuProvider>
                   <MenuCommand fontSize={14}>Financeiro</MenuCommand>
                 </Stack>
+                <MenuDivider/>
+                <MenuItem sx={{ paddingLeft: 5 }}>
+                <img src={img1} alt="configuração" style={{ width: 22, height: 22, marginRight: 10 }} />
+                  Gerenciar Perfil</MenuItem>
+                <MenuItem sx={{ paddingLeft: 6 }}>
+                <img src={img2} alt="sair" style={{ width: 20, height: 18, marginRight: 8 }} /> Sair</MenuItem>
                 
-                <MenuDivider />
-                <MenuItem>Gerenciar Perfil</MenuItem>
-                <MenuItem>Sair</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
