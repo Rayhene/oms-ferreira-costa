@@ -162,10 +162,9 @@ const BoughtProducts = () => {
   });
 
   return (
-    <Box w="62vw" 
+    <Box w='100%' 
     bg='FDFFFE'  
     borderRadius='8' 
-    ml='12' 
     my='8' 
     overflow='hidden'
     boxShadow="base"

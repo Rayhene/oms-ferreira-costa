@@ -10,24 +10,12 @@ import {
     Heading,
 } from "@chakra-ui/react";
 import { buscarTodosPedidos } from "../../services/api";
-import { useState, useEffect } from "react";
 import Loading from "../Loading";
+import useSWR from "swr";
 
 
 const LogApiTable = () => {
-    const [pedidos, setPedidos] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    useEffect(() => {
-        buscarTodosPedidos()
-            .then((data) => {
-                setPedidos(data);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.error("Erro ao buscar todos os pedidos:", error);
-            });
-    }, []);
-
+    const { data: pedidos, isLoading } = useSWR('/api/pedidos', buscarTodosPedidos);
 
     return (
         <Box>
@@ -57,10 +45,10 @@ const LogApiTable = () => {
                                     <Tbody>
                                         {pedidos.map((item) => (
                                             <Tr key={item.id} fontSize="12px">
-                                                <Td  p={3} pl={5}>{item.numeroDoPedido}</Td>
-                                                <Td  p={3} pl={5} wordBreak={"keep-all"}>{item.timestempDataDaCompra}</Td>
-                                                <Td  p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 404 : 201}</Td>
-                                                <Td  p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Not Found" : "Order created success"}</Td>
+                                                <Td p={3} pl={5}>{item.numeroDoPedido}</Td>
+                                                <Td p={3} pl={5} wordBreak={"keep-all"}>{item.timestempDataDaCompra}</Td>
+                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? 404 : 201}</Td>
+                                                <Td p={3} pl={5}>{item.status_erro === true && item.status_pedido === "ANTIFRAUDE" ? "Not Found" : "Order created success"}</Td>
                                             </Tr>
                                         ))}
                                     </Tbody>
@@ -70,7 +58,7 @@ const LogApiTable = () => {
                 </ChakraProvider>
             </Table>
         </Box>
-            
+
 
     );
 };

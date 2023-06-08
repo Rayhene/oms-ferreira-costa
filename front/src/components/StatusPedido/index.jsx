@@ -109,8 +109,6 @@ function Example() {
       border="1px"
       borderColor="gray.300"
       boxShadow="base"
-      marginRight="9px"
-      marginLeft="9px"
       borderRadius="8px"
       gap={'2vh'}
     >
