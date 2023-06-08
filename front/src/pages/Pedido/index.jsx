@@ -18,29 +18,33 @@ const Pedido = () => {
 
   return (
     <>
+      
+      <Flex w={'1280px'} margin={'auto'} direction={'column'}>
       <Navbar />
-      <Flex p={10} align="center">
-        <Button onClick={handleBackButton} bg="transparent" px="2" mr="5"><ArrowBackIcon boxSize={6} /></Button>
-        <Heading as="h1" size="lg">
-          Pedido n° {params.pedidoId}
+        <Flex py={10} align="center" w={'100%'}>
+          <Button onClick={handleBackButton} bg="transparent" px="2"><ArrowBackIcon boxSize={6}/></Button>
+          <Heading as="h1" size="lg">
+            Pedido n° {params.pedidoId}
 
-        </Heading>
-      </Flex >
+          </Heading>
+        </Flex >
 
-      <Flex w={"100%"} justify={'center'} gap={'2%'}>
+        <Flex justify={'space-between'} gap={'2%'}>
 
-        <Box>
-          <ClientInfos></ClientInfos>
-          <BoughtProducts />
-          <Observations />
-        </Box>
+          <Box width={'75%'}>
+            <ClientInfos></ClientInfos>
+            <BoughtProducts />
+            <Observations />
+          </Box>
 
-        <Box>
-          <Example />
-          <Pricing />
-        </Box>
+          <Box width={'25%'}>
+            <Example />
+            <Pricing />
+          </Box>
 
+        </Flex>
       </Flex>
+      
 
     </>
   );
