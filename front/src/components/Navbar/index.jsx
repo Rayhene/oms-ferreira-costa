@@ -40,11 +40,11 @@ const NavLink = ({ children }) => {
       py={1}
       rounded={'md'}
       _hover={{
-        textDecoration: 'underline',
-
+        textDecoration: 'none',
+        bg: useColorModeValue('#E5E5E5'),
       }}
       as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
-      style={{ color: mapRouter === children ? 'red' : 'black' }}
+      style={{ backgroundColor: mapRouter === children ? '#00b233' : 'none', color: mapRouter === children ? 'white' : 'black' }}
     >
       {children}
 

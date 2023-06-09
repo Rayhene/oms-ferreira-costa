@@ -15,7 +15,7 @@ const Home = () => {
 
       <Flex direction='column' alignItems={'center'} >
         <Flex w='1280px'>
-          <Flex w='100%' justifyContent="space-between" p='1rem'>
+          <Flex w='100%' justifyContent="space-between" p='1em'>
             <Box w='70%'>
               <ChartErrorGroup />
             </Box>
