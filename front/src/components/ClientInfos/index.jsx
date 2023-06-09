@@ -28,25 +28,25 @@ const ClientInfos = () => {
     }
 
     return (
-        <Flex 
+        <Flex
             justify={'space-between'}
             p="30px"
             boxShadow="base"
             border="1px"
             borderColor="gray.300"
             borderRadius="8"
-            >{isLoading ? (
-                <Table>
-                    <Tr>
-                        <Td colSpan={6} py="10px">
-                            <Loading mb={3} mt={3} />
-                        </Td>
-                    </Tr>
-                </Table>
-            ) : (
-                <>
-                <Flex  width={'100%'} gap='3vh'>
-                    <Flex   direction={'column'} w={'100%'} gap={'30px'} justify={'space-between'}>
+        >{isLoading ? (
+            <Table>
+                <Tr>
+                    <Td colSpan={6} py="10px">
+                        <Loading mb={3} mt={3} />
+                    </Td>
+                </Tr>
+            </Table>
+        ) : (
+            <>
+                <Flex width={'100%'} gap='3vh'>
+                    <Flex direction={'column'} w={'100%'} gap={'30px'} justify={'space-between'}>
                         <Box>
                             <Heading as="h2" fontSize="lg" h="30%">Cliente</Heading>
                             {clientData && (
@@ -57,7 +57,7 @@ const ClientInfos = () => {
                             )}
                         </Box>
 
-                        
+
                         <Box>
                             <Heading as="h2" fontSize="lg" h="30%">Contato</Heading>
                             {clientData && (
@@ -66,10 +66,10 @@ const ClientInfos = () => {
                                     <Text >Email: {clientData.email}</Text>
                                 </>
                             )}
-                        </Box  > 
+                        </Box  >
                     </Flex>
-                    <Flex  direction={'column'} w={'100%'} justify={"space-between"}>
-                    <Box>
+                    <Flex direction={'column'} w={'100%'} justify={"space-between"}>
+                        <Box>
                             <Heading as="h2" fontSize="lg" h="50%">Endereço</Heading>
                             {clientData && (
                                 <>
@@ -88,8 +88,8 @@ const ClientInfos = () => {
                         </Box>
                     </Flex>
                 </Flex>
-                    
-                </>)}
+
+            </>)}
         </Flex>
     );
 }

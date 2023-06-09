@@ -22,7 +22,8 @@ function CardsErro() {
           </Heading>
 
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Anti-Fraude</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("ANTIFRAUDE")}</Heading>
@@ -30,7 +31,8 @@ function CardsErro() {
               </Flex>
             </Box>
 
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Captura</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("CAPTURA")}</Heading>
@@ -38,8 +40,8 @@ function CardsErro() {
               </Flex>
             </Box>
 
-
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Carrinho</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("FATURADO")}</Heading>
@@ -47,8 +49,8 @@ function CardsErro() {
               </Flex>
             </Box>
 
-
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Picking</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("PICKING")}</Heading>
@@ -56,7 +58,7 @@ function CardsErro() {
               </Flex>
             </Box>
           </SimpleGrid>
-          
+
         </Box>
       </Flex>
     </Flex>
