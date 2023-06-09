@@ -33,7 +33,8 @@ function CardsStatistic() {
           </Heading>
 
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Avariados</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">13</Heading>
@@ -41,7 +42,8 @@ function CardsStatistic() {
               </Flex>
             </Box>
 
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Produtos em Atraso</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">42</Heading>
@@ -50,7 +52,8 @@ function CardsStatistic() {
             </Box>
 
 
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Fora de Estoque</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">27</Heading>
@@ -59,7 +62,8 @@ function CardsStatistic() {
             </Box>
 
 
-            <Box minHeight="10vh" border='1.10733px solid rgba(158, 158, 158, 0.7)' borderRadius='6.23432px' padding='5px'>
+            <Box minHeight="10vh" boxShadow="base"
+              border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Devolvidos</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">38</Heading>
@@ -67,7 +71,7 @@ function CardsStatistic() {
               </Flex>
             </Box>
           </SimpleGrid>
-          
+
         </Box>
       </Flex>
     </Flex>
@@ -75,4 +79,3 @@ function CardsStatistic() {
 }
 
 export default CardsStatistic;
-  

@@ -54,7 +54,7 @@ const Observations = () => {
   };
 
   return (
-    <Box maxWidth="62vw" ml="12" mt="3vh" pb="10vh">
+    <Box maxWidth="60vw" ml="12" mt="3vh" pb="10vh">
       <Heading size="xl" fontSize="32px" mb="1vw">
         Observações
       </Heading>

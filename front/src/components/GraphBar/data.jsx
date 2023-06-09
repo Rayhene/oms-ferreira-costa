@@ -1,5 +1,3 @@
-
-
 export const data = [
   {
     "mes": "JAN",
