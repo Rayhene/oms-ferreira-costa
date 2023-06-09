@@ -32,7 +32,7 @@ const rotaAtual = () => {
 const NavLink = ({ children }) => {
 
   let router = rotaAtual();
-  let mapRouter = router === 'pedidos' ? 'Pedidos' : router === '' ? 'Dashboard' : 'Estatísticas';
+  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' :  router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
 
   return (
     <Link
@@ -57,8 +57,8 @@ export default function withAction() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Flex justifyContent="center">
-      <Box w='1280px' bg={useColorModeValue('white.100', 'white.900')} px={4}>
+    <Flex justifyContent="center" borderBottom='1px' borderColor='#D9D9D9'>
+      <Box w='1280px' bg={useColorModeValue('white.100', 'white.900')} px={4}  >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -68,7 +68,7 @@ export default function withAction() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box><img src={img} alt="logo da Ferreira Costa" width={75} height={75} /></Box>
+            <Box><img src={img} alt="logo da Ferreira Costa" width={100} height={100} /></Box>
             <HStack
               as={'nav'}
               spacing={4}
