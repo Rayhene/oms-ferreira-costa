@@ -2,7 +2,7 @@ import Navbar from "../../components/Navbar";
 import { useParams, useNavigate } from "react-router-dom";
 import { Flex, Heading, Button, Box } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import Example from "../../components/StatusPedido";
+import OrderStatus from "../../components/StatusPedido";
 import Observations from "../../components/Observations/index";
 import Pricing from "../../components/metodo_de_pagamento/index";
 import ClientInfos from "../../components/ClientInfos";
@@ -38,7 +38,7 @@ const Pedido = () => {
           </Box>
 
           <Box width={'25%'}>
-            <Example />
+            <OrderStatus />
             <Pricing />
           </Box>
 
