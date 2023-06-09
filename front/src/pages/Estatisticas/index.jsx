@@ -27,7 +27,7 @@ const Estatisticas = () => {
         </Flex>
         
      
-
+        </Center>
       </Flex>
 
     </>
