@@ -1,33 +1,28 @@
-import {
-  Box,
-  Center,
-  Text,
-  List,
-  ListItem,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import { buscarPedidoPorNumero } from "../../services/api";
-import { useState, useEffect } from 'react'
+import { Box, Center, Text, List, ListItem, useColorModeValue } from '@chakra-ui/react';
+import { useState } from 'react';
 import { useParams } from "react-router-dom";
+import useSWR from 'swr';
+import { buscarPedidoPorNumero } from "../../services/api";
 import realMask from '../Masks/realMask';
 
 function Pricing() {
   const [clientData, setClientData] = useState(null);
   const params = useParams();
-  useEffect(() => {
-    buscarPedidoPorNumero(params.pedidoId)
-      .then((data) => {
-        console.log('data', data);
-        getClientData(data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar todos os pedidos:', error);
-      });
-  }, []);
 
-  const getClientData = (data) => {
-    setClientData(data);
-  }
+  const fetcher = (url) => buscarPedidoPorNumero(url);
+
+  const { data: pedidoData, error } = useSWR(
+    params.pedidoId,
+    fetcher,
+    {
+      onError: () => {
+        console.error("Erro ao buscar o pedido:", error);
+      },
+      onSuccess: (data) => {
+        setClientData(data);
+      },
+    }
+  );
 
   const calculateValorParcelas = () => {
     if (!clientData || !clientData.parcelas || !clientData.produtos) {
@@ -36,12 +31,10 @@ function Pricing() {
 
     const somaValores = clientData.produtos.reduce((sum, produto) => {
       return sum + produto.valor_total_produto;
-
     }, 0);
 
-    const result = (somaValores / clientData.parcelas)
+    const result = somaValores / clientData.parcelas;
     return realMask(result);
-
   }
 
   const valorParcelas = calculateValorParcelas();
@@ -65,10 +58,10 @@ function Pricing() {
         <List spacing={5}>
           <Box>
             <ListItem>
-              {clientData?.tipo_pagamento}
+              {pedidoData?.tipo_pagamento}
             </ListItem>
             <ListItem>
-              {clientData?.parcelas}x {valorParcelas}
+              {pedidoData?.parcelas}x {valorParcelas}
             </ListItem>
           </Box>
 
@@ -77,7 +70,7 @@ function Pricing() {
               Id de Transação
             </ListItem>
             <ListItem>
-              {clientData?.id_transacao}
+              {pedidoData?.id_transacao}
             </ListItem>
           </Box>
         </List>
