@@ -8,9 +8,8 @@ const Estatisticas = () => {
   return (
     <>
       <Navbar />
-      <Flex Flex w='100%' justifyContent="Center" p='1rem'>
-        <Center w='1280px'>
-          <Flex w='100%' justifyContent="space-between" p='1rem'>
+      <Flex w='1280px' justifyContent="Center" align={'center'} margin={'auto'} direction={'column'} gap={'41px'}>
+          <Flex justifyContent="space-between" w='1280px'>
             <Box w='70%'>
               <ChartSalesGroup />
             </Box>
@@ -18,12 +17,14 @@ const Estatisticas = () => {
               <Visitantes />
             </Box>
           </Flex>
-        </Center>
-      </Flex>
-      <Flex w='100%'justifyContent="Center">
-        <Box w='1280px'>
-        <BestSellingProducts />
+
+        <Flex w='1280px'>
+        <Box w='70%'>
+          <BestSellingProducts />
         </Box>
+        </Flex>
+        
+     
 
       </Flex>
 
