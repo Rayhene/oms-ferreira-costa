@@ -43,7 +43,7 @@ const BestSellingProducts = () => {
         },
       ];
     return (
-        <TableContainer border='1px' borderColor='#9E9E9E' borderRadius={'7px'}>
+        <TableContainer border='1px' borderColor='#9E9E9E' borderRadius={'7px'} mt="4vh"> 
             <Text as='h2' fontSize='3xl' p={'22px'} fontWeight={500}>
                 Produtos Mais Vendidos
                 </Text>

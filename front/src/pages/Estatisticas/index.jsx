@@ -12,22 +12,17 @@ const Estatisticas = () => {
       <Navbar />
       <CardsStatistic />
       <Flex Flex w='100%' justifyContent="Center" p='1rem'>
-        <Center w='1280px'>
+        <Center w='1280px' flexDirection={'column'}>
           <Flex w='100%' justifyContent="space-between" p='1rem'>
             <Box w='70%'>
               <ChartSalesGroup />
+              <BestSellingProducts />
             </Box>
             <Box w='29%' >
               <Visitantes />
               <ChartSalesChannels />
             </Box>
           </Flex>
-
-        <Flex w='1280px'>
-        <Box w='70%'>
-          <BestSellingProducts />
-        </Box>
-        </Flex>
         
      
         </Center>
