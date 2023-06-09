@@ -14,9 +14,9 @@ import {
 } from '@chakra-ui/react'
 import { ArrowUpIcon } from '@chakra-ui/icons'
 
-const ChartDaily = () => (<ChartSalesDaily/>);
-const ChartMonthly = () => (<ChartSalesMounthly/>)
-const ChartYearly = () => (<ChartSalesYerly/>);
+const ChartDaily = () => (<ChartSalesDaily />);
+const ChartMonthly = () => (<ChartSalesMounthly />)
+const ChartYearly = () => (<ChartSalesYerly />);
 
 const ChartSalesGroup = () => {
     const [componentSelected, setComponentSelected] = useState('Daily');
@@ -29,38 +29,39 @@ const ChartSalesGroup = () => {
         switch (componentSelected) {
             case 'Daily':
                 return (
-                <Box style={{ height: 350 }} >
-                <ChartDaily/>
-                </Box>
+                    <Box style={{ height: 350 }} >
+                        <ChartDaily />
+                    </Box>
                 )
             case 'Monthly':
                 return (
                     <Box style={{ height: 350 }} >
-                    <ChartMonthly/>
+                        <ChartMonthly />
                     </Box>
-                    )
+                )
             case 'Yearly':
                 return (
                     <Box style={{ height: 350 }} >
-                    <ChartYearly/>
+                        <ChartYearly />
                     </Box>
-                    )
+                )
             default:
                 return (
                     <Box style={{ height: 350 }} >
-                    <ChartDaily/>
+                        <ChartDaily />
                     </Box>
-                    )
+                )
         }
     };
 
     return (
 
-        <Flex w='100%' border='1px' borderColor='#9E9E9E' borderRadius='6px' padding='15px' minH='300px' direction={{ base: 'column', xl: 'column' }}>
+        <Flex w='100%' boxShadow="base"
+            border="1px" borderColor="gray.300" borderRadius="8" padding='15px' minH='300px' direction={{ base: 'column', xl: 'column' }}>
             <StatGroup paddingLeft='50px' marginBottom='-50px'>
                 <Stat>
                     <StatLabel>Vendas</StatLabel>
-                    
+
                     <Flex>
                         <StatNumber>250.000 pedidos</StatNumber>
                         <StatHelpText diplay="flex" color='#2CAB40' >
@@ -72,12 +73,12 @@ const ChartSalesGroup = () => {
             </StatGroup>
             <Flex padding='15px' direction={{ base: 'column', xl: 'column' }} align="end" >
 
-                <Select  width="20%" value={componentSelected} onChange={handleChange}>
+                <Select width="20%" value={componentSelected} onChange={handleChange}>
                     <option value="Daily">Diario</option>
                     <option value="Monthly">Mensal</option>
                     <option value="Yearly">Anual</option>
                 </Select>
-                    <Box w='100%' h='100%'>{renderSelectedChart()}</Box>
+                <Box w='100%' h='100%'>{renderSelectedChart()}</Box>
             </Flex>
         </Flex>
     );

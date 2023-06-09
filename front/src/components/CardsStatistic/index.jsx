@@ -1,59 +1,72 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import img from '../../assets/Vector.png';
-import useSWR from 'swr';
 import { buscarTodosPedidos } from "../../services/api";
+import { useState, useEffect } from "react";
 
-function CardsErro() {
-  const { data: pedidos, error } = useSWR("/api/pedidos", buscarTodosPedidos);
+function CardsStatistic() {
+
+  const [pedidos, setPedidos] = useState([]);
+
+  useEffect(() => {
+    buscarTodosPedidos()
+      .then((data) => {
+        setPedidos(data);
+        console.log("data", data)
+        console.log(pedidos);
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar todos os pedidos:", error);
+      });
+  }, []); 0
 
   const getQuantidadePedidosErro = (status) => {
-    if (pedidos && pedidos.length > 0) {
-      return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
-    }
-    return 0;
+    return pedidos.filter(pedido => pedido.status_pedido === status && pedido.status_erro === true).length;
   };
+
 
   return (
     <Flex justifyContent="center" marginTop='4rem' >
       <Flex w='1280px' justifyContent='space-arround' color="#1D252F" padding={'16px'}>
         <Box width='100%' margin='auto'>
           <Heading fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} color='#303030' size="lg" marginBottom='1rem'>
-            Erros no Sistema
+            Estatísticas
           </Heading>
 
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
             <Box minHeight="10vh" boxShadow="base"
               border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
-              <Heading as="h1" size="sm" margin="8px 18px">Anti-Fraude</Heading>
+              <Heading as="h1" size="sm" margin="8px 18px">Produtos Avariados</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
-                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("ANTIFRAUDE")}</Heading>
+                <Heading as="h1" fontSize="2xl">13</Heading>
                 <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
             <Box minHeight="10vh" boxShadow="base"
               border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
-              <Heading as="h1" size="sm" margin="8px 18px">Captura</Heading>
+              <Heading as="h1" size="sm" margin="8px 18px">Produtos em Atraso</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
-                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("CAPTURA")}</Heading>
+                <Heading as="h1" fontSize="2xl">42</Heading>
                 <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
+
             <Box minHeight="10vh" boxShadow="base"
               border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
-              <Heading as="h1" size="sm" margin="8px 18px">Carrinho</Heading>
+              <Heading as="h1" size="sm" margin="8px 18px">Produtos Fora de Estoque</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
-                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("FATURADO")}</Heading>
+                <Heading as="h1" fontSize="2xl">27</Heading>
                 <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
+
             <Box minHeight="10vh" boxShadow="base"
               border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
-              <Heading as="h1" size="sm" margin="8px 18px">Picking</Heading>
+              <Heading as="h1" size="sm" margin="8px 18px">Produtos Devolvidos</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
-                <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("PICKING")}</Heading>
+                <Heading as="h1" fontSize="2xl">38</Heading>
                 <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
@@ -65,4 +78,4 @@ function CardsErro() {
   );
 }
 
-export default CardsErro;
+export default CardsStatistic;
