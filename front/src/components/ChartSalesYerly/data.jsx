@@ -1,5 +1,3 @@
-
-
 export const data = [
   {
     "id": "Finalizado",

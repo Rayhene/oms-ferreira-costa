@@ -33,7 +33,7 @@ export const ChartProgressError = () => {
   return (
 
     <Flex justifyContent="flex-end">
-      <Box border="1px solid #9E9E9E" w='100%' height={546} marginLeft="auto" borderRadius='6px' minH='610px'>
+      <Box boxShadow="base" border="1px" borderColor="gray.300" borderRadius="8" w='100%' height={546} marginLeft="auto" minH='610px'>
         <Flex direction="column" height="100%" paddingLeft={4} paddingTop={6} paddingBottom={2}>
           <Text as="h1" fontWeight="bold" fontSize={30} textAlign="left" marginBottom={2}>
             Problemas resolvidos
