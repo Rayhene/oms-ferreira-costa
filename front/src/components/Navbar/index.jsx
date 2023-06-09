@@ -32,7 +32,7 @@ const rotaAtual = () => {
 const NavLink = ({ children }) => {
 
   let router = rotaAtual();
-  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' :  router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
+  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' : router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
 
   return (
     <Link
