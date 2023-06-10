@@ -32,7 +32,7 @@ const rotaAtual = () => {
 const NavLink = ({ children }) => {
 
   let router = rotaAtual();
-  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' :  router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
+  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' : router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
 
   return (
     <Link
@@ -40,11 +40,11 @@ const NavLink = ({ children }) => {
       py={1}
       rounded={'md'}
       _hover={{
-        textDecoration: 'underline',
-
+        textDecoration: 'none',
+        bg: useColorModeValue('#E5E5E5'),
       }}
       as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
-      style={{ color: mapRouter === children ? 'red' : 'black' }}
+      style={{ backgroundColor: mapRouter === children ? '#00b233' : 'none', color: mapRouter === children ? 'white' : 'black' }}
     >
       {children}
 

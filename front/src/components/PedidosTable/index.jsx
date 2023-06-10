@@ -18,6 +18,7 @@ const PedidosTable = () => {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [quantidadePedidos, setQuantidadePedidos] = useState(10);
   const [indexDaPagina, setIndexDaPagina] = useState();
+  const [contadorPagina, setContadorPagina] = useState(1);
 
 
   useEffect(() => {
@@ -41,9 +42,10 @@ const PedidosTable = () => {
     }
 
     if (numeroPedido) {
+      const numeroPedidoSemMascara = numeroPedido.replace(/\D/g, '');
       pedidosFiltrados = pedidosFiltrados.filter(
         (pedido) =>
-          pedido.cpf.includes(numeroPedido) ||
+          pedido.cpf.includes(numeroPedidoSemMascara) ||
           pedido.numeroDoPedido.includes(numeroPedido)
       );
     }
@@ -113,6 +115,7 @@ const PedidosTable = () => {
 
   const proximaPagina = () => {
     setPaginaAtual(paginaAtual + 1);
+    setContadorPagina(indexDaPagina + 1);
   };
 
 
@@ -138,6 +141,7 @@ const PedidosTable = () => {
   const paginaAnterior = () => {
     if (paginaAtual > 1) {
       setPaginaAtual(paginaAtual - 1);
+       setContadorPagina(contadorPagina - quantidadePedidos);
     }
   };
 
@@ -258,15 +262,15 @@ const PedidosTable = () => {
           </Table>
           <Flex justify="right" py="5px" marginRight={5}>
             <Tag bg="none" color="#B4B4B4">Resultados por página:</Tag>
-            <Select
+            {/* <Select
               value={quantidadePedidos}
               onChange={(event) => atualizarPedidosDaTab(event.target.value)}
               width=" 7%">
               <option value={2}>2</option>
               <option value={5}>5</option>
               <option value={10}>10</option>
-            </Select>
-            <Tag ml={5} mr={1} color="black" bg="none" >{indexDaPagina} de {totalPedidosNaTab}</Tag>
+            </Select> */}
+            <Tag ml={5} mr={1} color="black" bg="none" >{contadorPagina} - {indexDaPagina} de {totalPedidosNaTab}</Tag>
             <Button
               mx="-1" onClick={paginaAnterior}
               isDisabled={paginaAtual === 1}
