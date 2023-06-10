@@ -42,9 +42,10 @@ const PedidosTable = () => {
     }
 
     if (numeroPedido) {
+      const numeroPedidoSemMascara = numeroPedido.replace(/\D/g, '');
       pedidosFiltrados = pedidosFiltrados.filter(
         (pedido) =>
-          pedido.cpf.includes(numeroPedido) ||
+          pedido.cpf.includes(numeroPedidoSemMascara) ||
           pedido.numeroDoPedido.includes(numeroPedido)
       );
     }
