@@ -51,9 +51,6 @@ export const ChartProgressError = () => {
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
                     {calcularPorcentagem("ANTIFRAUDE").porcentagemProblemasResolvidos}%
                   </Text>
-                  <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4} >
-                    {calcularPorcentagem("ANTIFRAUDE").porcentagemStatusErro}%
-                  </Text>
                 </Box>
               </Box>
               <Box>
@@ -66,9 +63,6 @@ export const ChartProgressError = () => {
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
                     {calcularPorcentagem("SINCRONIZACAO").porcentagemProblemasResolvidos}%
-                  </Text>
-                  <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    {calcularPorcentagem("SINCRONIZACAO").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
@@ -83,9 +77,6 @@ export const ChartProgressError = () => {
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
                     {calcularPorcentagem("CAPTURA").porcentagemProblemasResolvidos}%
                   </Text>
-                  <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    {calcularPorcentagem("CAPTURA").porcentagemStatusErro}%
-                  </Text>
                 </Box>
               </Box>
               <Box>
@@ -98,9 +89,6 @@ export const ChartProgressError = () => {
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                   <Text as="p" fontWeight="bold" fontSize={17} textAlign="left" marginTop={2} marginLeft={2}>
                     {calcularPorcentagem("PICKING").porcentagemProblemasResolvidos}%
-                  </Text>
-                  <Text as="p" fontWeight="bold" fontSize={17} marginTop={2} textAlign="right" marginRight={4}>
-                    {calcularPorcentagem("PICKING").porcentagemStatusErro}%
                   </Text>
                 </Box>
               </Box>
