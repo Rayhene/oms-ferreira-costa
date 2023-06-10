@@ -64,10 +64,7 @@ const ChartSalesGroup = () => {
 
                     <Flex>
                         <StatNumber>250.000 pedidos</StatNumber>
-                        <StatHelpText diplay="flex" color='#2CAB40' >
-                            <ArrowUpIcon type='increase' />
-                            25%
-                        </StatHelpText>
+                        <StatHelpText diplay="flex" color='#2CAB40' ></StatHelpText>
                     </Flex>
                 </Stat>
             </StatGroup>
