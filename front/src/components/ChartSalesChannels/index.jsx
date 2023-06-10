@@ -43,11 +43,12 @@ const ChartSalesChannels = () => {
       padding="2vw"
       minH="400px"
       maxW="lg"
-      mt="4vh"
       boxShadow="base"
       border="1px"
       borderColor="gray.300"
       borderRadius="8"
+      height={'100%'}
+
     >
       <h1 style={{ fontWeight: 'bold' }}>Vendas por canal</h1>
       <h2>Em relação ao total de pedidos</h2>

@@ -14,14 +14,15 @@ const Estatisticas = () => {
       <Flex Flex w='100%' justifyContent="Center" p='1rem'>
         <Center w='1280px' flexDirection={'column'}>
           <Flex w='100%' justifyContent="space-between" p='1rem'>
-            <Box w='70%'>
+            <Flex w='70%' direction={'column'} gap={'40px'}>
               <ChartSalesGroup />
               <BestSellingProducts />
-            </Box>
-            <Box w='29%' >
+            </Flex>
+
+            <Flex w='29%' direction={'column'} justify={'space-between'} gap={'40px'}>
               <Visitantes />
               <ChartSalesChannels />
-            </Box>
+            </Flex>
           </Flex>
         
      
