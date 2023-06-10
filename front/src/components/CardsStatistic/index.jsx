@@ -38,7 +38,6 @@ function CardsStatistic() {
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Avariados</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">13</Heading>
-                <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
@@ -47,7 +46,6 @@ function CardsStatistic() {
               <Heading as="h1" size="sm" margin="8px 18px">Produtos em Atraso</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">42</Heading>
-                <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
@@ -57,7 +55,6 @@ function CardsStatistic() {
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Fora de Estoque</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">27</Heading>
-                <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
 
@@ -67,7 +64,6 @@ function CardsStatistic() {
               <Heading as="h1" size="sm" margin="8px 18px">Produtos Devolvidos</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">38</Heading>
-                <Image src={img} width="20px" height="20px" />
               </Flex>
             </Box>
           </SimpleGrid>
