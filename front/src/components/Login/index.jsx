@@ -33,7 +33,7 @@ export default function Login() {
                 setErroMensage("Email ou senha inválidos. Por favor, tente novamente.")
             }
             if (response.validate) {
-                navigate('/');
+                navigate('/Home');
             }
         } catch (error) {
             setIsValid(false);
