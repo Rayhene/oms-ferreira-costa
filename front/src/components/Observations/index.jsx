@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
+import { buscarComentariosPorIDPedido, criarComentario, criarResposta, deletarComentario } from '../../services/api';
 
 const Observations = () => {
   const [comentarios, setComentarios] = useState([]);
+  const [comentarios2, setComentarios2] = useState([]);
   const [novoComentario, setNovoComentario] = useState('');
   const [isReplyClicked, setIsReplyClicked] = useState(false);
   const [replyIndex, setReplyIndex] = useState(null);
@@ -12,16 +14,31 @@ const Observations = () => {
     if (isReplyClicked && replyIndex !== null && inputRef.current) {
       inputRef.current.focus();
     }
+
+    buscarComentariosPorIDPedido(getOrderNumber())
+      .then((data) => {
+        setComentarios2(data);
+        console.log(data)
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar os comentários.", error);
+      });
   }, [isReplyClicked, replyIndex]);
+
+  const getOrderNumber = () => {
+    let orderNumber = window.location.pathname.split('/');
+    return orderNumber[2];
+  };
 
   const handleComentar = () => {
     if (novoComentario.trim() !== '') {
       const newComment = {
-        nome: 'Hamilton Gomes',
+        nome: 'Fabrício Borges',
         avatar: 'https://avatars.dicebear.com/api/male/username.svg',
         texto: novoComentario,
         respostas: [],
       };
+      criarComentario(getOrderNumber(), newComment.texto)
       setComentarios([...comentarios, newComment]);
       setNovoComentario('');
     }
