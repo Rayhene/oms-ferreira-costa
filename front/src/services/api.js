@@ -1,3 +1,27 @@
+
+export async function login(email, senha) {
+  const url = 'https://backend-node-fc-rise-up.cyclic.app/login';
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        senha: senha,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Erro ao fazer login:', error);
+    throw error;
+  }
+}
+
+
 export async function buscarPedidoPorCPF(cpf) {
   const url = `https://backend-node-fc-rise-up.cyclic.app/cliente/${cpf}`;
 

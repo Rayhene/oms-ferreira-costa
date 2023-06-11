@@ -43,9 +43,9 @@ const BestSellingProducts = () => {
         },
       ];
     return (
-        <TableContainer border='1px' borderColor="gray.300" boxShadow="base" borderRadius="8px"> 
-            <Text as='h2' fontSize='3xl' p={'22px'} fontWeight={500}>
-                Produtos Mais Vendidos
+        <TableContainer mb='70px' border='1px' borderColor="gray.300" boxShadow="base" borderRadius="8px"> 
+            <Text as='h1' fontSize='3xl' ml={3} p={'20px'} fontWeight="bold">
+                Produtos mais vendidos
                 </Text>
             <Table variant='simple'>
                 <Thead>
