@@ -28,7 +28,7 @@ function CardsStatistic() {
     <Flex justifyContent="center" marginTop='4rem' >
       <Flex w='1280px' justifyContent='space-arround' color="#1D252F" padding={'16px'}>
         <Box width='100%' margin='auto'>
-          <Heading fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} color='#303030' size="lg" marginBottom='1rem'>
+          <Heading fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} fontWeight= 'bold' size="xl" marginBottom='2rem'>
             Estatísticas
           </Heading>
 

@@ -149,7 +149,7 @@ const PedidosTable = () => {
   return (
     <>
       <Box maxW="7xl" mx="auto" mb='90px' pt={1} px={{ base: 2, sm: 12, md: 17 }}>
-        <Box textAlign="left" fontSize="4xl" py={10} fontWeight="bold">
+        <Box fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} fontWeight= 'bold' fontSize="4xl" marginTop='4rem' marginBottom='1rem'>
           Pedidos
         </Box>
         <Tabs width="100%" onChange={handleTabChange}>

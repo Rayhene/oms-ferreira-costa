@@ -51,7 +51,7 @@ const ChartErrorGroup = () => {
         <Flex w='100%' boxShadow="base"
             border="1px" borderColor="gray.300" borderRadius="8" padding='15px' minH='610px' direction={{ base: 'column', xl: 'column' }}>
             <Flex>
-                <Heading ml='1em' size="xl">Histórico de erros</Heading>
+                <Heading ml='1em' size="lg" paddingTop={3}>Histórico de erros</Heading>
             </Flex>
 
             <Flex padding='15px' direction={{ base: 'column', xl: 'column' }} align="end" >
