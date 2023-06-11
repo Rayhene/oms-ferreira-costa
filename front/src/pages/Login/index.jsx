@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import {
     Button,
-    Checkbox,
     Flex,
     FormControl,
-    FormLabel,
-    Heading,
     Input,
     Link,
     Stack,
-    Image,
     Text,
+    Box,
+    Center,
 } from '@chakra-ui/react';
+import { LockIcon, AtSignIcon } from '@chakra-ui/icons';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { login } from '../../services/api';
-
+import img from '../../assets/img.png';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -26,9 +25,11 @@ export default function Login() {
     const handleLogin = async () => {
         try {
             const response = await login(email, password);
-            console.log(response)
+            console.log(response);
             if (!response.validate) {
-                setErroMensage("Email ou senha inválidos. Por favor, tente novamente.")
+                setErroMensage(
+                    'Email ou senha inválidos. Por favor, tente novamente.'
+                );
             }
             if (response.validate) {
                 navigate('/');
@@ -41,28 +42,69 @@ export default function Login() {
     };
 
     return (
-        <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+        <Stack minH={'80vh'} direction={{ base: 'column', md: 'row' }}>
             <Flex p={8} flex={1} align={'center'} justify={'center'}>
                 <Stack spacing={4} w={'full'} maxW={'md'}>
-                    <Heading fontSize={'2xl'}>Login</Heading>
-                    <FormControl id="email">
-                        <FormLabel>Email</FormLabel>
+                    <Box>
+                        <Center><img
+                            src={img}
+                            alt="logo da Ferreira Costa"
+                            width={200}
+                            height={200}
+                            display="flex"
+                        />
+                        </Center>
+                    </Box>
+                    <FormControl id="email" >
                         <Input
+                            border='none'
                             type="email"
                             value={email}
+                            placeholder="Usuário"
+                            fontSize="14px"
+                            bg="#F3F3F3"
+                            focusBorderColor="red"
                             onChange={(e) => setEmail(e.target.value)}
+                            _placeholder={{
+                                position: 'relative',
+                            }}
+
+                            paddingLeft="2.0rem"
+                        />
+                        <AtSignIcon
+                            position="absolute"
+                            left={2}
+                            top="50%"
+                            transform="translateY(-50%)"
+                            color="gray.400"
                         />
                     </FormControl>
                     <FormControl id="password">
-                        <FormLabel>Senha</FormLabel>
                         <Input
+                            border='none'
                             type="password"
                             value={password}
+                            placeholder="Senha"
+                            fontSize="14px"
+                            bg="#F3F3F3"
+                            focusBorderColor="red"
                             onChange={(e) => setPassword(e.target.value)}
+                            _placeholder={{
+                                position: 'relative',
+                            }}
+
+                            paddingLeft="2.0rem"
+                        />
+                        <LockIcon
+                            position="absolute"
+                            left={2}
+                            top="50%"
+                            transform="translateY(-50%)"
+                            color="gray.400"
                         />
                     </FormControl>
                     {!isValid && (
-                        <Text color="red.500" fontSize="sm">
+                        <Text color="#E71D35" fontSize="sm" mb={3}>
                             {erroMessage}
                         </Text>
                     )}
@@ -72,28 +114,35 @@ export default function Login() {
                             align={'start'}
                             justify={'space-between'}
                         >
-                            <Checkbox>Lembre-me</Checkbox>
-                            {/* <Link color={'red.500'}>Esqueceu sua senha?</Link> */}
+                            <Box></Box>
+                            <Link
+                                textDecoration="underline"
+                                color="#9C9C9C"
+                                fontSize="12px"
+                                mt={-6}
+                                mb={-3}
+                            >
+                                Esqueci minha senha
+                            </Link>
                         </Stack>
+
                         <Button
-                            colorScheme="red"
+                            width="110px"
+                            mb={5}
+                            ml={170}
+                            bg="#579C24"
+                            color="white"
                             variant="solid"
                             as={RouterLink}
                             onClick={handleLogin}
+                            _hover={{
+                                opacity: 0.8,
+                            }}
                         >
-                            Entrar
+                            ENTRAR
                         </Button>
                     </Stack>
                 </Stack>
-            </Flex>
-            <Flex flex={1}>
-                <Image
-                    alt={'Login Image'}
-                    objectFit={'cover'}
-                    src={
-                        'https://yt3.googleusercontent.com/ytc/AGIKgqNQKde8656syVvSNWq_-pNEiXrHPVt5HqpoARQdHg=s900-c-k-c0x00ffffff-no-rj'
-                    }
-                />
             </Flex>
         </Stack>
     );
