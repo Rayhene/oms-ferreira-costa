@@ -39,6 +39,7 @@ const ChartSalesChannels = () => {
 
   return (
     <Box
+      mb='70px'
       textAlign="left"
       padding="2vw"
       minH="400px"
@@ -50,8 +51,8 @@ const ChartSalesChannels = () => {
       height={'100%'}
 
     >
-      <h1 style={{ fontWeight: 'bold' }}>Vendas por canal</h1>
-      <h2>Em relação ao total de pedidos</h2>
+      <h1 style={{fontWeight: 'bold', fontSize: '1.7rem' }}>Vendas por canal</h1>
+      <h2 style={{fontSize: '1.1rem' }}>Em relação ao total de pedidos</h2>
       <Pie
         data={updatedData}
         height={300}

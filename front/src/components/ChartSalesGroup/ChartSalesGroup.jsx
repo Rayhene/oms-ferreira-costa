@@ -58,12 +58,12 @@ const ChartSalesGroup = () => {
 
         <Flex w='100%' boxShadow="base"
             border="1px" borderColor="gray.300" borderRadius="8" padding='15px' minH='300px' direction={{ base: 'column', xl: 'column' }}>
-            <StatGroup paddingLeft='50px' marginBottom='-50px'>
+            <StatGroup paddingLeft='20px' marginBottom='-50px'>
                 <Stat>
-                    <StatLabel>Vendas</StatLabel>
+                    <StatLabel as='h1' fontSize='3xl' fontWeight="bold">Vendas</StatLabel>
 
                     <Flex>
-                        <StatNumber>250.000 pedidos</StatNumber>
+                        <StatNumber as='h3' fontSize='2xl' >250.000 pedidos</StatNumber>
                         <StatHelpText diplay="flex" color='#2CAB40' ></StatHelpText>
                     </Flex>
                 </Stat>

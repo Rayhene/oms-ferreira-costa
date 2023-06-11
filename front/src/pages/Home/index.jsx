@@ -24,11 +24,11 @@ const Home = () => {
             </Box>
           </Flex>
         </Flex>
-        <Box width='1280px' p='1em' >
+        <Box width='1280px' p='1em' mb='70px' >
           <Flex align={'center'} justify={'center'} width='100%' boxShadow="base"
             border="1px" borderColor="gray.300" borderRadius="8" rounded={'md'}>
             <Flex direction='column' alignItems={'left'} width='40%' p={5} >
-              <Heading as='h3' size='lg'>API do Anti-Fraude</Heading>
+              <Heading as='h3' size='lg' paddingTop={3}>API do Anti-Fraude</Heading>
               <Pie />
             </Flex>
 
