@@ -3,17 +3,20 @@ import {
     Button,
     Flex,
     FormControl,
+    Center,
     Input,
     Link,
     Stack,
+    Image,
     Text,
-    Box,
-    Center,
+    Img,
+    Box
 } from '@chakra-ui/react';
-import { LockIcon, AtSignIcon } from '@chakra-ui/icons';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { login } from '../../services/api';
-import img from '../../assets/img.png';
+import img from '../../assets/img.png'
+import { LockIcon, AtSignIcon } from '@chakra-ui/icons'
+
 
 export default function Login() {
     const navigate = useNavigate();
@@ -25,11 +28,9 @@ export default function Login() {
     const handleLogin = async () => {
         try {
             const response = await login(email, password);
-            console.log(response);
+            console.log(response)
             if (!response.validate) {
-                setErroMensage(
-                    'Email ou senha inválidos. Por favor, tente novamente.'
-                );
+                setErroMensage("Email ou senha inválidos. Por favor, tente novamente.")
             }
             if (response.validate) {
                 navigate('/');
@@ -42,17 +43,22 @@ export default function Login() {
     };
 
     return (
-        <Stack minH={'80vh'} direction={{ base: 'column', md: 'row' }}>
+        <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+            <Flex flex={1}>
+                <Image
+                    alt={'Login Image'}
+                    objectFit={'cover'}
+                    src={
+                        'https://carreiras.ferreiracosta.com/wp-content/uploads/2023/05/GPTW_2023_Banner_Site_01.jpg'
+                    }
+                />
+            </Flex>
             <Flex p={8} flex={1} align={'center'} justify={'center'}>
                 <Stack spacing={4} w={'full'} maxW={'md'}>
+
                     <Box>
-                        <Center><img
-                            src={img}
-                            alt="logo da Ferreira Costa"
-                            width={200}
-                            height={200}
-                            display="flex"
-                        />
+                        <Center>
+                            <Img src={img} width={200} mb={5}></Img>
                         </Center>
                     </Box>
                     <FormControl id="email" >
@@ -104,7 +110,7 @@ export default function Login() {
                         />
                     </FormControl>
                     {!isValid && (
-                        <Text color="#E71D35" fontSize="sm" mb={3}>
+                        <Text color="red.500" fontSize="sm">
                             {erroMessage}
                         </Text>
                     )}
@@ -114,32 +120,20 @@ export default function Login() {
                             align={'start'}
                             justify={'space-between'}
                         >
-                            <Box></Box>
-                            <Link
+                            <Box />
+                            <Link color='#9C9C9C'
                                 textDecoration="underline"
-                                color="#9C9C9C"
                                 fontSize="12px"
-                                mt={-6}
-                                mb={-3}
-                            >
-                                Esqueci minha senha
-                            </Link>
+                                mt={-4}
+                                mb={-3}>Esqueci minha senha</Link>
                         </Stack>
-
                         <Button
-                            width="110px"
-                            mb={5}
-                            ml={170}
-                            bg="#579C24"
-                            color="white"
+                            colorScheme="red"
                             variant="solid"
                             as={RouterLink}
                             onClick={handleLogin}
-                            _hover={{
-                                opacity: 0.8,
-                            }}
                         >
-                            ENTRAR
+                            Entrar
                         </Button>
                     </Stack>
                 </Stack>
