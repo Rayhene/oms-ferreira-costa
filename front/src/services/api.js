@@ -109,13 +109,13 @@ export async function buscarComentariosPorIDPedido(numero) {
 }
 
 export async function criarComentario(numero, conteudoComentario) {
-  const url = 'https://backend-node-fc-rise-up.cyclic.app/comentarios/';
+  const url = 'https://backend-node-fc-rise-up.cyclic.app/pedidos/comentarios/';
 
   try {
     const response = await fetch(url, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({ 
       idPedido: numero,
