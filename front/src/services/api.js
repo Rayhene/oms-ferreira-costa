@@ -113,14 +113,14 @@ export async function criarComentario(numero, conteudoComentario) {
 
   try {
     const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ 
-      idPedido: numero,
-      conteudo: conteudoComentario
-    }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([{
+        idPedido: numero,
+        conteudo: conteudoComentario
+      }]),
     });
     const data = await response.json();
     return data;
@@ -138,7 +138,7 @@ export async function criarResposta(resposta, numero, idComentario) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ 
+    body: JSON.stringify({
       resposta: resposta,
       id_pedido: numero
     })

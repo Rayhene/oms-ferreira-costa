@@ -39,8 +39,12 @@ const Observations = () => {
         texto: novoComentario,
         respostas: [],
       }
-      criarComentario(getOrderNumber(), newComment.texto)
-      console.log(novoComentario)
+
+      const numeroString = getOrderNumber().toString();
+      criarComentario(numeroString, newComment.texto)
+        .then(() => {
+          console.log(novoComentario);
+        })
         .catch((error) => {
           console.error("Erro ao criar comentário.", error);
         });
