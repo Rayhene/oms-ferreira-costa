@@ -1,25 +1,21 @@
 import { Pie } from "@nivo/pie";
-import { useState, useEffect } from "react";
+import useSWR from 'swr';
 import { buscarTodosPedidos } from "../../services/api";
+import { useState, useEffect } from "react";
 
 const ResponsivePie = () => {
-  const [pedidos, setPedidos] = useState([]);
+  const { data: pedidos, error } = useSWR("/api/pedidos", buscarTodosPedidos);
   const [isLoading, setIsLoading] = useState(true);
   const [updatedData, setUpdatedData] = useState([]);
 
   useEffect(() => {
-    buscarTodosPedidos()
-      .then((data) => {
-        setPedidos(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Erro ao buscar todos os pedidos:", error);
-      });
-  }, []);
+    if (pedidos) {
+      setIsLoading(false);
+    }
+  }, [pedidos]);
 
   useEffect(() => {
-    if (!isLoading && pedidos.length > 0) {
+    if (!isLoading && pedidos && pedidos.length > 0) {
       const erroAntifraudeCount = pedidos.filter(
         (item) => item.status_erro && item.status_pedido === "ANTIFRAUDE"
       ).length;
@@ -27,8 +23,8 @@ const ResponsivePie = () => {
       const successCount = pedidos.length - erroAntifraudeCount;
       const totalCount = pedidos.length;
 
-      const successPercentage = (successCount / totalCount) * 100;
-      const errorPercentage = (erroAntifraudeCount / totalCount) * 100;
+      const successPercentage = ((successCount / totalCount) * 100).toFixed(0);
+      const errorPercentage = ((erroAntifraudeCount / totalCount) * 100).toFixed(0);
 
       const updatedData = [
         {
@@ -53,6 +49,14 @@ const ResponsivePie = () => {
     return datum.label === "Erros" ? "#FFB2B2" : "#FF5757";
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <Pie
       data={updatedData}
@@ -69,6 +73,7 @@ const ResponsivePie = () => {
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
+      enableArcLabels={false}
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{

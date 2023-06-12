@@ -1,10 +1,10 @@
 import { Bar } from "@nivo/bar";
 import { data } from "./data";
 
-   const ResponsiveBar = () => (
+const ResponsiveBar = () => (
     <Bar
         data={data}
-        height={400} 
+        height={400}
         width={800}
         keys={[
             'Pedidos',
@@ -35,7 +35,7 @@ import { data } from "./data";
                 spacing: 10
             }
         ]}
-    
+
         borderColor={{
             from: 'color',
             modifiers: [
@@ -72,33 +72,33 @@ import { data } from "./data";
                 ]
             ]
         }}
-/*         legends={[
-            {
-                dataFrom: 'keys',
-                anchor: 'bottom-right',
-                direction: 'column',
-                justify: false,
-                translateX: 120,
-                translateY: 0,
-                itemsSpacing: 2,
-                itemWidth: 100,
-                itemHeight: 20,
-                itemDirection: 'left-to-right',
-                itemOpacity: 0.85,
-                symbolSize: 20,
-                effects: [
+        /*         legends={[
                     {
-                        on: 'hover',
-                        style: {
-                            itemOpacity: 1
-                        }
+                        dataFrom: 'keys',
+                        anchor: 'bottom-right',
+                        direction: 'column',
+                        justify: false,
+                        translateX: 120,
+                        translateY: 0,
+                        itemsSpacing: 2,
+                        itemWidth: 100,
+                        itemHeight: 20,
+                        itemDirection: 'left-to-right',
+                        itemOpacity: 0.85,
+                        symbolSize: 20,
+                        effects: [
+                            {
+                                on: 'hover',
+                                style: {
+                                    itemOpacity: 1
+                                }
+                            }
+                        ]
                     }
-                ]
-            }
-        ]} */
+                ]} */
         role="application"
         ariaLabel="Nivo bar chart demo"
-        barAriaLabel={e=>e.id+": "+e.formattedValue+" in mes: "+e.indexValue}
+        barAriaLabel={e => e.id + ": " + e.formattedValue + " in mes: " + e.indexValue}
     />
 )
 

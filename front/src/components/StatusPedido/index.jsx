@@ -23,7 +23,7 @@ const steps = [
 
 let indexStatus = 0;
 
-function Example() {
+function OrderStatus() {
 
   const [pedido, setPedido] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -70,7 +70,7 @@ function Example() {
   else if (pedido?.status_pedido === "EMPACOTAMENTO E DESIGNAÇÃO") {
     indexStatus = Number(6);
   }
-  else if (pedido?.status_pedido === "TRANSPORTE") {
+  else if (pedido?.status_pedido === "SINCRONIZACAO") {
     indexStatus = Number(7);
   }
   else if (pedido?.status_pedido === "NAOENTREGUE") {
@@ -109,8 +109,6 @@ function Example() {
       border="1px"
       borderColor="gray.300"
       boxShadow="base"
-      marginRight="9px"
-      marginLeft="9px"
       borderRadius="8px"
       gap={'2vh'}
     >
@@ -151,4 +149,4 @@ function Example() {
   )
 }
 
-export default Example;
+export default OrderStatus;

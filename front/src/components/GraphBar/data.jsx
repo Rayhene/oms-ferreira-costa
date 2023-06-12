@@ -1,5 +1,3 @@
-
-
 export const data = [
   {
     "mes": "JAN",
@@ -31,5 +29,34 @@ export const data = [
     "Pedidos": 14,
     "PedidosColor": "hsl(179, 70%, 50%)",
   },
-  
+  {
+    "mes": "JUL",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  },
+  {
+    "mes": "AGO",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  },
+  {
+    "mes": "SENT",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  },
+  {
+    "mes": "OUT",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  },
+  {
+    "mes": "NOV",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  },
+  {
+    "mes": "DEZ",
+    "Pedidos": 55,
+    "PedidosColor": "hsl(179, 70%, 50%)",
+  }
 ];

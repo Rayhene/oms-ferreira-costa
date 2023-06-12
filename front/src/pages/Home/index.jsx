@@ -1,38 +1,42 @@
-import { Flex, Center, Heading } from '@chakra-ui/react';
-import Pie from '../../components/ChartPie/GraphPie';
-import App from '../../components/ChartSelling/GraphSelling';
+import { Flex, Box, Heading } from '@chakra-ui/react';
+import Pie from '../../components/ChartErrorPie/GraphPie';
+import ChartErrorGroup from '../../components/ChartErrorGroup/ChartErrorGroup';
 import LogApiTable from '../../components/LogApi/LogApiTable';
 import Navbar from '../../components/Navbar';
 import CardsErro from '../../components/CardsErro';
-import { ChartProgressError } from '../../components/ChartProgressError/ChartProgressError';
+import { ChartProgressError } from '../../components/ChartErrorProgressBar/ChartProgressError';
 
 const Home = () => {
 
   return (
     <>
-   <Navbar />
-   <CardsErro />
-   <ChartProgressError/>
-      <Flex direction='column' alignItems={'center'} width='100%'>
-        <Flex alignItems="center" justifyContent="center">
-          <Center>
-            <Heading as="h1" size="xl">Home</Heading>
-            <App />
-            
-          </Center>
-        </Flex>
+      <Navbar />
+      <CardsErro />
 
-        <Flex align={'center'} justify={'center'}  width='80%' border={'1px solid'} borderColor={'gray.300'} rounded={'md'}>
-          <Flex direction='column' alignItems={'left'} width='40%' p={5} >
-            <Heading as='h3' size='lg'>API do Anti-Fraude</Heading>
-            <Pie />
+      <Flex direction='column' alignItems={'center'} >
+        <Flex w='1280px'>
+          <Flex w='100%' justifyContent="space-between" p='1em'>
+            <Box w='70%'>
+              <ChartErrorGroup />
+            </Box>
+            <Box w='29%' >
+              <ChartProgressError />
+            </Box>
           </Flex>
-          
-          <Flex alignItems={'center'} width='100%' p={10}>
-            <LogApiTable />
-          </Flex>
-
         </Flex>
+        <Box width='1280px' p='1em' mb='70px' >
+          <Flex align={'center'} justify={'center'} width='100%' boxShadow="base"
+            border="1px" borderColor="gray.300" borderRadius="8" rounded={'md'}>
+            <Flex direction='column' alignItems={'left'} width='40%' p={5} >
+              <Heading as='h3' size='lg' paddingTop={3}>API do Anti-Fraude</Heading>
+              <Pie />
+            </Flex>
+
+            <Flex alignItems={'center'} p={10}>
+              <LogApiTable />
+            </Flex>
+          </Flex>
+        </Box>
       </Flex>
     </>
   );

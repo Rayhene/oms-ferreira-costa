@@ -7,6 +7,7 @@ import cpfMask from "../Masks/cpfMask";
 import Loading from "../Loading";
 import { Link } from 'react-router-dom';
 import { Link as LinkChakra } from '@chakra-ui/react'
+import realMask from "../Masks/realMask";
 
 const PedidosTable = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -17,6 +18,7 @@ const PedidosTable = () => {
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [quantidadePedidos, setQuantidadePedidos] = useState(10);
   const [indexDaPagina, setIndexDaPagina] = useState();
+  const [contadorPagina, setContadorPagina] = useState(1);
 
 
   useEffect(() => {
@@ -40,9 +42,10 @@ const PedidosTable = () => {
     }
 
     if (numeroPedido) {
+      const numeroPedidoSemMascara = numeroPedido.replace(/\D/g, '');
       pedidosFiltrados = pedidosFiltrados.filter(
         (pedido) =>
-          pedido.cpf.includes(numeroPedido) ||
+          pedido.cpf.includes(numeroPedidoSemMascara) ||
           pedido.numeroDoPedido.includes(numeroPedido)
       );
     }
@@ -67,7 +70,7 @@ const PedidosTable = () => {
       );
     } else if (status === "transporte") {
       return pedidosFiltrados.filter(
-        (pedido) => pedido.status_pedido === "TRANSPORTE"
+        (pedido) => pedido.status_pedido === "SINCRONIZACAO"
       );
     } else if (status === "naoEntregue") {
       return pedidosFiltrados.filter(
@@ -112,6 +115,7 @@ const PedidosTable = () => {
 
   const proximaPagina = () => {
     setPaginaAtual(paginaAtual + 1);
+    setContadorPagina(indexDaPagina + 1);
   };
 
 
@@ -137,14 +141,15 @@ const PedidosTable = () => {
   const paginaAnterior = () => {
     if (paginaAtual > 1) {
       setPaginaAtual(paginaAtual - 1);
+       setContadorPagina(contadorPagina - quantidadePedidos);
     }
   };
 
 
   return (
     <>
-      <Box maxW="7xl" mx="auto" pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-        <Box textAlign="left" fontSize="4xl" py={10} fontWeight="bold">
+      <Box maxW="7xl" mx="auto" mb='90px' pt={1} px={{ base: 2, sm: 12, md: 17 }}>
+        <Box fontStyle="normal" letterSpacing='0.45px' textAlign={['center', 'left']} fontWeight= 'bold' fontSize="4xl" marginTop='4rem' marginBottom='1rem'>
           Pedidos
         </Box>
         <Tabs width="100%" onChange={handleTabChange}>
@@ -216,37 +221,37 @@ const PedidosTable = () => {
                         <Td py="10px">{pedido.dataDaCompra}</Td>
                         <Td py="10px">{pedido.nome}</Td>
                         <Td py="10px">{cpfMask(pedido.cpf)}</Td>
-                        <Td py="10px">{pedido.valorTotal.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</Td>
+                        <Td py="10px">{realMask(pedido.valorTotal)}</Td>
 
                         <Td py="10px" px='0'>
                           {pedido.status_pedido === "NAOENTREGUE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag></>
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#E71D35" color="#FDFFFE" rounded="full">Não entregue</Tag></>
                           ) : pedido.status_pedido === "NAOENTREGUE" ? (
-                            <Tag ml={4} bg="#F8ADC1" color="000000" rounded="full">Não entregue</Tag>
+                            <Tag ml={4} bg="#E71D35" color="#FDFFFE" rounded="full">Não entregue</Tag>
                           ) : pedido.status_pedido === "PICKING" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8ADE6" color="000000" rounded="full">Picking</Tag></>
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#A88888" color="#FDFFFE" rounded="full">Picking</Tag></>
                           ) : pedido.status_pedido === "PICKING" ? (
-                            <Tag ml={4} bg="#F8ADE6" color="000000" rounded="full">Picking</Tag>
+                            <Tag ml={4} bg="#A88888" color="#FDFFFE" rounded="full">Picking</Tag>
                           ) : pedido.status_pedido === "FATURADO" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag></>
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#8D56DB" color="#FDFFFE" rounded="full">Faturado</Tag></>
                           ) : pedido.status_pedido === "FATURADO" ? (
-                            <Tag ml={4} bg="#F9B2AC" color="000000" rounded="full">Faturado</Tag>
-                          ) : pedido.status_pedido === "TRANSPORTE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B1ADF9" color="000000" rounded="full">Transporte</Tag></>
-                          ) : pedido.status_pedido === "TRANSPORTE" ? (
-                            <Tag ml={4} bg="#B1ADF9" color="000000">Transporte</Tag>
+                            <Tag ml={4} bg="#8D56DB" color="#FDFFFE" rounded="full">Faturado</Tag>
+                          ) : pedido.status_pedido === "SINCRONIZACAO" && pedido.status_erro === true ? (
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#3BA7C0" color="#FDFFFE" rounded="full">Transporte</Tag></>
+                          ) : pedido.status_pedido === "SINCRONIZACAO" ? (
+                            <Tag  ml={4} bg="#3BA7C0" color="#FDFFFE" rounded="full">Transporte</Tag>
                           ) : pedido.status_pedido === "ANTIFRAUDE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag></>
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#FF86AF" color="#FDFFFE" rounded="full">Anti-fraude</Tag></>
                           ) : pedido.status_pedido === "ANTIFRAUDE" ? (
-                            <Tag ml={4} bg="#F9D3AE" color="000000" rounded="full">Anti-fraude</Tag>
+                            <Tag ml={4} bg="#FF86AF" color="#FDFFFE" rounded="full">Anti-fraude</Tag>
                           ) : pedido.status_pedido === "CAPTURA" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F8EDAD" color="000000" rounded="full">Captura</Tag></>
+                            <><Badge mt='7px' height={'100%'} bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#F5CB5F" color="#FDFFFE" rounded="full">Captura</Tag></>
                           ) : pedido.status_pedido === "CAPTURA" ? (
-                            <Tag ml={4} bg="#52B7FF" color="000000" rounded="full">Captura</Tag>
+                            <Tag ml={4} bg="#F5CB5F" color="#FDFFFE" rounded="full">Captura</Tag>
                           ) : pedido.status_pedido === "ENTREGUE" && pedido.status_erro === true ? (
-                            <><Badge bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag></>
+                            <><Badge mt='7px' bg="red.500" mr={2} rounded="full" boxSize="0.5rem" /><Tag bg="#45CD6D" color="#FDFFFE" rounded="full">Entregue</Tag></>
                           ) : pedido.status_pedido === "ENTREGUE" ? (
-                            <Tag ml={4} bg="#B7FAAD" color="000000" rounded="full">Entregue</Tag>
+                            <Tag ml={4} bg="#45CD6D" color="#FDFFFE" rounded="full">Entregue</Tag>
                           ) : null}
                         </Td>
                       </Tr>
@@ -257,15 +262,15 @@ const PedidosTable = () => {
           </Table>
           <Flex justify="right" py="5px" marginRight={5}>
             <Tag bg="none" color="#B4B4B4">Resultados por página:</Tag>
-            <Select
+            {/* <Select
               value={quantidadePedidos}
               onChange={(event) => atualizarPedidosDaTab(event.target.value)}
               width=" 7%">
               <option value={2}>2</option>
               <option value={5}>5</option>
               <option value={10}>10</option>
-            </Select>
-            <Tag ml={5} mr={1} color="black" bg="none" >{indexDaPagina} de {totalPedidosNaTab}</Tag>
+            </Select> */}
+            <Tag ml={5} mr={1} color="black" bg="none" >{contadorPagina} - {indexDaPagina} de {totalPedidosNaTab}</Tag>
             <Button
               mx="-1" onClick={paginaAnterior}
               isDisabled={paginaAtual === 1}
