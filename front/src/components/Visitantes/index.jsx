@@ -64,7 +64,7 @@ function Visitantes() {
             <Text fontSize={'md'} fontWeight="bold">Tempo de uso</Text>
             <Flex ml={95} justifyContent="space-between">
               <Heading size={'sm'}>3.4H</Heading>
-              <ArrowUpIcon ml={2} color="#2CAB40" type="increase" />
+              <ArrowUpIcon color="#2CAB40" type="increase" />
             </Flex>
           </SimpleGrid>
         </CardBody>

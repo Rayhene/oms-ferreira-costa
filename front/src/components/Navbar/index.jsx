@@ -19,6 +19,8 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import img from '../../assets/img.png';
+import img1 from '../../assets/config.svg';
+import img2 from '../../assets/sair-vetor.svg';
 import { Link as LinkDom } from 'react-router-dom';
 
 const Links = ['Dashboard', 'Pedidos', 'Estatísticas'];
@@ -30,9 +32,15 @@ const rotaAtual = () => {
 };
 
 const NavLink = ({ children }) => {
-
   let router = rotaAtual();
-  let mapRouter = router === 'pedidos' || router === '/' ? 'Pedidos' : router === '' ? 'Dashboard' : router === 'estatisticas' ? 'Estatísticas' : 'Pedidos';
+  let mapRouter =
+    router === 'pedidos'
+      ? 'Pedidos'
+      : router === 'Home'
+      ? 'Dashboard'
+      : router === 'estatisticas'
+      ? 'Estatísticas'
+      : 'Pedidos';
 
   return (
     <Link
@@ -43,7 +51,7 @@ const NavLink = ({ children }) => {
         textDecoration: 'none',
         bg: useColorModeValue('#E5E5E5'),
       }}
-      as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/" : "/estatisticas")}
+      as={LinkDom} to={(children === 'Pedidos' ? "/pedidos" : children === 'Dashboard' ? "/Home" : "/estatisticas")}
       style={{ backgroundColor: mapRouter === children ? '#00b233' : 'none', color: mapRouter === children ? 'white' : 'black' }}
     >
       {children}
@@ -97,14 +105,17 @@ export default function withAction() {
                 />
               </MenuButton>
               <MenuList>
-                <Stack align={'center'} direction={'column'}>
+                
+                <Stack sx={{ paddingLeft: 5, paddingTop: 4, PaddingBotton: 4}} align={'start'} direction={'column'}>
                   <MenuProvider>Fabrício Borges</MenuProvider>
                   <MenuCommand fontSize={14}>Financeiro</MenuCommand>
                 </Stack>
-
-                <MenuDivider />
-                <MenuItem>Gerenciar Perfil</MenuItem>
-                <MenuItem>Sair</MenuItem>
+                <MenuDivider/>
+                <MenuItem sx={{ paddingLeft: 5 }}>
+                <img src={img1} alt="configuração" style={{ width: 22, height: 22, marginRight: 10 }} />
+                  Gerenciar Perfil</MenuItem>
+                <MenuItem sx={{ paddingLeft: 6 }}>
+                <img src={img2} alt="sair" style={{ width: 20, height: 18, marginRight: 8 }} /> Sair</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
