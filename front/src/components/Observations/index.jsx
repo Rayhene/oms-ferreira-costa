@@ -1,6 +1,6 @@
+import { buscarComentariosPorIDPedido, criarComentario, criarResposta, deletarComentario } from '../../services/api';
 import React, { useState, useRef, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
-import { buscarComentariosPorIDPedido, criarComentario, criarResposta, deletarComentario } from '../../services/api';
 
 const Observations = () => {
   const [comentarios, setComentarios] = useState([]);
@@ -19,6 +19,7 @@ const Observations = () => {
       .then((data) => {
         setComentarios2(data);
         console.log(data)
+        console.log(data[0].id_comentario)
       })
       .catch((error) => {
         console.error("Erro ao buscar os comentários.", error);
@@ -37,10 +38,12 @@ const Observations = () => {
         avatar: 'https://avatars.dicebear.com/api/male/username.svg',
         texto: novoComentario,
         respostas: [],
-      };
+      }
       criarComentario(getOrderNumber(), newComment.texto)
-      setComentarios([...comentarios, newComment]);
-      setNovoComentario('');
+      console.log(novoComentario)
+        .catch((error) => {
+          console.error("Erro ao criar comentário.", error);
+        });
     }
   };
 

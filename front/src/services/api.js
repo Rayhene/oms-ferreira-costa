@@ -1,4 +1,3 @@
-
 export async function login(email, senha) {
   const url = 'https://backend-node-fc-rise-up.cyclic.app/login';
 
@@ -20,7 +19,6 @@ export async function login(email, senha) {
     throw error;
   }
 }
-
 
 export async function buscarPedidoPorCPF(cpf) {
   const url = `https://backend-node-fc-rise-up.cyclic.app/cliente/${cpf}`;
@@ -111,9 +109,10 @@ export async function buscarComentariosPorIDPedido(numero) {
 }
 
 export async function criarComentario(numero, conteudoComentario) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/`;
+  const url = 'https://backend-node-fc-rise-up.cyclic.app/comentarios/';
 
-  const params = {
+  try {
+    const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -121,20 +120,12 @@ export async function criarComentario(numero, conteudoComentario) {
     body: JSON.stringify({ 
       idPedido: numero,
       conteudo: conteudoComentario
-     })
-  };
-
-  try {
-    const response = await fetch(url, params);
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      return data;
-    } else {
-      console.warn("Erro ao criar comentário.");
-    }
+    }),
+    });
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Erro ao criar comentário.", error);
+    console.error('Erro ao criar comentário.', error);
     throw error;
   }
 }
@@ -150,7 +141,7 @@ export async function criarResposta(resposta, numero, idComentario) {
     body: JSON.stringify({ 
       resposta: resposta,
       id_pedido: numero
-     })
+    })
   };
 
   try {
