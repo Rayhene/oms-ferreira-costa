@@ -42,6 +42,12 @@ export default function Login() {
         }
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleLogin();    
+        }
+    };
+
     return (
         <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
             <Flex flex={1}>
@@ -95,6 +101,7 @@ export default function Login() {
                             bg="#F3F3F3"
                             focusBorderColor="red"
                             onChange={(e) => setPassword(e.target.value)}
+                            onKeyDown={handleKeyPress}
                             _placeholder={{
                                 position: 'relative',
                             }}
