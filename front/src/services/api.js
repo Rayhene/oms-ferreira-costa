@@ -1,5 +1,5 @@
 export async function login(email, senha) {
-  const url = 'https://backend-node-fc-rise-up.cyclic.app/login';
+  const url = 'https://node-project-fc-production.up.railway.app/login';
 
   try {
     const response = await fetch(url, {
@@ -21,7 +21,7 @@ export async function login(email, senha) {
 }
 
 export async function buscarPedidoPorCPF(cpf) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/cliente/${cpf}`;
+  const url = `https://node-project-fc-production.up.railway.app/cliente/${cpf}`;
 
   try {
     const response = await fetch(url);
@@ -34,20 +34,34 @@ export async function buscarPedidoPorCPF(cpf) {
 }
 
 export async function buscarPedidoPorNumero(numero) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/pedido/${numero}`;
-
+  const url = `https://node-project-fc-production.up.railway.app/pedido/${numero}`;
+  const urlBackup = `https://backend1-node-fc-rise-up.cyclic.app/pedido/${numero}`;
   try {
     const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }
   } catch (error) {
     console.error("Erro ao buscar pedido por número:", error);
-    throw error;
+    console.warn("Tentando URL de backup...");
+  }
+  try {
+    const responseBackup = await fetch(urlBackup);
+    if (responseBackup.ok) {
+      const dataBackup = await responseBackup.json();
+      return dataBackup;
+    } else {
+      throw new Error("Erro ao buscar todos os pedidos na URL de backup.");
+    }
+  } catch (errorBackup) {
+    console.error("Erro ao buscar todos os pedidos na URL de backup:", errorBackup);
+    throw errorBackup;
   }
 }
 
 export async function buscarPedidosPorStatus(status) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/pedidos/all/${status}`;
+  const url = `https://node-project-fc-production.up.railway.app/pedidos/all/${status}`;
 
   try {
     const response = await fetch(url);
@@ -60,7 +74,7 @@ export async function buscarPedidosPorStatus(status) {
 }
 
 export async function buscarTodosPedidos() {
-  const url = "https://backend-node-fc-rise-up.cyclic.app/pedidos/all";
+  const url = "https://node-project-fc-production.up.railway.app/pedidos/all";
   const urlBackup = "https://backend1-node-fc-rise-up.cyclic.app/pedidos/all";
 
   try {
@@ -91,7 +105,7 @@ export async function buscarTodosPedidos() {
 }
 
 export async function buscarComentariosPorIDPedido(numero) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${numero}`;
+  const url = `https://node-project-fc-production.up.railway.app/comentarios/${numero}`;
 
   try {
     const response = await fetch(url);
@@ -109,7 +123,7 @@ export async function buscarComentariosPorIDPedido(numero) {
 }
 
 export async function criarComentario(numero, conteudoComentario) {
-  const url = 'https://backend-node-fc-rise-up.cyclic.app/comentarios/';
+  const url = 'https://node-project-fc-production.up.railway.app/comentarios/';
 
   try {
     const response = await fetch(url, {
@@ -131,7 +145,7 @@ export async function criarComentario(numero, conteudoComentario) {
 }
 
 export async function criarResposta(resposta, numero, idComentario) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${idComentario}`;
+  const url = `https://node-project-fc-production.up.railway.app/comentarios/${idComentario}`;
 
   const params = {
     method: 'POST',
@@ -160,7 +174,7 @@ export async function criarResposta(resposta, numero, idComentario) {
 }
 
 export async function deletarComentario(idComentario) {
-  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${idComentario}`;
+  const url = `https://node-project-fc-production.up.railway.app/comentarios/${idComentario}`;
 
   const params = {
     method: 'DELETE',
