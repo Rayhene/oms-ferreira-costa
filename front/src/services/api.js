@@ -1,4 +1,3 @@
-
 export async function login(email, senha) {
   const url = 'https://backend-node-fc-rise-up.cyclic.app/login';
 
@@ -20,7 +19,6 @@ export async function login(email, senha) {
     throw error;
   }
 }
-
 
 export async function buscarPedidoPorCPF(cpf) {
   const url = `https://backend-node-fc-rise-up.cyclic.app/cliente/${cpf}`;
@@ -92,3 +90,96 @@ export async function buscarTodosPedidos() {
   }
 }
 
+export async function buscarComentariosPorIDPedido(numero) {
+  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${numero}`;
+
+  try {
+    const response = await fetch(url);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      return data;
+    } else {
+      console.warn("Erro ao buscar todos os comentários.");
+    }
+  } catch (error) {
+    console.error("Erro ao buscar comentário por ID do pedido:", error);
+    throw error;
+  }
+}
+
+export async function criarComentario(numero, conteudoComentario) {
+  const url = 'https://backend-node-fc-rise-up.cyclic.app/comentarios/';
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify([{
+        idPedido: numero,
+        conteudo: conteudoComentario
+      }]),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Erro ao criar comentário.', error);
+    throw error;
+  }
+}
+
+export async function criarResposta(resposta, numero, idComentario) {
+  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${idComentario}`;
+
+  const params = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      resposta: resposta,
+      id_pedido: numero
+    })
+  };
+
+  try {
+    const response = await fetch(url, params);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } else {
+      console.warn("Erro ao criar resposta.");
+    }
+  } catch (error) {
+    console.error("Erro ao criar resposta.", error);
+    throw error;
+  }
+}
+
+export async function deletarComentario(idComentario) {
+  const url = `https://backend-node-fc-rise-up.cyclic.app/comentarios/${idComentario}`;
+
+  const params = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+
+  try {
+    const response = await fetch(url, params);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } else {
+      console.warn("Erro ao deletar comentário.");
+    }
+  } catch (error) {
+    console.error("Erro ao deletar comentário.", error);
+    throw error;
+  }
+}

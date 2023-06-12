@@ -88,7 +88,7 @@ export default function withAction() {
           </HStack>
           <Flex alignItems={'center'}>
             <Box mr={5} display="flex">
-              Olá, <Box style={{ fontWeight: 'bold' }} ml={2}>Igor Santos!</Box>
+              Olá, <Box style={{ fontWeight: 'bold' }} ml={2}>Fabrício Borges!</Box>
             </Box>
             <Menu>
               <MenuButton
@@ -100,14 +100,14 @@ export default function withAction() {
                 <Avatar
                   size={'sm'}
                   src={
-                    'https://avatars.githubusercontent.com/u/103756299?v=4'
+                    'https://avatars.dicebear.com/api/male/username.svg'
                   }
                 />
               </MenuButton>
               <MenuList>
                 
                 <Stack sx={{ paddingLeft: 5, paddingTop: 4, PaddingBotton: 4}} align={'start'} direction={'column'}>
-                  <MenuProvider>Igor Santos</MenuProvider>
+                  <MenuProvider>Fabrício Borges</MenuProvider>
                   <MenuCommand fontSize={14}>Financeiro</MenuCommand>
                 </Stack>
                 <MenuDivider/>
