@@ -2,24 +2,24 @@
 
 Repositório do front-end do Sistema de Gerenciamento de Pedidos (OMS) da empresa Ferreira Costa. Este projeto está sendo desenvolvido durante a residência em software do Porto Digital, utilizando a biblioteca React.
 
-## Pré-Requisitos
+## Pré-requisitos
 
 Para rodar o projeto é necessário ter instalado o Node.js e o npm. 
 
-- Para instalar o Node.js, acesse o [site oficial](https://nodejs.org/) e faça o download da versão correspondente ao seu sistema operacional. 
+- Para instalar o Node.js, acesse o [site oficial](https://nodejs.org/) e faça o download da versão correspondente ao seu sistema operacional.
 - O npm já vem instalado com o Node.js.
-- Instale o Yarn com o comando `npm install --global yarn`
+- Instale o Yarn com o comando `npm install --global yarn`.
+
 ## Como rodar
 
-### Front
-
 1. Entre na pasta /front.
-2. Execute o comando `npm install` para instalar as dependências.
+2. Executo o comando `yarn` no prompt de comando.
 3. Execute o comando `npm run dev` para iniciar o cliente.
-4. Executo o comando `yarn` recomendo sempre usar o Prompt de comandos (CMD)
+4. Ao acessar o local host do projeto a primeira tela que será apresentada é a de Login, na qual você poderá acessar informando:
+4.1 Login: teste
+4.2 Senha: teste
 
-
-## Como Contribuir
+## Como contribuir
 Descreveremos abaixo o processo passo a passo para você contribuir com o projeto no GitHub.
 
 **1. Clone o Repositório**<br>
@@ -46,3 +46,5 @@ Forneça uma descrição clara e concisa do seu Pull Request, explicando o que f
 
 **7. Revisão e Incorporação**<br>
 Os colaboradores do projeto revisarão suas alterações, fornecendo comentários e sugestões, se necessário. Esteja preparado para iterar e fazer ajustes com base no feedback recebido. Assim que suas alterações forem aprovadas, um colaborador do projeto irá incorporá-las à branch principal. Agradecemos sua contribuição para o projeto!
+
+## Imagens do projeto
