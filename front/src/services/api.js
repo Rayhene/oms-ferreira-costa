@@ -144,8 +144,8 @@ export async function criarComentario(numero, conteudoComentario) {
   }
 }
 
-export async function criarResposta(resposta, numero, idComentario) {
-  const url = `https://node-project-fc-production.up.railway.app/comentarios/${idComentario}`;
+export async function criarResposta(resposta, numero, idComentarioASerRespondido) {
+  const url = `https://node-project-fc-production.up.railway.app/comentarios/${idComentarioASerRespondido}`;
 
   const params = {
     method: 'POST',
