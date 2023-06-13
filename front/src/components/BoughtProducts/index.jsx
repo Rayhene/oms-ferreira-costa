@@ -63,7 +63,7 @@ const BoughtProducts = () => {
               <Heading fontSize='20px'>
                 Pacote {pos + 1}
               </Heading>
-              <Text pl='2' fontWeight='semibold' color='#9E9E9E'>(1 item, {produtos[pos]?.quantidade} unidades)</Text>
+              <Text pl='2' fontWeight='semibold' color='#9E9E9E'>(1 item, {produtos[pos]?.quantidade} {produtos[pos]?.quantidade === 1 ? "unidade" : "unidades"})</Text>
             </Box>
             <Stack spacing={'32px'} direction={['column', 'row']}>
               <Box>
