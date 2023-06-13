@@ -129,7 +129,11 @@ function OrderStatus() {
                 <StepIndicator>
                   <StepStatus
                     complete={<StepIcon />}
-                    active={statusErro || indexStatus === 8 ? <WarningIcon color="red.500" /> : <StepNumber />}
+                    active={statusErro || indexStatus === 8 ? <WarningIcon style={{
+                      boxShadow: '0 0 0 4px red',
+                      borderRadius: '50%',
+                    }}
+                    color="red.500"/> : <StepNumber />}
                     incomplete={<StepNumber />}
                   />
                 </StepIndicator>

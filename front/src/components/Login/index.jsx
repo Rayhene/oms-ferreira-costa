@@ -75,7 +75,7 @@ export default function Login() {
                             placeholder="Usuário"
                             fontSize="14px"
                             bg="#F3F3F3"
-                            focusBorderColor="red"
+                            focusBorderColor="#9E9E9E"
                             onChange={(e) => setEmail(e.target.value)}
                             _placeholder={{
                                 position: 'relative',
@@ -99,7 +99,7 @@ export default function Login() {
                             placeholder="Senha"
                             fontSize="14px"
                             bg="#F3F3F3"
-                            focusBorderColor="red"
+                            focusBorderColor="#9E9E9E"
                             onChange={(e) => setPassword(e.target.value)}
                             onKeyDown={handleKeyPress}
                             _placeholder={{
