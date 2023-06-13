@@ -1,4 +1,6 @@
-import { buscarComentariosPorIDPedido, criarComentario, criarResposta, deletarComentario } from '../../services/api';
+import {
+  buscarComentariosPorIDPedido, criarComentario, criarResposta, deletarComentario
+} from '../../services/api';
 import React, { useState, useRef, useEffect } from 'react';
 import { Input, Heading, Avatar, Button, Stack, Box, Flex } from '@chakra-ui/react';
 
@@ -22,11 +24,10 @@ const Observations = () => {
 
     buscarComentariosPorIDPedido(getOrderNumber())
       .then((data) => {
-        console.log(getOrderNumber());
         setComentarios2(data);
       })
       .catch((error) => {
-        console.error("Erro ao buscar os comentários.", error);
+        console.error('Erro ao buscar os comentários.', error);
       });
   }, [isReplyClicked, replyIndex]);
 
@@ -36,7 +37,7 @@ const Observations = () => {
         nome: 'Fabrício Borges',
         avatar: 'https://avatars.dicebear.com/api/male/username.svg',
         texto: novoComentario,
-        respostas: [],
+        respostas: []
       };
 
       criarComentario(getOrderNumber(), novoComentario)
@@ -48,17 +49,17 @@ const Observations = () => {
               setNovoComentario('');
             })
             .catch((error) => {
-              console.error("Erro ao buscar os comentários.", error);
+              console.error('Erro ao buscar os comentários.', error);
             });
         })
         .catch((error) => {
-          console.error("Erro ao criar comentário.", error);
+          console.error('Erro ao criar comentário.', error);
         });
     }
   };
 
   const handleResponderComentario = (index, resposta) => {
-    if (resposta.trim() !== '') {
+    if (String(resposta).trim() !== '') {
       const updatedComentarios = [...comentarios];
       updatedComentarios[index].respostas.push(resposta);
       setComentarios(updatedComentarios);
@@ -72,24 +73,24 @@ const Observations = () => {
     const updatedComentarios = [...comentarios2];
     updatedComentarios.splice(index, 1);
     setComentarios2(updatedComentarios);
-  
+
     try {
       await deletarComentario(comentario.id_comentario);
-      console.log("Comentário excluído com sucesso.");
+      console.log('Comentário excluído com sucesso.');
     } catch (error) {
-      console.error("Erro ao excluir comentário.", error);
+      console.error('Erro ao excluir comentário.', error);
       setComentarios2([...comentarios2]);
     }
-  
+
     if (comentarios2.length === 1 && index === 0) {
       setIsReplyClicked(false);
     }
   };
 
   const handleExcluirResposta = (comentarioIndex, respostaIndex) => {
-    const updatedComentarios = [...comentarios];
+    const updatedComentarios = [...comentarios2];
     updatedComentarios[comentarioIndex].respostas.splice(respostaIndex, 1);
-    setComentarios(updatedComentarios);
+    setComentarios2(updatedComentarios);
   };
 
   return (
@@ -102,9 +103,13 @@ const Observations = () => {
         {comentarios2.map((comentario, index) => (
           <React.Fragment key={index}>
             {/* OUTPUT DOS COMENTÁRIOS */}
-            <Box >
+            <Box>
               <Flex align="center">
-                <Avatar size="sm" src='https://avatars.dicebear.com/api/male/username.svg' mr={2} />
+                <Avatar
+                  size="sm"
+                  src="https://avatars.dicebear.com/api/male/username.svg"
+                  mr={2}
+                />
                 <Box>
                   <b>Fabrício Borges</b>
                 </Box>
@@ -137,6 +142,7 @@ const Observations = () => {
                   onClick={() => {
                     setIsReplyClicked(true);
                     setReplyIndex(index);
+                    handleResponderComentario(index, event.target.value)
                   }}
                   style={{ cursor: 'pointer' }}
                 >
@@ -154,53 +160,57 @@ const Observations = () => {
                 </Box>
               </Box>
             </Stack>
+
+            {/* INPUT DA RESPOSTA */}
+            {isReplyClicked && replyIndex === index && (
+              <Stack direction="row" spacing={4} mb="1vh">
+                <Flex justifyContent="space-between" width="100%">
+                  <Avatar
+                    size="sm"
+                    src="https://avatars.dicebear.com/api/male/username.svg"
+                    mr={4}
+                  />
+                  <Input
+                    placeholder="Escreva uma resposta..."
+                    focusBorderColor="black"
+                    colorScheme="black"
+                    id={`resposta-${index}`}
+                    ref={inputRef}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        handleResponderComentario(index, comentario.id_comentario, event.target.value);
+                      }
+                    }}
+                  />
+                  <Button
+                    colorScheme="red"
+                    variant="outline"
+                    size="md"
+                    onClick={() =>
+                      handleResponderComentario(index, comentario.id_comentario, novoComentario)
+                    }
+                    ml={2}
+                  >
+                    Enviar
+                  </Button>
+                  <Button
+                    colorScheme="gray"
+                    variant="outline"
+                    size="md"
+                    onClick={() => {
+                      setIsReplyClicked(false);
+                      setReplyIndex(null);
+                    }}
+                    ml={2}
+                  >
+                    Cancelar
+                  </Button>
+                </Flex>
+              </Stack>
+            )}
           </React.Fragment>
         ))}
       </Stack>
-
-      {/* INPUT DA RESPOSTA */}
-      {isReplyClicked && replyIndex === index && (
-        <Stack direction="row" spacing={4} mb="1vh">
-          <Flex justifyContent="space-between" width="100%">
-            <Avatar size="sm" src="https://avatars.dicebear.com/api/male/username.svg" mr={4} />
-            <Input
-              placeholder="Escreva uma resposta..."
-              focusBorderColor="black"
-              colorScheme="black"
-              id={`resposta-${index}`}
-              ref={inputRef}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  handleResponderComentario(index, event.target.value);
-                }
-              }}
-            />
-            <Button
-              colorScheme="red"
-              variant="outline"
-              size="md"
-              onClick={() =>
-                handleResponderComentario(index, document.getElementById(`resposta-${index}`).value)
-              }
-              ml={2}
-            >
-              Enviar
-            </Button>
-            <Button
-              colorScheme="gray"
-              variant="outline"
-              size="md"
-              onClick={() => {
-                setIsReplyClicked(false);
-                setReplyIndex(null);
-              }}
-              ml={2}
-            >
-              Cancelar
-            </Button>
-          </Flex>
-        </Stack>
-      )}
 
       <Stack direction="column">
         {comentarios.map((comentario, index) => (
