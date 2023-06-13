@@ -114,7 +114,7 @@ export default function withAction() {
                 <MenuItem sx={{ paddingLeft: 5 }}>
                 <img src={img1} alt="configuração" style={{ width: 22, height: 22, marginRight: 10 }} />
                   Gerenciar Perfil</MenuItem>
-                <MenuItem sx={{ paddingLeft: 6 }}>
+                <MenuItem sx={{ paddingLeft: 6 }} onClick={() => window.location.href = '/'}>
                 <img src={img2} alt="sair" style={{ width: 20, height: 18, marginRight: 8 }} /> Sair</MenuItem>
               </MenuList>
             </Menu>
