@@ -15,8 +15,6 @@ const Observations = () => {
     return orderNumber[2];
   };
 
-  /*   const numeroString = getOrderNumber().toString(); */
-
   useEffect(() => {
     if (isReplyClicked && replyIndex !== null && inputRef.current) {
       inputRef.current.focus();
@@ -25,8 +23,6 @@ const Observations = () => {
     buscarComentariosPorIDPedido(getOrderNumber())
       .then((data) => {
         console.log(getOrderNumber());
-        console.log(data.id_comentario);
-        console.log(data.conteudo);
         setComentarios2(data);
       })
       .catch((error) => {
@@ -71,12 +67,21 @@ const Observations = () => {
     }
   };
 
-  const handleExcluirComentario = (index) => {
-    const updatedComentarios = [...comentarios];
+  const handleExcluirComentario = async (index) => {
+    const comentario = comentarios2[index];
+    const updatedComentarios = [...comentarios2];
     updatedComentarios.splice(index, 1);
-    setComentarios(updatedComentarios);
-
-    if (comentarios.length === 1 && index === 0) {
+    setComentarios2(updatedComentarios);
+  
+    try {
+      await deletarComentario(comentario.id_comentario);
+      console.log("Comentário excluído com sucesso.");
+    } catch (error) {
+      console.error("Erro ao excluir comentário.", error);
+      setComentarios2([...comentarios2]);
+    }
+  
+    if (comentarios2.length === 1 && index === 0) {
       setIsReplyClicked(false);
     }
   };
