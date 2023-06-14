@@ -31,13 +31,13 @@ const ResponsivePie = () => {
           id: `${successPercentage}%`,
           label: "Sucessos",
           value: successCount,
-          color: "#FF5757",
+          color: "##00b233",
         },
         {
           id: `${errorPercentage}%`,
           label: "Erros",
           value: erroAntifraudeCount,
-          color: "#FFB2B2",
+          color: "#FF5757",
         },
       ];
 
@@ -46,7 +46,7 @@ const ResponsivePie = () => {
   }, [isLoading, pedidos]);
 
   const colorMapping = (datum) => {
-    return datum.label === "Erros" ? "#FFB2B2" : "#FF5757";
+    return datum.label === "Erros" ? "#FF5757" : "#00b233";
   };
 
   if (isLoading) {

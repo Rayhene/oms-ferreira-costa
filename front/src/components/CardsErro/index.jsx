@@ -24,7 +24,7 @@ function CardsErro() {
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 5, lg: 8 }}>
             <Box minHeight="10vh" boxShadow="base"
               border="1px" borderColor="gray.300" borderRadius="8" padding='5px'>
-              <Heading as="h1" size="sm" margin="8px 18px">Anti-Fraude</Heading>
+              <Heading as="h1" size="sm" margin="8px 18px">Antifraude</Heading>
               <Flex alignItems="center" justifyContent={['space-between']} margin="16px 18px">
                 <Heading as="h1" fontSize="2xl">{getQuantidadePedidosErro("ANTIFRAUDE")}</Heading>
                 <Image src={img} width="20px" height="20px" />

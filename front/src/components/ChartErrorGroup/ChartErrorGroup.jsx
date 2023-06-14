@@ -57,7 +57,7 @@ const ChartErrorGroup = () => {
             <Flex padding='15px' direction={{ base: 'column', xl: 'column' }} align="end" >
 
                 <Select width="20%" value={componentSelected} onChange={handleChange}>
-                    <option value="Daily">Diario</option>
+                    <option value="Daily">Diário</option>
                     <option value="Monthly">Mensal</option>
                     <option value="Yearly">Anual</option>
                 </Select>

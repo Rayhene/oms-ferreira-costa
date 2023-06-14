@@ -139,11 +139,6 @@ const Observations = () => {
                   direction="row"
                   textDecoration="underline"
                   mr={2}
-                  onClick={() => {
-                    setIsReplyClicked(true);
-                    setReplyIndex(index);
-                    handleResponderComentario(index, event.target.value)
-                  }}
                   style={{ cursor: 'pointer' }}
                 >
                   Responder

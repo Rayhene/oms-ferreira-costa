@@ -12,7 +12,7 @@ import Loading from '../Loading'
 const steps = [
   { title: 'Pedido Realizado', description: '' },
   { title: 'Captura', description: '' },
-  { title: 'Anti-Fraude', description: '' },
+  { title: 'Antifraude', description: '' },
   { title: 'Faturado', description: '' },
   { title: 'E-mail Enviado ao Cliente', description: '' },
   { title: 'Picking', description: '' },
