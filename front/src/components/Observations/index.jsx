@@ -135,16 +135,6 @@ const Observations = () => {
             <Stack direction="row" color="#BABBBB" mt="0.5vh" mb="2vh" alignItems="center">
               <Box width="94%" ml="48px" display="flex" alignItems="center" fontSize={16}>
                 <Box
-                  ml="15px"
-                  direction="row"
-                  textDecoration="underline"
-                  mr={2}
-                  style={{ cursor: 'pointer' }}
-                >
-                  Responder
-                </Box>
-                <span ml={2}>●</span>
-                <Box
                   direction="row"
                   textDecoration="underline"
                   ml={2}
