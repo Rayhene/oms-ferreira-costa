@@ -42,7 +42,7 @@ export const ChartProgressError = () => {
             <Stack w='100%' spacing={15} marginRight={3}>
               <Box >
                 <Text as="h3" fontSize={19} textAlign="left" marginBottom={2}>
-                  Anti-Fraude
+                  Antifraude
                 </Text>
                 <Progress colorScheme="yellow" w='100%' height="20px" borderRadius={20} value={calcularPorcentagem("ANTIFRAUDE").porcentagemProblemasResolvidos}>
                   <Box width={`${20}%`} bg="#E3A400" height="100%" />
