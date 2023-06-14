@@ -12,12 +12,17 @@ Para rodar o projeto é necessário ter instalado o Node.js e o npm.
 
 ## Como rodar
 
-1. Entre na pasta /front.
-2. Executo o comando `yarn` no prompt de comando.
-3. Execute o comando `npm run dev` para iniciar o cliente.
-4. Ao acessar o local host do projeto a primeira tela que será apresentada é a de Login, na qual você poderá acessar informando:
-4.1 Login: teste
-4.2 Senha: teste
+1. Tenha instalado o Node.js em seu computador.
+1.1 Caso não possua, realize a instalação por meio deste site Node.js e faça o download da versão correspondente ao seu sistema operacional.
+2. Abra o seu prompt de comando (CMD) e instale o Yarn com o comando `npm install --global yarn`.
+3. Clone o repositório para o seu ambiente local. No seu prompt de comando digite: git clone https://github.com/Rayhene/oms-ferreira-costa.git
+4. Por meio do prompt de comando (CMD), entre na pasta /front do nosso projeto. Use o comando 'cd front' para acessá-la.
+5. Dentro da pasta /front execute o comando `yarn` no prompt de comando (CMD).
+6. Execute o comando `yarn dev` para iniciar o cliente localmente.
+7. Acesse no seu navegador o endereço: http://localhost:5173/.
+8. Para navegar pelas telas informe as seguintes informações no login:
+Usuário: teste
+Senha: teste
 
 ## Como contribuir
 Descreveremos abaixo o processo passo a passo para você contribuir com o projeto no GitHub.
@@ -46,5 +51,3 @@ Forneça uma descrição clara e concisa do seu Pull Request, explicando o que f
 
 **7. Revisão e Incorporação**<br>
 Os colaboradores do projeto revisarão suas alterações, fornecendo comentários e sugestões, se necessário. Esteja preparado para iterar e fazer ajustes com base no feedback recebido. Assim que suas alterações forem aprovadas, um colaborador do projeto irá incorporá-las à branch principal. Agradecemos sua contribuição para o projeto!
-
-## Imagens do projeto
